@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 
 import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from './shared/shared.module';
 
 
 
@@ -19,7 +20,8 @@ import { MatInputModule } from '@angular/material/input';
     BrowserModule,
     NoopAnimationsModule,
     AppRoutingModule,
-    MatInputModule
+    MatInputModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
