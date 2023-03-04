@@ -1,4 +1,4 @@
-@import "src/colors.scss";
+@import "src/styles/colors.scss";
 
 .search-icon {
     padding: 10px;
@@ -7,14 +7,4 @@
 
 .icon {
     color: $primary-color;
-}
-  
-.input-field {
-    width: 40vw;
-    padding: 11px; 
-    padding-left: 40px;
-    color: $spanish-gray;
-    border: 1px solid $platinum;
-    border-radius: 8px; 
-    outline: none;
 }
