@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 
 import { MatInputModule } from '@angular/material/input';
+import { FooterComponent } from './core/footer/footer.component';
 import { SharedModule } from './shared/shared.module';
 
 
@@ -14,7 +15,8 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
