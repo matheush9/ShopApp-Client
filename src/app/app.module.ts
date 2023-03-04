@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button'
+
 import { FooterComponent } from './core/footer/footer.component';
 import { SharedModule } from './shared/shared.module';
 
@@ -23,7 +25,8 @@ import { SharedModule } from './shared/shared.module';
     NoopAnimationsModule,
     AppRoutingModule,
     MatInputModule,
-    SharedModule
+    SharedModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
