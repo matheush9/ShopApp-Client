@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from './components/input/input.component';
+import { IconBoxComponent } from './components/icon-box/icon-box.component';
 
 
 
 @NgModule({
   declarations: [
-    InputComponent
+    InputComponent,
+    IconBoxComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    InputComponent
+    InputComponent,
+    IconBoxComponent
   ]
 })
 export class SharedModule { }
