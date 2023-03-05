@@ -1,10 +1,17 @@
 <div>
-  <div class="flex justify-evenly w-full mb-0.5 mt-4 px-22">
+  <div class="px-22 mb-0.5 mt-4 flex w-full justify-evenly">
     <img class="h-10" src="/assets/svg/logo.svg" alt="logo" />
     <div>
-      <app-input class="w-[35rem]" placeholder="Search..." [HasIconLeft]="true" inputType="search">
-        <i class="material-icons-round text-primary-color p-2.5 absolute">search</i>
-      </app-input> 
+      <app-input
+        class="w-[35rem]"
+        placeholder="Search..."
+        [HasIconLeft]="true"
+        inputType="search"
+      >
+        <i class="material-icons-round absolute p-2.5 text-primary-color"
+          >search</i
+        >
+      </app-input>
     </div>
     <div class="flex">
       <div class="default-box mr-2">
