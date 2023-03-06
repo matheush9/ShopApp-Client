@@ -6,5 +6,4 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./icon-box.component.scss']
 })
 export class IconBoxComponent {
-  @Input() class: string = '';
 }

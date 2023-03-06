@@ -8,6 +8,5 @@ import { Component, Input } from '@angular/core';
 export class InputComponent {
   @Input() inputType: string = '';
   @Input() placeholder: string = '';
-  @Input() class: string = '';
   @Input() HasIconLeft: boolean = false;
 }
