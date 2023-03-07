@@ -1,74 +1,111 @@
-<div class="bg-light-platinum">
+<div class="w-full bg-light-platinum">
   <div class="flex justify-center [&_h4]:font-bold">
-    <div class="flex w-80 flex-col">
-      <h4>Sign up for news</h4>
-      <p>
-        Keep up to date with the latest product launches and news. Find out more
-        about our brands and get special promo codes.
-      </p>
-      <app-input
-        class="w-80"
-        placeholder="Your e-mail"
-        type="email"
-      ></app-input>
-      <button mat-flat-button color="primary">Subscribe</button>
-    </div>
+    <div class="flex justify-between py-5 [&_h4]:font-bold [&_li]:mt-3">
+      <div class="flex flex-col lg:w-60 xl:w-80">
+        <h4 class="mt-3">Sign up for news</h4>
+        <p class="mt-6">
+          Keep up to date with the latest product launches and news. Find out
+          more about our brands and get special promo codes.
+        </p>
+        <app-input
+          class="mt-6 [&>input]:w-full"
+          placeholder="Your e-mail"
+          type="email"
+        ></app-input>
+        <button class="mt-6" mat-flat-button color="primary">Subscribe</button>
+        <span class="mt-3 flex items-center">
+          <mat-checkbox color="primary"></mat-checkbox>
+          <span class="text-sm"
+            >I accept
+            <span class="text-primary-color"
+              >the personal data management.</span
+            >
+          </span>
+        </span>
+      </div>
 
-    <div class="ml-32 flex flex-col">
-      <h4>How to buy</h4>
-      <ul>
-        <li>
-          <a href="#">Payment methods</a>
-        </li>
-        <li>
-          <a href="#">Order and Pick up</a>
-        </li>
-        <li>
-          <a href="#">Order with delivery</a>
-        </li>
-        <li>
-          <a href="#">Shopping over the phone</a>
-        </li>
-        <li>
-          <a href="#">Returns</a>
-        </li>
-      </ul>
-    </div>
+      <div class="flex gap-12">
+        <div class="flex flex-col">
+          <h4 class="mt-3">How to buy</h4>
+          <ul>
+            <li>
+              <a href="#">Payment methods</a>
+            </li>
+            <li>
+              <a href="#">Order and Pick up</a>
+            </li>
+            <li>
+              <a href="#">Order with delivery</a>
+            </li>
+            <li>
+              <a href="#">Shopping over the phone</a>
+            </li>
+            <li>
+              <a href="#">Returns</a>
+            </li>
+          </ul>
+        </div>
 
-    <div class="ml-16 flex flex-col">
-      <h4>Services</h4>
-      <ul>
-        <li>
-          <a href="#">Transport</a>
-        </li>
-        <li>
-          <a href="#">Design service</a>
-        </li>
-        <li>
-          <a href="#">Paint an plaster mixing service</a>
-        </li>
-        <li>
-          <a href="#">Dimensioning and assembly service</a>
-        </li>
-      </ul>
-    </div>
+        <div class="flex flex-col">
+          <h4 class="mt-3">Help</h4>
+          <ul>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+            <li>
+              <a href="#">Online Help</a>
+            </li>
+            <li>
+              <a href="#">Our commitments</a>
+            </li>
+            <li>
+              <a href="#">Give Feedback</a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="ml-16 flex flex-col">
-      <h4>About</h4>
-      <ul>
-        <li>
-          <a href="#">About us</a>
-        </li>
-        <li>
-          <a href="#">Press Office</a>
-        </li>
-        <li>
-          <a href="#">For suppliers</a>
-        </li>
-        <li>
-          <a href="#">Regulations</a>
-        </li>
-      </ul>
+      <div class="flex gap-12">
+        <div class="flex w-52 flex-col">
+          <h4 class="mt-3">Services</h4>
+          <ul>
+            <li>
+              <a href="#">Transport</a>
+            </li>
+            <li>
+              <a href="#">Design service</a>
+            </li>
+            <li>
+              <a href="#">Paint an plaster mixing service</a>
+            </li>
+            <li>
+              <a href="#">Dimensioning and assembly service</a>
+            </li>
+            <li>
+              <a href="#">Return of used equipment</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col">
+          <h4 class="mt-3">About</h4>
+          <ul>
+            <li>
+              <a href="#">About us</a>
+            </li>
+            <li>
+              <a href="#">Press Office</a>
+            </li>
+            <li>
+              <a href="#">For suppliers</a>
+            </li>
+            <li>
+              <a href="#">Regulations</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </div>
