@@ -2,13 +2,13 @@
   <div
     class="mx-auto mb-0.5 mt-4 flex items-center justify-between lg:max-w-screen-lg xl:max-w-screen-xl"
   >
-    <div class="ml-5 lg:hidden">
+    <div class="ml-5 flex lg:hidden">
       <i class="material-icons-round cursor-pointer select-none">menu</i>
     </div>
 
-    <img class="h-10" src="/assets/svg/logo.svg" alt="logo" />
+    <img class="h-7 lg:h-10" src="/assets/svg/logo.svg" alt="logo" />
 
-    <div class="max-[450px]:hidden">
+    <div class="hidden lg:block">
       <app-input
         class="[&>input]:w-[35rem]"
         placeholder="Search..."
@@ -20,21 +20,21 @@
         >
       </app-input>
     </div>
-    
+
     <div class="flex">
-      <app-icon-box class="mr-5 order-2">
+      <app-icon-box class="order-2 mr-5">
         <i class="material-icons-round text-primary-color">shopping_cart</i>
       </app-icon-box>
 
-      <app-icon-box class="max-[450px]:hidden order-3">
+      <app-icon-box class="order-3 hidden lg:block">
         <i class="material-icons-round text-primary-color">person</i>
       </app-icon-box>
     </div>
   </div>
-  
-  <div class="my-2 flex justify-center bg-light-platinum p-3 lg:hidden">
+
+  <div class="my-2 flex bg-light-platinum p-3 lg:hidden">
     <app-input
-      class="[&>input]:w-96"
+      class="w-full [&>input]:w-full"
       placeholder="Search..."
       [HasIconLeft]="true"
       inputType="search"
@@ -44,5 +44,4 @@
       >
     </app-input>
   </div>
-
 </div>
