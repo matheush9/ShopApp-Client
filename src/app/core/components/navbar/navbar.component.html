@@ -2,8 +2,28 @@
   <div
     class="mx-auto mb-0.5 mt-4 flex items-center justify-between lg:max-w-screen-lg xl:max-w-screen-xl"
   >
-    <div class="ml-5 flex lg:hidden">
-      <i class="material-icons-round cursor-pointer select-none">menu</i>
+    <div class="lg:hidden">
+      <label for="check" class="open-menu ml-5 flex">
+        <i class="material-icons-round cursor-pointer select-none">menu</i>
+      </label>
+    </div>
+
+    <input type="checkbox" id="check" class="hidden [&+div]:checked:left-0" />
+    <div
+      class="fixed top-0 -left-full z-20 flex h-full w-3/4 list-none flex-col items-center justify-center bg-rich-black 
+      opacity-95 text-white transition-all duration-700 ease-in-out lg:hidden leading-10"
+    >
+      <li>Home</li>
+      <li>Products</li>
+      <li>Services</li>
+      <li>About</li>
+      <li>Contact</li>
+  
+      <label for="check" class="close-menu absolute top-6 left-5">
+        <i class="material-icons-round cursor-pointer select-none text-white"
+          >close</i
+        >
+      </label>
     </div>
 
     <img class="h-7 lg:h-10" src="/assets/svg/logo.svg" alt="logo" />
