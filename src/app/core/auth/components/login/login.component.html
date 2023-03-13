@@ -1,0 +1,35 @@
+<div class="flex w-full h-screen items-center justify-center bg-gray-500">
+  <div class="flex w-full h-screen lg:h-1/2 lg:w-1/3 flex-col bg-white lg:rounded-lg">
+    <i
+      class="material-icons-round mr-6 mt-6 cursor-pointer select-none self-end"
+      >close</i
+    >
+    <div class="mt-20 lg:mt-4 flex flex-col items-center ">
+      <p class="mb-32 lg:mb-8 text-xl font-bold">Welcome back! Log in</p>
+
+      <div class="flex w-full px-10 lg:px-20 xl flex-col">
+        <mat-form-field appearance="fill">
+          <mat-label>Login/e-mail</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <span class="self-end text-primary-color"
+          ><a href="#">Forgot Password?</a></span
+        >
+      </div>
+      <button class="mt-24 lg:mt-4 mb-8 w-1/4 rounded-lg" mat-flat-button color="primary">Login</button>
+
+      <span
+        >You do not have an account?
+        <span class="text-primary-color">
+          <a href="#">Register</a>
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
