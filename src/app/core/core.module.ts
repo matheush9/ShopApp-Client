@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { LoginBaseComponent } from './auth/components/login-base/login-base.component';
 import { LoginComponent } from './auth/components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -19,7 +20,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   declarations: [
     NavbarComponent,
     FooterComponent,
-    LoginComponent,
+    LoginBaseComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
