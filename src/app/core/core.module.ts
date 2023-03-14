@@ -5,6 +5,7 @@ import { LoginBaseComponent } from './auth/components/login-base/login-base.comp
 import { LoginComponent } from './auth/components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -21,7 +22,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     NavbarComponent,
     FooterComponent,
     LoginBaseComponent,
-    LoginComponent
+    LoginComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   exports: [
     NavbarComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    ForgotPasswordComponent
   ],
 })
 export class CoreModule {}
