@@ -1,0 +1,56 @@
+<app-login-base class="">
+  <div *ngIf="!storeAccount && !customerAccount" class="flex flex-col gap-10">
+    <h1 class="my-10 text-xl font-bold">What type of account you desire?</h1>
+
+    <button
+      class="rounded-lg"
+      mat-flat-button
+      color="primary"
+      (click)="setCustomerAccount()"
+    >
+      Customer
+    </button>
+    <button
+      class="rounded-lg"
+      mat-flat-button
+      color="primary"
+      (click)="setStoreAccount()"
+    >
+      Store
+    </button>
+  </div>
+
+  <div
+    *ngIf="storeAccount || customerAccount"
+    class="flex w-full flex-col justify-center text-center"
+  >
+    <h1 class="mb-10 text-xl font-bold">Create account</h1>
+
+    <div class="flex w-full flex-col px-10 sm:px-40 lg:px-10 xl:px-20">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>E-mail address</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <div>
+        <button
+          class="mt-24 mb-8 rounded-lg lg:mt-4"
+          mat-flat-button
+          color="primary"
+        >
+          Register now
+        </button>
+      </div>
+    </div>
+  </div>
+</app-login-base>

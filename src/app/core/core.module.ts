@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NewAccountComponent } from './auth/components/new-account/new-account.component';
 
 
 
@@ -23,7 +24,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FooterComponent,
     LoginBaseComponent,
     LoginComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    NewAccountComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    NewAccountComponent
   ],
 })
 export class CoreModule {}
