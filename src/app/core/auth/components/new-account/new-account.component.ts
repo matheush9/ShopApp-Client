@@ -6,14 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./new-account.component.scss']
 })
 export class NewAccountComponent {
-  storeAccount: boolean = false;
-  customerAccount: boolean = false;
-
-  public setStoreAccount() {
-    this.storeAccount = true;    
-  }
-
-  public setCustomerAccount() {
-    this.customerAccount = true;
-  }
 }

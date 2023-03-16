@@ -1,32 +1,16 @@
-<app-login-base class="">
-  <div *ngIf="!storeAccount && !customerAccount" class="flex flex-col gap-10">
-    <h1 class="my-10 text-xl font-bold">What type of account you desire?</h1>
+<app-login-base class="[&_.box]:lg:h-4/5">
+  <div class="flex w-full flex-col justify-center text-center mt-10">
+    <h1 class="text-xl font-bold">Create account</h1>
 
-    <button
-      class="rounded-lg"
-      mat-flat-button
-      color="primary"
-      (click)="setCustomerAccount()"
-    >
-      Customer
-    </button>
-    <button
-      class="rounded-lg"
-      mat-flat-button
-      color="primary"
-      (click)="setStoreAccount()"
-    >
-      Store
-    </button>
-  </div>
+    <div class="flex flex-col gap-3 my-8">
+      <span class="font-bold">Select the type of your account</span>
+      <mat-radio-group aria-label="Select the type of your account">
+        <mat-radio-button class="mr-4" color="primary" value="1">Store</mat-radio-button>
+        <mat-radio-button color="primary" value="2">Customer</mat-radio-button>
+      </mat-radio-group>
+    </div>
 
-  <div
-    *ngIf="storeAccount || customerAccount"
-    class="flex w-full flex-col justify-center text-center"
-  >
-    <h1 class="mb-10 text-xl font-bold">Create account</h1>
-
-    <div class="flex w-full flex-col px-10 sm:px-40 lg:px-10 xl:px-20">
+    <div class="flex w-full flex-col px-10 sm:px-40 lg:px-10 xl:px-20 gap-4">
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
         <input matInput />
@@ -44,7 +28,7 @@
 
       <div>
         <button
-          class="mt-24 mb-8 rounded-lg lg:mt-4"
+          class="mb-8 rounded-lg lg:mt-4"
           mat-flat-button
           color="primary"
         >
