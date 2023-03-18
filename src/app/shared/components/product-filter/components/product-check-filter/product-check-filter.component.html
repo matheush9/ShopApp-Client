@@ -1,0 +1,13 @@
+<fieldset class="flex flex-col">
+  <mat-accordion >
+    <mat-expansion-panel>
+      <mat-expansion-panel-header >
+        <mat-panel-title class="font-medium">Categories</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let category of categories" >
+        <mat-checkbox color="primary"></mat-checkbox>
+        <span>{{ category.name }}</span>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</fieldset>
