@@ -1,0 +1,16 @@
+<fieldset class="flex flex-col gap-4">
+  <legend class="font-medium">Price</legend>
+
+  <div>
+    <mat-slider
+      class="w-full"
+      min="0"
+      max="10000"
+      [displayWith]="formatLabel"
+      discrete
+    >
+      <input matSliderStartThumb />
+      <input matSliderEndThumb />
+    </mat-slider>
+  </div>
+</fieldset>
