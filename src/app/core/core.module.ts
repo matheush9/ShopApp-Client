@@ -40,10 +40,7 @@ import { MatRadioModule } from '@angular/material/radio';
   ],
   exports: [
     NavbarComponent,
-    FooterComponent,
-    LoginComponent,
-    ForgotPasswordComponent,
-    NewAccountComponent
+    FooterComponent
   ],
 })
 export class CoreModule {}
