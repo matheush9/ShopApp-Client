@@ -1,0 +1,41 @@
+<div class="mx-auto max-w-7xl">
+  <div class="flex">
+    <div class="hidden w-72 flex-col gap-2 sm:flex">
+      <span class="flex items-center gap-2">
+        <i class="material-icons-round cursor-pointer select-none">tune</i>
+        <span class="text-lg font-medium">Filter by:</span>
+      </span>
+
+      <div
+        class="flex h-screen flex-col gap-6 rounded-lg border bg-light-platinum p-3"
+      >
+        <app-product-price-filter></app-product-price-filter>
+        <hr />
+        <app-product-check-filter></app-product-check-filter>
+        
+        <button class="mt-12" mat-flat-button color="primary">
+          Apply filters
+        </button>
+      </div>
+    </div>
+
+    <div class="flex h-full flex-col flex-wrap gap-6 p-3 sm:flex-row">
+      <!--- Temporary mock, do a loop later -->
+      <app-product-card
+        class="[&>div]:sm:w-52 [&>div]:lg:w-64"
+      ></app-product-card>
+      <app-product-card
+        class="[&>div]:sm:w-52 [&>div]:lg:w-64"
+      ></app-product-card>
+      <app-product-card
+        class="[&>div]:sm:w-52 [&>div]:lg:w-64"
+      ></app-product-card>
+      <app-product-card
+        class="[&>div]:sm:w-52 [&>div]:lg:w-64"
+      ></app-product-card>
+      <app-product-card
+        class="[&>div]:sm:w-52 [&>div]:lg:w-64"
+      ></app-product-card>
+    </div>
+  </div>
+</div>
