@@ -5,18 +5,22 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { SharedModule } from '../shared/shared.module';
+import { ProductFilterGroupComponent } from './components/product-filter-group/product-filter-group/product-filter-group.component';
 
 @NgModule({
   declarations: [
     ProductDetailComponent,
-    ProductListingComponent
+    ProductListingComponent,
+    ProductFilterGroupComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [
     ProductListingComponent
