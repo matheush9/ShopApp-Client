@@ -6,9 +6,16 @@ import { Component, Renderer2 } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
+  checked: boolean = false;
+
   constructor(private renderer: Renderer2) {}
 
-  onOpenMenuClick() {
-    this.renderer.addClass(document.body, 'block-scroll');
+  onMenuClick() {
+    this.checked = !this.checked;
+
+    if (this.checked)
+      this.renderer.addClass(document.body, 'block-scroll');
+    else 
+      this.renderer.removeClass(document.body, 'block-scroll');     
   }
 }

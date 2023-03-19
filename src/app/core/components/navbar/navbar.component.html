@@ -3,28 +3,36 @@
     class="mx-auto mb-0.5 mt-4 flex items-center justify-between lg:max-w-screen-lg xl:max-w-screen-xl"
   >
     <div class="lg:hidden">
-      <label for="check" class="ml-5 flex">
-        <i class="material-icons-round cursor-pointer select-none" (click)="onOpenMenuClick()">menu</i>
-      </label>
+      <span class="ml-5 flex">
+        <i
+          class="material-icons-round cursor-pointer select-none"
+          (click)="onMenuClick()"
+          >menu</i
+        >
+      </span>
     </div>
 
-    <input type="checkbox" id="check" class="hidden [&+div]:checked:left-0" />
-      <div
-      class="fixed top-0 -left-full z-20 flex h-full w-full list-none flex-col items-center justify-center bg-light-platinum
-        transition-all duration-700 ease-in-out lg:hidden leading-10"
+    <input
+      type="checkbox"
+      class="hidden [&+div]:checked:left-0"
+      [checked]="checked"
+    />
+    <div
+      class="fixed top-0 -left-full z-20 flex h-full w-full list-none flex-col items-center justify-center bg-light-platinum leading-10 transition-all duration-700 ease-in-out lg:hidden"
     >
       <li>Home</li>
       <li>Products</li>
       <li>Services</li>
       <li>About</li>
       <li>Contact</li>
-  
-      <label for="check" class="close-menu absolute top-6 left-5">
-        <i class="material-icons-round cursor-pointer select-none"
-          (click)="onCloseMenuClick()"
+
+      <span class="close-menu absolute top-6 left-5">
+        <i
+          class="material-icons-round cursor-pointer select-none"
+          (click)="onMenuClick()"
           >close</i
         >
-      </label>
+      </span>
     </div>
 
     <img class="h-7 lg:h-10" src="/assets/svg/logo.svg" alt="logo" />
