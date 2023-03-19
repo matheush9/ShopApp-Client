@@ -6,14 +6,16 @@ import { Component, Renderer2 } from '@angular/core';
   styleUrls: ['./product-listing.component.scss'],
 })
 export class ProductListingComponent {
+  checked: boolean = false;
+
   constructor(private renderer: Renderer2) {}
 
-  onOpenMenuClick() {
-    this.checked = true;
-    this.renderer.addClass(document.body, 'block-scroll');
-  }
+  onMenuClick() {
+    this.checked = !this.checked;
 
-  onCloseMenuClick() {
-    this.renderer.removeClass(document.body, 'block-scroll');
+    if (this.checked)
+      this.renderer.addClass(document.body, 'block-scroll');
+    else 
+      this.renderer.removeClass(document.body, 'block-scroll');     
   }
 }
