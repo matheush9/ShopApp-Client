@@ -32,7 +32,9 @@
             "styles": [
               "src/styles/theme.scss",
               "src/styles/styles.scss",
-              "src/styles/palletes.scss"
+              "src/styles/palletes.scss",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css"
             ],
             "scripts": []
           },
@@ -96,7 +98,9 @@
             ],
             "styles": [
               "src/styles/theme.scss",
-              "src/styles/styles.scss"
+              "src/styles/styles.scss",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css"
             ],
             "scripts": []
           }
