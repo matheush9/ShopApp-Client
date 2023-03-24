@@ -7,6 +7,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
 import { NewAccountComponent } from './auth/components/new-account/new-account.component';
+import { AccountInfoComponent } from './components/account-info/account-info/account-info.component';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -16,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -26,7 +28,8 @@ import { MatRadioModule } from '@angular/material/radio';
     LoginBaseComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    NewAccountComponent
+    NewAccountComponent,
+    AccountInfoComponent
   ],
   imports: [
     CommonModule,
@@ -36,11 +39,13 @@ import { MatRadioModule } from '@angular/material/radio';
     MatExpansionModule,
     MatCheckboxModule,
     MatRadioModule,
-    SharedModule
+    SharedModule,
+    MatDialogModule
   ],
   exports: [
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    AccountInfoComponent
   ],
 })
 export class CoreModule {}
