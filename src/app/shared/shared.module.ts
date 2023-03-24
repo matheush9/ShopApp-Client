@@ -6,11 +6,13 @@ import { IconBoxComponent } from './components/icon-box/icon-box.component';
 import { ProductCardComponent } from './components/product-card/product-card/product-card.component';
 import { ProductPriceFilterComponent } from './components/product-filter/components/product-price-filter/product-price-filter.component';
 import { ProductCheckFilterComponent } from './components/product-filter/components/product-check-filter/product-check-filter.component';
+import { DeleteConfirmationDialogComponent } from './components/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -21,14 +23,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     IconBoxComponent,
     ProductCardComponent,
     ProductPriceFilterComponent,
-    ProductCheckFilterComponent
+    ProductCheckFilterComponent,
+    DeleteConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
     MatIconModule,
     MatSliderModule,
     MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatButtonModule
   ],
   exports: [
     InputComponent,
