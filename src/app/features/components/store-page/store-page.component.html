@@ -1,0 +1,29 @@
+<div class="mx-auto lg:max-w-screen-lg xl:max-w-screen-xl">
+  <div class="flex w-full flex-col">
+    <div class="flex flex-row gap-4 rounded-lg bg-light-platinum sm:gap-8">
+      <div
+        class="flex flex-col items-center gap-4 rounded-lg border p-4 shadow sm:flex-row"
+      >
+        <img src="/assets/calc.jpg" class="h-32 rounded-full border shadow" />
+        <span class="text-lg font-medium sm:mb-12">Store name</span>
+      </div>
+      <div class="flex flex-col justify-center gap-12">
+        <span>Products: <span class="text-primary-color">0</span></span>
+        <span
+          >Joined: <span class="text-primary-color">0 Months ago</span></span
+        >
+      </div>
+    </div>
+
+    <div
+      class="mt-10 grid h-full gap-4 p-4 min-[430px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 lg:p-0 xl:grid-cols-5"
+    >
+      <!--- Temporary mock, do a loop later -->
+      <app-product-card></app-product-card>
+      <app-product-card></app-product-card>
+      <app-product-card></app-product-card>
+      <app-product-card></app-product-card>
+      <app-product-card></app-product-card>
+    </div>
+  </div>
+</div>
