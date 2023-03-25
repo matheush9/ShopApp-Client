@@ -1,0 +1,88 @@
+<div class="mx-auto lg:max-w-screen-lg xl:max-w-screen-xl">
+  <h1 *ngIf="!newProduct" class="mt-5 text-center text-2xl font-bold lg:text-start">
+    Edit product: <span class="ml-2 text-xl font-medium">#000000</span>
+  </h1>
+
+  <h1 *ngIf="newProduct" class="mt-5 text-center text-2xl font-bold lg:text-start">
+    Add a new product
+  </h1>
+
+  <div class="flex flex-col">
+    <div class="mt-10 flex justify-center gap-6 lg:justify-start">
+      <button mat-flat-button color="warn" (click)="openDialog('250ms', '150ms')">Cancel</button>
+      <button class="hidden lg:block" mat-flat-button color="primary" (click)="openDialog('250ms', '150ms')">
+        Save all
+      </button>
+    </div>
+
+    <div
+      class="mt-10 flex w-full flex-col justify-around gap-20 p-4 pb-14 sm:flex-row lg:gap-60 lg:px-0 lg:pt-0"
+    >
+      <div class="order-2 flex flex-grow flex-col lg:order-1">
+        <h2 class="mb-6 text-center text-xl font-bold">Product info</h2>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Product name</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="h-40">
+          <mat-label>Product description</mat-label>
+          <textarea class="resize-none" matInput></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Select category</mat-label>
+          <mat-select>
+            <mat-option value="one">Category 1</mat-option>
+            <mat-option value="two">Category 2</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Price</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </div>
+
+      <div class="relative flex w-full flex-col sm:w-2/5 lg:order-2 lg:w-2/6">
+        <h2 class="mb-6 text-center text-xl font-bold">Product images</h2>
+        <owl-carousel-o [options]="customOptions" #owlCar>
+          <ng-template carouselSlide>
+            <div>
+              <img src="/assets/calc.jpg" />
+            </div>
+            <div class="absolute left-0 top-[46%] hidden w-full sm:block">
+              <i
+                class="material-icons-round absolute top-1/2 left-1 z-10 -translate-y-1/2 cursor-pointer select-none rounded-2xl border bg-light-blue p-2.5 shadow-md"
+                (click)="owlCar.prev()"
+                >navigate_before</i
+              >
+              <i
+                class="material-icons-round absolute top-1/2 right-1 z-10 -translate-y-1/2 cursor-pointer select-none rounded-2xl border bg-light-blue p-2.5 shadow-md"
+                (click)="owlCar.next()"
+                >navigate_next</i
+              >
+            </div>
+          </ng-template>
+
+          <ng-template carouselSlide>
+            <div>
+              <img src="/assets/conversor.jpg" />
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+
+        <div class="mt-10 flex gap-10 lg:mt-6">
+          <button class="flex-grow basis-0" mat-flat-button color="warn" (click)="openDialog('250ms', '150ms')">
+            Remove this image
+          </button>
+
+          <button class="flex-grow basis-0" mat-flat-button color="primary">
+            Add new image
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
