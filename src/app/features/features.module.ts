@@ -7,12 +7,14 @@ import { ProductFilterGroupComponent } from './components/product-filter-group/p
 import { SharedModule } from '../shared/shared.module';
 import { StorePageComponent } from './components/store-page/store-page.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTable, MatTableModule } from '@angular/material/table';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
@@ -23,6 +25,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ProductFilterGroupComponent,
     StorePageComponent,
     ProductAddComponent,
+    OrderDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -32,13 +35,15 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     CarouselModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule
   ],
   exports: [
     ProductListingComponent,
     ProductDetailComponent,
     StorePageComponent,
     ProductAddComponent,
+    OrderDetailComponent
   ],
 })
 export class FeaturesModule {}
