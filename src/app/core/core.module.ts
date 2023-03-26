@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
 import { NewAccountComponent } from './auth/components/new-account/new-account.component';
 import { AccountInfoComponent } from './components/account-info/account-info/account-info.component';
+import { CartComponent } from './components/cart/cart.component';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -29,7 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     LoginComponent,
     ForgotPasswordComponent,
     NewAccountComponent,
-    AccountInfoComponent
+    AccountInfoComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   exports: [
     NavbarComponent,
     FooterComponent,
-    AccountInfoComponent
+    AccountInfoComponent,
+    CartComponent
   ],
 })
 export class CoreModule {}
