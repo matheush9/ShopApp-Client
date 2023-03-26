@@ -7,6 +7,7 @@ import { ProductFilterGroupComponent } from './components/product-filter-group/p
 import { SharedModule } from '../shared/shared.module';
 import { StorePageComponent } from './components/store-page/store-page.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
+import { OrderListingComponent } from './components/order-listing/order-listing.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -25,6 +26,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ProductFilterGroupComponent,
     StorePageComponent,
     ProductAddComponent,
+    OrderListingComponent,
     OrderDetailComponent,
   ],
   imports: [
@@ -43,6 +45,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ProductDetailComponent,
     StorePageComponent,
     ProductAddComponent,
+    OrderListingComponent,
     OrderDetailComponent
   ],
 })
