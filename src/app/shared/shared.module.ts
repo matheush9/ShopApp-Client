@@ -6,7 +6,7 @@ import { IconBoxComponent } from './components/icon-box/icon-box.component';
 import { ProductCardComponent } from './components/product-card/product-card/product-card.component';
 import { ProductPriceFilterComponent } from './components/product-filter/components/product-price-filter/product-price-filter.component';
 import { ProductCheckFilterComponent } from './components/product-filter/components/product-check-filter/product-check-filter.component';
-import { DeleteConfirmationDialogComponent } from './components/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
@@ -24,7 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
     ProductCardComponent,
     ProductPriceFilterComponent,
     ProductCheckFilterComponent,
-    DeleteConfirmationDialogComponent
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,

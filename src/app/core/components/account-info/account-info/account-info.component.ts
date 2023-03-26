@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DeleteConfirmationDialogComponent } from 'src/app/shared/components/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-account-info',
@@ -14,7 +14,7 @@ export class AccountInfoComponent {
     enterAnimationDuration: string,
     exitAnimationDuration: string
   ): void {
-    this.dialog.open(DeleteConfirmationDialogComponent, {
+    this.dialog.open(ConfirmationDialogComponent, {
       width: '300px',
       enterAnimationDuration,
       exitAnimationDuration,

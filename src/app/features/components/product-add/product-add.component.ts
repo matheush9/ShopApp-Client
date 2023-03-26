@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DeleteConfirmationDialogComponent } from 'src/app/shared/components/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogConfig,
+} from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-product-add',
   templateUrl: './product-add.component.html',
-  styleUrls: ['./product-add.component.scss']
+  styleUrls: ['./product-add.component.scss'],
 })
 export class ProductAddComponent {
   newProduct: boolean = false;
@@ -28,7 +32,7 @@ export class ProductAddComponent {
       },
       650: {
         items: 2,
-      }
+      },
     },
   };
 
@@ -36,10 +40,15 @@ export class ProductAddComponent {
     enterAnimationDuration: string,
     exitAnimationDuration: string
   ): void {
-    this.dialog.open(DeleteConfirmationDialogComponent, {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+
+    this.dialog.open(ConfirmationDialogComponent, {
       width: '300px',
       enterAnimationDuration,
       exitAnimationDuration,
+      disableClose: true
     });
   }
 }
