@@ -1,16 +1,33 @@
 <div class="mx-auto lg:max-w-screen-lg xl:max-w-screen-xl">
-  <h1 *ngIf="!newProduct" class="mt-5 text-center text-2xl font-bold lg:text-start">
+  <h1
+    *ngIf="!newProduct"
+    class="mt-5 text-center text-2xl font-bold lg:text-start"
+  >
     Edit product: <span class="ml-2 text-xl font-medium">#000000</span>
   </h1>
 
-  <h1 *ngIf="newProduct" class="mt-5 text-center text-2xl font-bold lg:text-start">
+  <h1
+    *ngIf="newProduct"
+    class="mt-5 text-center text-2xl font-bold lg:text-start"
+  >
     Add a new product
   </h1>
 
   <div class="flex flex-col">
     <div class="mt-10 flex justify-center gap-6 lg:justify-start">
-      <button mat-flat-button color="warn" (click)="openDialog('250ms', '150ms')">Cancel</button>
-      <button class="hidden lg:block" mat-flat-button color="primary" (click)="openDialog('250ms', '150ms')">
+      <button
+        mat-flat-button
+        color="warn"
+        (click)="openDialog('250ms', '150ms', 'Are you sure you want to cancel your changes?')"
+      >
+        Cancel
+      </button>
+      <button
+        class="hidden lg:block"
+        mat-flat-button
+        color="primary"
+        (click)="openDialog('250ms', '150ms', 'Are you sure you want to save all?')"
+      >
         Save all
       </button>
     </div>
@@ -74,7 +91,12 @@
         </owl-carousel-o>
 
         <div class="mt-10 flex gap-10 lg:mt-6">
-          <button class="flex-grow basis-0" mat-flat-button color="warn" (click)="openDialog('250ms', '150ms')">
+          <button
+            class="flex-grow basis-0"
+            mat-flat-button
+            color="warn"
+            (click)="openDialog('250ms', '150ms', 'Are you sure you want to remove this image?')"
+          >
             Remove this image
           </button>
 

@@ -38,7 +38,8 @@ export class ProductAddComponent {
 
   openDialog(
     enterAnimationDuration: string,
-    exitAnimationDuration: string
+    exitAnimationDuration: string,
+    dialogMessage: string,
   ): void {
     const dialogConfig = new MatDialogConfig();
 
@@ -48,7 +49,10 @@ export class ProductAddComponent {
       width: '300px',
       enterAnimationDuration,
       exitAnimationDuration,
-      disableClose: true
+      disableClose: true,
+      data: {
+        message: dialogMessage,
+      },
     });
   }
 }

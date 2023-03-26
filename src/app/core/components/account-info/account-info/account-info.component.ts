@@ -12,12 +12,17 @@ export class AccountInfoComponent {
 
   openDialog(
     enterAnimationDuration: string,
-    exitAnimationDuration: string
+    exitAnimationDuration: string,
+    dialogMessage: string,
   ): void {
     this.dialog.open(ConfirmationDialogComponent, {
       width: '300px',
       enterAnimationDuration,
       exitAnimationDuration,
+      disableClose: true,
+      data: {
+        message: dialogMessage,
+      },
     });
   }
 }

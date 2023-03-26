@@ -1,6 +1,6 @@
 <div class="flex flex-col gap-6 p-3" mat-dialog-content>
   <h1 class="text-xl font-medium" mat-dialog-title>Confirm</h1>
-  <div>Are you sure you want to perform this operation?</div>
+  <div>{{ message }}</div>
   <div mat-dialog-actions class="flex w-full gap-6">
     <button
       class="w-full"
@@ -18,7 +18,7 @@
       color="warn"
       (click)="onConfirm(true)"
     >
-    Yes
+      Yes
     </button>
   </div>
 </div>
