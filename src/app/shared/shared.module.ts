@@ -7,6 +7,7 @@ import { ProductCardComponent } from './components/product-card/product-card/pro
 import { ProductPriceFilterComponent } from './components/product-filter/components/product-price-filter/product-price-filter.component';
 import { ProductCheckFilterComponent } from './components/product-filter/components/product-check-filter/product-check-filter.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { QuantitySelectorComponent } from './components/quantity-selector/quantity-selector.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
@@ -24,7 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
     ProductCardComponent,
     ProductPriceFilterComponent,
     ProductCheckFilterComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    QuantitySelectorComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { MatButtonModule } from '@angular/material/button';
     IconBoxComponent,
     ProductCardComponent,
     ProductCheckFilterComponent,
-    ProductPriceFilterComponent
+    ProductPriceFilterComponent,
+    QuantitySelectorComponent
   ]
 })
 export class SharedModule { }
