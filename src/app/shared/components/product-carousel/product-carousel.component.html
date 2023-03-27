@@ -1,0 +1,32 @@
+<div>
+  <div class="flex w-full">
+    <div class="relative w-full">
+      <owl-carousel-o [options]="customOptions" #owlCar>
+        <ng-template carouselSlide>
+          <div class="mr-4">
+            <app-product-card> </app-product-card>
+          </div>
+        </ng-template>
+
+        <ng-template carouselSlide>
+          <div class="mr-4">
+            <app-product-card></app-product-card>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
+
+      <div class="absolute left-0 top-[46%] hidden w-full sm:block">
+        <i
+          class="material-icons-round absolute top-1/2 -left-3 z-10 -translate-y-1/2 cursor-pointer select-none rounded-2xl border bg-light-blue p-2.5 shadow-md"
+          (click)="owlCar.prev()"
+          >navigate_before</i
+        >
+        <i
+          class="material-icons-round absolute top-1/2 -right-3 z-10 -translate-y-1/2 cursor-pointer select-none rounded-2xl border bg-light-blue p-2.5 shadow-md"
+          (click)="owlCar.next()"
+          >navigate_next</i
+        >
+      </div>
+    </div>
+  </div>
+</div>
