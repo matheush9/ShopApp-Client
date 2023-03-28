@@ -16,8 +16,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
+
+import { FeaturesRoutingModule } from './features.routing.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule,
+    FeaturesRoutingModule
   ],
   exports: [
     ProductListingComponent,
@@ -46,7 +51,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     StorePageComponent,
     ProductAddComponent,
     OrderListingComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
   ],
 })
 export class FeaturesModule {}

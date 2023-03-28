@@ -21,8 +21,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
 
-
-
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -44,7 +42,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCheckboxModule,
     MatRadioModule,
     SharedModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   exports: [
     NavbarComponent,
