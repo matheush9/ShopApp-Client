@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductListing } from '../../interfaces/product-listing-interface';
+import { ProductListing } from 'src/app/modules/product/interfaces/product-listing-interface';
 
 //mock data
 
