@@ -5,24 +5,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
-import { FeaturesModule } from './features/features.module';
-
+import { CoreModule } from './modules/core/core.module';
+import { SharedModule } from './modules/shared/shared.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { OrderModule } from './modules/order/order.module';
+import { ProductModule } from './modules/product/product.module';
+import { StoreModule } from './modules/store/store.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    FeaturesModule
+    AuthModule,
+    OrderModule,
+    ProductModule,
+    StoreModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

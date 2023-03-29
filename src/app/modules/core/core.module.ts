@@ -1,13 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LoginBaseComponent } from './auth/components/login-base/login-base.component';
-import { LoginComponent } from './auth/components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
-import { NewAccountComponent } from './auth/components/new-account/new-account.component';
-import { AccountInfoComponent } from './components/account-info/account-info/account-info.component';
 import { CartComponent } from './components/cart/cart.component';
 import { HomeComponent } from './components/home/home.component';
 
@@ -25,11 +20,6 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [
     NavbarComponent,
     FooterComponent,
-    LoginBaseComponent,
-    LoginComponent,
-    ForgotPasswordComponent,
-    NewAccountComponent,
-    AccountInfoComponent,
     CartComponent,
     HomeComponent,
   ],
@@ -47,7 +37,6 @@ import { MatDialogModule } from '@angular/material/dialog';
   exports: [
     NavbarComponent,
     FooterComponent,
-    AccountInfoComponent,
     CartComponent,
   ],
 })
