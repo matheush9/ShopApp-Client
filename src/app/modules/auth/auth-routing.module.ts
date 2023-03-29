@@ -8,7 +8,7 @@ import { NewAccountComponent } from './components/new-account/new-account.compon
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: '',
     component: LoginComponent,
     children: [
       { path: 'account-info', component: AccountInfoComponent },
