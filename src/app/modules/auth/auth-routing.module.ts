@@ -9,7 +9,6 @@ import { NewAccountComponent } from './components/new-account/new-account.compon
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
     children: [
       { path: 'account-info', component: AccountInfoComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },

@@ -7,7 +7,6 @@ import { OrderListingComponent } from './components/order-listing/order-listing.
 const routes: Routes = [
   {
     path: '',
-    component: OrderListingComponent,
     children: [
       { path: 'listing', component: OrderListingComponent },
       { path: 'detail', component: OrderDetailComponent },
