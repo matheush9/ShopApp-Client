@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { CustomPreloading } from './modules/core/services/custom-preloading.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -15,7 +17,7 @@ import { CoreModule } from './modules/core/core.module';
     AppRoutingModule,
     CoreModule,
   ],
-  providers: [],
+  providers: [CustomPreloading],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
