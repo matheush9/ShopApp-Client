@@ -10,6 +10,7 @@ import { AccountInfoComponent } from './components/account-info/account-info/acc
 import { NewAccountComponent } from './components/new-account/new-account.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 
@@ -25,6 +26,7 @@ import { MatRadioModule } from '@angular/material/radio';
     CommonModule,
     AuthRoutingModule,
     MatFormFieldModule,
+    MatInputModule,
     MatButtonModule,
     MatRadioModule,
   ],

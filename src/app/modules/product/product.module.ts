@@ -9,9 +9,10 @@ import { ProductFilterGroupComponent } from './components/product-filter-group/p
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -28,6 +29,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     CommonModule,
     ProductRoutingModule,
     MatFormFieldModule,
+    MatInputModule,
     MatButtonModule,
     MatSelectModule,
     MatIconModule,
