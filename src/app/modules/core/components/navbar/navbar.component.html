@@ -1,6 +1,6 @@
 <div>
   <div
-    class="mx-auto flex items-center justify-between lg:max-w-screen-lg xl:max-w-screen-xl p-4"
+    class="mx-auto flex items-center justify-between p-4 lg:max-w-screen-lg xl:max-w-screen-xl"
   >
     <div class="lg:hidden">
       <span class="flex">
@@ -35,7 +35,12 @@
       </span>
     </div>
 
-    <img class="h-7 lg:h-10" src="/assets/svg/logo.svg" alt="logo" />
+    <img
+      routerLink=""
+      class="h-7 cursor-pointer select-none lg:h-10"
+      src="/assets/svg/logo.svg"
+      alt="logo"
+    />
 
     <div class="hidden lg:block">
       <app-input
@@ -51,12 +56,21 @@
     </div>
 
     <div class="flex">
-      <app-icon-box class="order-2 lg:mr-5">
-        <i class="material-icons-round text-primary-color">shopping_cart</i>
+      <app-icon-box class="order-2 lg:mr-5  cursor-pointer" routerLink="/cart">
+        <i
+          class="material-icons-round select-none text-primary-color"
+          >shopping_cart</i
+        >
       </app-icon-box>
 
-      <app-icon-box class="order-3 hidden lg:block">
-        <i class="material-icons-round text-primary-color">person</i>
+      <app-icon-box
+        class="order-3 hidden lg:block cursor-pointer"
+        routerLink="/auth/account-info"
+      >
+        <i
+          class="material-icons-round select-none text-primary-color"
+          >person</i
+        >
       </app-icon-box>
     </div>
   </div>

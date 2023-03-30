@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -25,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -34,10 +36,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     SharedModule,
     MatDialogModule,
   ],
-  exports: [
-    NavbarComponent,
-    FooterComponent,
-    CartComponent,
-  ],
+  exports: [NavbarComponent, FooterComponent, CartComponent],
 })
 export class CoreModule {}

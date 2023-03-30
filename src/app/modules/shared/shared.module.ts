@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { InputComponent } from './components/input/input.component';
 import { IconBoxComponent } from './components/icon-box/icon-box.component';
@@ -18,9 +19,6 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
-
-
-
 @NgModule({
   declarations: [
     InputComponent,
@@ -30,16 +28,17 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ProductCheckFilterComponent,
     ConfirmationDialogComponent,
     QuantitySelectorComponent,
-    ProductCarouselComponent
+    ProductCarouselComponent,
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MatIconModule,
     MatSliderModule,
     MatExpansionModule,
     MatCheckboxModule,
     MatButtonModule,
-    CarouselModule
+    CarouselModule,
   ],
   exports: [
     InputComponent,
@@ -48,7 +47,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ProductCheckFilterComponent,
     ProductPriceFilterComponent,
     QuantitySelectorComponent,
-    ProductCarouselComponent
-  ]
+    ProductCarouselComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
