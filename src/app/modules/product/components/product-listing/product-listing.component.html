@@ -62,7 +62,7 @@
   </div>
 
   <div
-    class="mt-2 flex p-4 lg:gap-4 lg:p-0"
+    class="mt-2 p-4 lg:flex lg:gap-4 lg:p-0"
     *ngIf="products$ | async as products"
   >
     <app-product-filter-group
@@ -70,7 +70,7 @@
     ></app-product-filter-group>
 
     <div
-      class="grid h-full gap-4 min-[430px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+      class="grid h-full w-full gap-4 min-[430px]:grid-cols-2 sm:grid-cols-3 xl:grid-cols-4"
     >
       <app-product-card
         *ngFor="let product of products"
