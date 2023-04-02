@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   checked: boolean = false;
-  query: string = '';
 
   constructor(private renderer: Renderer2, private router: Router) {}
 
@@ -20,12 +19,7 @@ export class NavbarComponent {
     else this.renderer.removeClass(document.body, 'block-scroll');
   }
 
-  setQuery(value: string) {
-    this.query = value;
-    this.searchProduct();
-  }
-
-  searchProduct() {
-    this.router.navigate(['product/listing/' + this.query]);
+  searchProduct(value: string) {
+    this.router.navigate(['product/listing/search/' + value]);
   }
 }
