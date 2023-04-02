@@ -9,13 +9,13 @@ import { Product } from '../interfaces/product-interface';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl: string | undefined;
+  private apiUrl?: string;
 
   constructor(private httpClient: HttpClient) {
     this.apiUrl = environment.apiUrl;
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.httpClient.get<Product>(this.apiUrl + '/api/Product/' + id)
+    return this.httpClient.get<Product>(this.apiUrl + '/Product/' + id);
   }
 }
