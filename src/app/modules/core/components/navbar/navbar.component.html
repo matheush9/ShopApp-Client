@@ -48,6 +48,7 @@
         placeholder="Search..."
         [hasIconLeft]="true"
         inputType="search"
+        (newTypedValue)="setQuery($event)"
       >
         <i class="material-icons-round absolute p-2.5 text-primary-color"
           >search</i
@@ -56,19 +57,17 @@
     </div>
 
     <div class="flex">
-      <app-icon-box class="order-2 lg:mr-5  cursor-pointer" routerLink="/cart">
-        <i
-          class="material-icons-round select-none text-primary-color"
+      <app-icon-box class="order-2 cursor-pointer lg:mr-5" routerLink="/cart">
+        <i class="material-icons-round select-none text-primary-color"
           >shopping_cart</i
         >
       </app-icon-box>
 
       <app-icon-box
-        class="order-3 hidden lg:block cursor-pointer"
+        class="order-3 hidden cursor-pointer lg:block"
         routerLink="/auth/account-info"
       >
-        <i
-          class="material-icons-round select-none text-primary-color"
+        <i class="material-icons-round select-none text-primary-color"
           >person</i
         >
       </app-icon-box>

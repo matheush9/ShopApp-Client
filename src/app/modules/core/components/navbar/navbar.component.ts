@@ -7,15 +7,19 @@ import { Component, Renderer2 } from '@angular/core';
 })
 export class NavbarComponent {
   checked: boolean = false;
+  query: string = '';
 
   constructor(private renderer: Renderer2) {}
 
   onMenuClick() {
     this.checked = !this.checked;
 
-    if (this.checked)
-      this.renderer.addClass(document.body, 'block-scroll');
-    else 
-      this.renderer.removeClass(document.body, 'block-scroll');     
+    if (this.checked) this.renderer.addClass(document.body, 'block-scroll');
+    else this.renderer.removeClass(document.body, 'block-scroll');
+  }
+
+  setQuery(value: string) {
+    this.query = value;
+  }
   }
 }
