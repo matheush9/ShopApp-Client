@@ -1,16 +1,17 @@
 <div class="sm:w-full">
   <div
-    class="flex w-full h-[26rem] flex-col gap-4 rounded-lg border border-solid shadow-md"
+    class="flex h-[26rem] w-full flex-col gap-4 rounded-lg border border-solid shadow-md"
   >
-    <div routerLink="/product/detail" class="h-full border-b border-solid cursor-pointer">
-      <img src="/assets/svg/logo.svg" alt="product image" class="h-full" />
+    <div
+      routerLink="/product/detail"
+      class="h-full cursor-pointer border-b border-solid"
+    >
+      <img [src]="productImageUrl" alt="product image" class="h-full" />
     </div>
 
     <div class="flex flex-col gap-6 p-3">
       <span class="multine-ellipsis overflow-hidden text-ellipsis font-medium"
-        >Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry Lorem Ipsum is simply dummy text of the printing and
-        typesetting industry
+        >{{ productName }}
       </span>
       <span class="text-xl font-bold text-primary-color">$00.00</span>
 
