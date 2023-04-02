@@ -24,4 +24,10 @@ export class ProductService {
       this.apiUrl + '/Product/search/' + query
     );
   }
+
+  filterProducts(filter: string): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(
+      this.apiUrl + '/Product/filter/' + filter
+    );
+  }
 }

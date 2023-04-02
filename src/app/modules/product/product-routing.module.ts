@@ -9,7 +9,9 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'listing/:query', component: ProductListingComponent },
+      { path: 'listing/search/:query', component: ProductListingComponent },
+      { path: 'listing/filter/:filter', component: ProductListingComponent },
+
       { path: 'add', component: ProductAddComponent },
       { path: 'detail/:id', component: ProductDetailComponent },
     ],

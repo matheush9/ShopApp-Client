@@ -1,16 +1,18 @@
 <div>
   <div class="flex w-full">
-    <div class="relative w-full">
+    <div class="relative w-full" *ngIf="products$ | async as products">
+      <span
+        [routerLink]="['/product/listing/filter/'] + productFilter"
+        class="cursor-pointer font-medium text-primary-color flex justify-end mb-4"
+        >View more...</span
+      >
       <owl-carousel-o [options]="customOptions" #owlCar>
-        <ng-template carouselSlide>
+        <ng-template carouselSlide *ngFor="let product of products">
           <div class="mr-4">
-            <app-product-card> </app-product-card>
-          </div>
-        </ng-template>
-
-        <ng-template carouselSlide>
-          <div class="mr-4">
-            <app-product-card></app-product-card>
+            <app-product-card
+              [productImageUrl]="product.imageUrl"
+              [productName]="product.name"
+            ></app-product-card>
           </div>
         </ng-template>
       </owl-carousel-o>
