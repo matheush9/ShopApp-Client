@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { InputComponent } from './components/input/input.component';
 import { IconBoxComponent } from './components/icon-box/icon-box.component';
-import { ProductCardComponent } from './components/product-card/product-card/product-card.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductPriceFilterComponent } from './components/product-filter/components/product-price-filter/product-price-filter.component';
 import { ProductCheckFilterComponent } from './components/product-filter/components/product-check-filter/product-check-filter.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';

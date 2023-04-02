@@ -5,7 +5,7 @@ import { ProductRoutingModule } from './product-routing.module';
 
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { ProductFilterGroupComponent } from './components/product-filter-group/product-filter-group/product-filter-group.component';
+import { ProductFilterGroupComponent } from './components/product-filter-group/product-filter-group.component';
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
