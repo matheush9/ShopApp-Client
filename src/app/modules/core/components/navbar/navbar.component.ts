@@ -1,5 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -9,7 +11,7 @@ export class NavbarComponent {
   checked: boolean = false;
   query: string = '';
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private router: Router) {}
 
   onMenuClick() {
     this.checked = !this.checked;
@@ -20,6 +22,10 @@ export class NavbarComponent {
 
   setQuery(value: string) {
     this.query = value;
+    this.searchProduct();
   }
+
+  searchProduct() {
+    this.router.navigate(['product/listing/' + this.query]);
   }
 }
