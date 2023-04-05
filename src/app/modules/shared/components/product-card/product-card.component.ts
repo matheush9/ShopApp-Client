@@ -8,4 +8,9 @@ import { Component, Input } from '@angular/core';
 export class ProductCardComponent {
   @Input() productName: string = '';
   @Input() productImageUrl: string = '/assets/svg/logo.svg';
+  @Input() productId: number = 0;
+
+  toStr(value: number): string {
+    return value.toString();
+  }
 }
