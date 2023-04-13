@@ -3,6 +3,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  imageUrl: string;
-  storeId: number
+  smallImageUrl: string;
+  largeImageUrl: string;
+  storeId: number;
 }

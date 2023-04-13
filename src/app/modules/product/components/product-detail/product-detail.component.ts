@@ -4,7 +4,9 @@ import { Observable, Subject, catchError, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 import { ProductService } from '../../services/product.service';
+import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { Product } from '../../interfaces/product-interface';
+import { Image } from 'src/app/modules/shared/interfaces/image-interface';
 
 @Component({
   selector: 'app-product-detail',
@@ -20,6 +22,7 @@ export class ProductDetailComponent {
     pullDrag: true,
     dots: true,
     navSpeed: 600,
+    lazyLoad: true,
     responsive: {
       0: {
         items: 1,
@@ -29,24 +32,41 @@ export class ProductDetailComponent {
 
   product?: Product;
   product$?: Observable<Product>;
+  imagess?: Image[];
+  images$?: Observable<Image[]>;
   error$ = new Subject<boolean>();
+  imagesProviderUrl?: string;
 
   constructor(
     private productService: ProductService,
+    private imageService: ImageService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.imagesProviderUrl = this.imageService.getImagesProviderUrl();
+
     this.route.paramMap.subscribe({
       next: (params) => {
         const id = params.get('id');
         this.getProduct(Number(id));
+        this.getImagesByProduct(Number(id));
       },
     });
   }
 
   getProduct(productId: number) {
     this.product$ = this.productService.getProduct(productId).pipe(
+      catchError((error) => {
+        console.error(error);
+        this.error$.next(true);
+        return of();
+      })
+    );
+  }
+
+  getImagesByProduct(productId: number) {
+    this.images$ = this.imageService.getImagesbyProduct(productId).pipe(
       catchError((error) => {
         console.error(error);
         this.error$.next(true);
