@@ -55,8 +55,8 @@
       </app-input>
     </div>
 
-    <div class="order-3 flex lg:order-none">
-      <app-icon-box class="order-2 cursor-pointer lg:mr-5" routerLink="/cart">
+    <div class="order-3 flex lg:gap-3 lg:order-none">
+      <app-icon-box class="order-2 cursor-pointer" routerLink="/cart">
         <i class="material-icons-round select-none text-primary-color"
           >shopping_cart</i
         >
@@ -69,6 +69,24 @@
         <i class="material-icons-round select-none text-primary-color"
           >person</i
         >
+      </app-icon-box>
+
+      <app-icon-box
+        class="order-4 hidden cursor-pointer lg:block"
+        routerLink="/order/listing"
+      >
+        <i class="material-icons-round select-none text-primary-color"
+          >inventory
+        </i>
+      </app-icon-box>
+
+      <app-icon-box
+        class="order-4 hidden cursor-pointer lg:block"
+        routerLink="/product/add"
+      >
+        <i class="material-icons-round select-none text-primary-color"
+          >inventory_2
+        </i>
       </app-icon-box>
     </div>
   </div>
