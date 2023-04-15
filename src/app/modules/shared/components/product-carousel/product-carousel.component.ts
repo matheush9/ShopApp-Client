@@ -1,9 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Observable, Subject, catchError, of } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  catchError,
+  of,
+  switchMap,
+  combineLatest,
+} from 'rxjs';
 
 import { Product } from 'src/app/modules/product/interfaces/product-interface';
+import { Image } from '../../interfaces/image-interface';
 import { ProductService } from 'src/app/modules/product/services/product.service';
+import { ImageService } from '../../services/image.service';
 
 @Component({
   selector: 'app-product-carousel',
@@ -19,6 +28,7 @@ export class ProductCarouselComponent implements OnInit {
     pullDrag: true,
     dots: false,
     navSpeed: 600,
+    lazyLoad: true,
     responsive: {
       0: {
         items: 1,
@@ -35,16 +45,48 @@ export class ProductCarouselComponent implements OnInit {
     },
   };
 
-  product?: Product;
+  products?: Product[];
   products$?: Observable<Product[]>;
+  images: Image[] = [];
+  image$?: Observable<Image>;
   error$ = new Subject<boolean>();
+  imagesProviderUrl?: string;
 
   @Input() productFilter: string = '';
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private imageService: ImageService
+  ) {
+    this.imagesProviderUrl = this.imageService.getImagesProviderUrl();
+  }
 
   ngOnInit(): void {
-    this.products$ = this.productService.filterProducts(this.productFilter).pipe(
+    this.products$ = this.productService
+      .filterProducts(this.productFilter)
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          this.error$.next(true);
+          return of();
+        })
+      );
+
+    this.products$
+      .pipe(
+        switchMap((products) =>
+          combineLatest(
+            products.map((product) => this.getImageByProduct(product.id))
+          )
+        )
+      )
+      .subscribe((images) => {
+        this.images = images;
+      });
+  }
+
+  getImageByProduct(productId: number): Observable<Image> {
+    return this.imageService.getImageByProduct(productId).pipe(
       catchError((error) => {
         console.error(error);
         this.error$.next(true);

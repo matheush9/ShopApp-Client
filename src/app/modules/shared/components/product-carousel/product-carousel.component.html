@@ -7,10 +7,10 @@
         >View more...</span
       >
       <owl-carousel-o [options]="customOptions" #owlCar>
-        <ng-template carouselSlide *ngFor="let product of products">
-          <div class="mr-4">
+        <ng-template carouselSlide *ngFor="let product of products; let i = index">
+          <div class="mr-4" *ngIf="images[i]">
             <app-product-card
-              [productImageUrl]="product.largeImageUrl"
+              [productImageUrl]="imagesProviderUrl + images[i].largeImagePath"
               [productName]="product.name"
               [productId]="product.id"
             ></app-product-card>
