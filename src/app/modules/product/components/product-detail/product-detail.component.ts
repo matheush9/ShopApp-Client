@@ -32,7 +32,7 @@ export class ProductDetailComponent {
 
   product?: Product;
   product$?: Observable<Product>;
-  imagess?: Image[];
+  images?: Image[];
   images$?: Observable<Image[]>;
   error$ = new Subject<boolean>();
   imagesProviderUrl?: string;

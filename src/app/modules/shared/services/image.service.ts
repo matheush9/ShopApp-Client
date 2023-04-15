@@ -22,10 +22,16 @@ export class ImageService {
   }
 
   getImage(id: number): Observable<Image> {
-    return this.httpClient.get<Image>(this.apiUrl + '/Image/' + id);    
+    return this.httpClient.get<Image>(this.apiUrl + '/Image/' + id);
   }
 
   getImagesbyProduct(id: number): Observable<Image[]> {
-    return this.httpClient.get<Image[]>(this.apiUrl + '/Image/product/' + id);        
+    return this.httpClient.get<Image[]>(
+      this.apiUrl + '/Image/product/list/' + id
+    );
+  }
+
+  getImageByProduct(id: number): Observable<Image> {
+    return this.httpClient.get<Image>(this.apiUrl + '/Image/product/' + id);
   }
 }
