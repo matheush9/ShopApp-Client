@@ -22,7 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     NavbarComponent,
     FooterComponent,
     CartComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

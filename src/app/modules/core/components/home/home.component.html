@@ -5,7 +5,7 @@
         <h2 class="text-xl font-medium">Trending</h2>
       </div>
       <app-product-carousel
-        [productFilter]="productFilter.featured"
+        [productSorting]="productOrdinations.featured"
       ></app-product-carousel>
     </div>
 
@@ -14,7 +14,7 @@
         <h2 class="text-xl font-medium">New products</h2>
       </div>
       <app-product-carousel
-        [productFilter]="productFilter.newProducts"
+        [productSorting]="productOrdinations.newProducts"
       ></app-product-carousel>
     </div>
 
@@ -23,7 +23,7 @@
         <h2 class="text-xl font-medium">New stores</h2>
       </div>
       <app-product-carousel
-        [productFilter]="productFilter.newStores"
+        [productSorting]="productOrdinations.newStores"
       ></app-product-carousel>
     </div>
   </div>

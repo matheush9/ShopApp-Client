@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ProductFilters } from 'src/app/modules/shared/models/product-filters-model';
+import { ProductOrdinations } from 'src/app/modules/shared/models/product-ordinations-model';
 
 @Component({
   selector: 'app-home',
@@ -8,5 +8,5 @@ import { ProductFilters } from 'src/app/modules/shared/models/product-filters-mo
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  readonly productFilter = ProductFilters;
+  readonly productOrdinations = ProductOrdinations;
 }
