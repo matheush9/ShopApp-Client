@@ -9,8 +9,8 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'listing/search/:query', component: ProductListingComponent },
-      { path: 'listing/filter/:filter', component: ProductListingComponent },
+      { path: 'listing', redirectTo: 'listing/filter' },
+      { path: 'listing/filter', component: ProductListingComponent },
 
       { path: 'add', component: ProductAddComponent },
       { path: 'detail/:id', component: ProductDetailComponent },

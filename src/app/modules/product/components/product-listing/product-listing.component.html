@@ -23,7 +23,7 @@
   <div class="flex flex-col px-4 lg:px-0">
     <span class="my-2 font-bold"
       >You searched for:
-      <span class="font-normal">{{ query }}</span>
+      <span class="font-normal">{{ this.queryParams?.get("query") }}</span>
     </span>
 
     <div class="flex h-full rounded-lg bg-light-platinum">
