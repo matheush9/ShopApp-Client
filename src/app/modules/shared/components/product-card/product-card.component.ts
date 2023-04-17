@@ -9,6 +9,7 @@ export class ProductCardComponent {
   @Input() productName: string = '';
   @Input() productImageUrl: string = '';
   @Input() productId: number = 0;
+  @Input() productRoute: string = '';
 
   toStr(value: number): string {
     return value.toString();

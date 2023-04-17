@@ -3,7 +3,7 @@
     class="flex h-[26rem] w-full flex-col gap-4 rounded-lg border border-solid shadow-md"
   >
     <div
-      [routerLink]="['/product/detail/'] + toStr(productId)"
+      [routerLink]="productRoute + toStr(productId)"
       class="h-full cursor-pointer border-b border-solid"
     >
       <img [src]="[productImageUrl]" alt="product image" class="h-full" />
