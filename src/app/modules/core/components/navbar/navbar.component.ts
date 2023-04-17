@@ -20,6 +20,6 @@ export class NavbarComponent {
   }
 
   searchProduct(value: string) {
-    this.router.navigate(['product/listing/search/' + value]);
+    this.router.navigate(['/product/listing'], {queryParams: {query: value}});
   }
 }
