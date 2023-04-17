@@ -13,7 +13,11 @@ const routes: Routes = [
       { path: 'listing', redirectTo: 'listing/filter' },
       { path: 'listing/filter', component: ProductListingComponent },
 
+      { path: 'inventory', redirectTo: 'inventory/filter' },
+      { path: 'inventory/filter', component: ProductInventoryListingComponent },
+
       { path: 'add', component: ProductAddComponent },
+      { path: 'edit/:id', component: ProductAddComponent },
       { path: 'detail/:id', component: ProductDetailComponent },
     ],
   },

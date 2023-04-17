@@ -22,7 +22,7 @@ export class ProductListingComponent implements OnInit {
   imagesProviderUrl?: string;
   queryParams?: HttpParams;
 
-  @Input() productCardRoute?: string = '/product/detail/';
+  @Input() productCardRoute: string = '/product/detail/';
 
   constructor(
     private renderer: Renderer2,

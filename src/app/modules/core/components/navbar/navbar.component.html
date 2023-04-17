@@ -82,12 +82,17 @@
 
       <app-icon-box
         class="order-4 hidden cursor-pointer lg:block"
-        routerLink="/product/add"
+        [matMenuTriggerFor]="menu"
       >
         <i class="material-icons-round select-none text-primary-color"
           >inventory_2
         </i>
       </app-icon-box>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/product/inventory">Your inventory</button>
+        <button mat-menu-item routerLink="/product/add">Create a product</button>
+      </mat-menu>
     </div>
   </div>
 </div>

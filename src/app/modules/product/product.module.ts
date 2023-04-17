@@ -7,6 +7,7 @@ import { ProductAddComponent } from './components/product-add/product-add.compon
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductFilterGroupComponent } from './components/product-filter-group/product-filter-group.component';
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
+import { ProductInventoryListingComponent } from './components/product-inventory-listing/product-inventory-listing.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -24,6 +25,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ProductDetailComponent,
     ProductFilterGroupComponent,
     ProductListingComponent,
+    ProductInventoryListingComponent,
   ],
   imports: [
     CommonModule,
