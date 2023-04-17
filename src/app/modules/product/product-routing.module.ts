@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
+import { ProductInventoryListingComponent } from './components/product-inventory-listing/product-inventory-listing.component';
 
 const routes: Routes = [
   {
