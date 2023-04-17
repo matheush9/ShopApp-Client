@@ -56,6 +56,7 @@ export class ProductCarouselComponent implements OnInit {
   imagesProviderUrl?: string;
 
   @Input() productSorting: string = '';
+  @Input() productCardRoute: string = '/product/detail/';
 
   constructor(
     private productService: ProductService,
