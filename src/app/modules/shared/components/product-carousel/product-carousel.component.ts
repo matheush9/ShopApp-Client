@@ -7,12 +7,15 @@ import {
   of,
   switchMap,
   combineLatest,
+  map,
+  tap
 } from 'rxjs';
 
 import { Product } from 'src/app/modules/product/interfaces/product-interface';
 import { Image } from '../../interfaces/image-interface';
 import { ProductService } from 'src/app/modules/product/services/product.service';
 import { ImageService } from '../../services/image.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-carousel',
@@ -52,7 +55,7 @@ export class ProductCarouselComponent implements OnInit {
   error$ = new Subject<boolean>();
   imagesProviderUrl?: string;
 
-  @Input() productFilter: string = '';
+  @Input() productSorting: string = '';
 
   constructor(
     private productService: ProductService,
@@ -63,26 +66,26 @@ export class ProductCarouselComponent implements OnInit {
 
   ngOnInit(): void {
     this.products$ = this.productService
-      .filterProducts(this.productFilter)
-      .pipe(
-        catchError((error) => {
-          console.error(error);
-          this.error$.next(true);
-          return of();
-        })
-      );
-
-    this.products$
-      .pipe(
-        switchMap((products) =>
-          combineLatest(
-            products.map((product) => this.getImageByProduct(product.id))
-          )
+    .filterProductsByParams(
+      new HttpParams({ fromObject: { sort: [this.productSorting] } })
+    )
+    .pipe(
+      catchError((error) => {
+        console.error(error);
+        this.error$.next(true);
+        return of([]);
+      }),
+      switchMap((products) =>
+        combineLatest(
+          products.map((product) => this.getImageByProduct(product.id))
+        ).pipe(
+          tap((images) => {
+            this.images = images;
+          }),
+          map(() => products)
         )
       )
-      .subscribe((images) => {
-        this.images = images;
-      });
+    );
   }
 
   getImageByProduct(productId: number): Observable<Image> {

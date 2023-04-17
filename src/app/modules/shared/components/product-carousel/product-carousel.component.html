@@ -2,7 +2,8 @@
   <div class="flex w-full">
     <div class="relative w-full" *ngIf="products$ | async as products">
       <span
-        [routerLink]="['/product/listing/filter/'] + productFilter"
+        [routerLink]="['/product/listing/filter']"
+        [queryParams]="{sort: productSorting}"
         class="cursor-pointer font-medium text-primary-color flex justify-end mb-4"
         >View more...</span
       >
