@@ -8,7 +8,7 @@ import {
   switchMap,
   combineLatest,
   map,
-  tap
+  tap,
 } from 'rxjs';
 
 import { Product } from 'src/app/modules/product/interfaces/product-interface';
@@ -54,6 +54,7 @@ export class ProductCarouselComponent implements OnInit {
   image$?: Observable<Image>;
   error$ = new Subject<boolean>();
   imagesProviderUrl?: string;
+  queryParams: HttpParams = new HttpParams();
 
   @Input() productSorting: string = '';
   @Input() productCardRoute: string = '/product/detail/';
@@ -66,36 +67,51 @@ export class ProductCarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products$ = this.productService
-    .filterProductsByParams(
-      new HttpParams({ fromObject: { sort: [this.productSorting] } })
-    )
-    .pipe(
-      catchError((error) => {
-        console.error(error);
-        this.error$.next(true);
-        return of([]);
-      }),
-      switchMap((products) =>
-        combineLatest(
-          products.map((product) => this.getImageByProduct(product.id))
-        ).pipe(
-          tap((images) => {
-            this.images = images;
-          }),
-          map(() => products)
-        )
-      )
-    );
+    this.loadQueryParams();
   }
 
-  getImageByProduct(productId: number): Observable<Image> {
-    return this.imageService.getImageByProduct(productId).pipe(
+  loadQueryParams() {
+    this.queryParams = new HttpParams({
+      fromObject: { sort: [this.productSorting] },
+    });
+
+    this.filterProducts(this.queryParams);
+  }
+
+  filterProducts(params: HttpParams) {
+    this.products$ = this.productService.filterProductsByParams(params).pipe(
       catchError((error) => {
         console.error(error);
         this.error$.next(true);
         return of();
+      }),
+      tap((products) => {
+        this.LoadProductsImage(products);
       })
     );
+  }
+
+  LoadProductsImage(products: Product[]) {
+    this.products = products;
+    this.queryParams = new HttpParams();
+    this.products.forEach((element) => {
+      this.queryParams = this.queryParams.append('proId', element.id);
+    });
+    this.getImagesByParams(this.queryParams);
+  }
+
+  getImagesByParams(params: HttpParams) {
+    this.imageService
+      .getImagesByProductParams(params)
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          this.error$.next(true);
+          return of();
+        })
+      )
+      .subscribe((images) => {
+        this.images = images;
+      });
   }
 }

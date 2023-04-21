@@ -1,15 +1,7 @@
 import { Component, OnInit, Renderer2, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
-import {
-  Observable,
-  Subject,
-  catchError,
-  forkJoin,
-  of,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { Observable, Subject, catchError, of, tap } from 'rxjs';
 
 import { Product } from '../../interfaces/product-interface';
 import { Image } from 'src/app/modules/shared/interfaces/image-interface';
@@ -25,11 +17,12 @@ import { ProductOrdinations } from 'src/app/modules/shared/models/product-ordina
 export class ProductListingComponent implements OnInit {
   checked: boolean = false;
   products$?: Observable<Product[]>;
+  products: Product[] = [];
   images: Image[] = [];
   image$?: Observable<Image>;
   error$ = new Subject<boolean>();
   imagesProviderUrl?: string;
-  queryParams?: HttpParams;
+  queryParams: HttpParams = new HttpParams();
 
   @Input() productCardRoute: string = '/product/detail/';
 
@@ -59,13 +52,45 @@ export class ProductListingComponent implements OnInit {
   loadQueryParams() {
     this.route.queryParams.pipe().subscribe((params) => {
       this.queryParams = new HttpParams({ fromObject: params });
-      this.filterProduct(this.queryParams);
-      this.LoadProductsImage();
+      this.filterProducts(this.queryParams);
     });
   }
 
-  filterProduct(params: HttpParams) {
-    this.products$ = this.productService.filterProductsByParams(params);
+  filterProducts(params: HttpParams) {
+    this.products$ = this.productService.filterProductsByParams(params).pipe(
+      catchError((error) => {
+        console.error(error);
+        this.error$.next(true);
+        return of();
+      }),
+      tap((products) => {
+        this.LoadProductsImage(products);
+      })
+    );
+  }
+
+  LoadProductsImage(products: Product[]) {
+    this.products = products;
+    this.queryParams = new HttpParams();
+    this.products.forEach((element) => {
+      this.queryParams = this.queryParams.append('proId', element.id);
+    });
+    this.getImagesByParams(this.queryParams);
+  }
+
+  getImagesByParams(params: HttpParams) {
+    this.imageService
+      .getImagesByProductParams(params)
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          this.error$.next(true);
+          return of();
+        })
+      )
+      .subscribe((images) => {
+        this.images = images;
+      });
   }
 
   changeProductOrdering(order: string) {
@@ -74,36 +99,6 @@ export class ProductListingComponent implements OnInit {
       queryParamsHandling: 'merge',
     });
     this.loadQueryParams();
-  }
-
-  LoadProductsImage() {
-    if (this.products$) {
-      this.products$
-        .pipe(
-          switchMap((products) =>
-            forkJoin(
-              products.map((product) => this.getImageByProduct(product.id))
-            )
-          ),
-          catchError((error) => {
-            console.error(error);
-            this.error$.next(true);
-            return of();
-          })
-        )
-        .subscribe((images) => {
-          this.images = images;
-        });
-    }
-  }
-
-  getImageByProduct(productId: number): Observable<Image> {
-    return this.imageService.getImageByProduct(productId).pipe(
-      catchError((error) => {
-        console.error(error);
-        this.error$.next(true);
-        return of();
-      })
-    );
+    console.log(order);
   }
 }

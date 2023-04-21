@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
@@ -33,5 +33,11 @@ export class ImageService {
 
   getImageByProduct(id: number): Observable<Image> {
     return this.httpClient.get<Image>(this.apiUrl + '/Image/product/' + id);
+  }
+
+  getImagesByProductParams(params: HttpParams): Observable<Image[]> {
+    return this.httpClient.get<Image[]>(this.apiUrl + '/Image/products/list', {
+      params: params,
+    });
   }
 }
