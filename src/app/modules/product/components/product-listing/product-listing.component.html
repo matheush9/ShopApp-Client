@@ -48,11 +48,15 @@
             <span class="font-medium">Order by:</span>
           </span>
 
-          <select class="w-full rounded-lg border p-2.5 outline-none lg:w-40">
-            <option value="Relevance" selected>Relevance</option>
-            <option value="New">New</option>
-            <option value="Price Low to High">Price Low to High</option>
-            <option value="Price High to Low">Price High to Low</option>
+          <select
+            class="w-full rounded-lg border p-2.5 outline-none lg:w-40"
+            #orderings
+            (change)="changeProductOrdering(orderings.value)"
+          >
+            <option [value]="productOrdinations.featured" selected>Relevance</option>
+            <option [value]="productOrdinations.newProducts">New</option>
+            <option [value]="productOrdinations.priceAscending">Price Low to High</option>
+            <option [value]="productOrdinations.priceDescending">Price High to Low</option>
           </select>
         </div>
 

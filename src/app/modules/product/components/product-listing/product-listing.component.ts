@@ -1,12 +1,21 @@
 import { Component, OnInit, Renderer2, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, Subject, catchError, forkJoin, of, switchMap, tap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
+import {
+  Observable,
+  Subject,
+  catchError,
+  forkJoin,
+  of,
+  switchMap,
+  tap,
+} from 'rxjs';
 
 import { Product } from '../../interfaces/product-interface';
 import { Image } from 'src/app/modules/shared/interfaces/image-interface';
 import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
-import { HttpParams } from '@angular/common/http';
+import { ProductOrdinations } from 'src/app/modules/shared/models/product-ordinations-model';
 
 @Component({
   selector: 'app-product-listing',
@@ -24,13 +33,20 @@ export class ProductListingComponent implements OnInit {
 
   @Input() productCardRoute: string = '/product/detail/';
 
+  readonly productOrdinations = ProductOrdinations;
+
   constructor(
     private renderer: Renderer2,
     private route: ActivatedRoute,
+    private router: Router,
     private productService: ProductService,
     private imageService: ImageService
   ) {
     this.imagesProviderUrl = this.imageService.getImagesProviderUrl();
+  }
+
+  ngOnInit(): void {
+    this.loadQueryParams();
   }
 
   onMenuClick() {
@@ -40,19 +56,24 @@ export class ProductListingComponent implements OnInit {
     else this.renderer.removeClass(document.body, 'block-scroll');
   }
 
-  ngOnInit(): void {
-    this.route.queryParams.pipe(
-      tap((params) => {
-        this.queryParams = new HttpParams({ fromObject: params });
-        this.filterProduct(this.queryParams);
-      })
-    ).subscribe();
-
-    this.LoadProductsImage();
-  }      
+  loadQueryParams() {
+    this.route.queryParams.pipe().subscribe((params) => {
+      this.queryParams = new HttpParams({ fromObject: params });
+      this.filterProduct(this.queryParams);
+      this.LoadProductsImage();
+    });
+  }
 
   filterProduct(params: HttpParams) {
     this.products$ = this.productService.filterProductsByParams(params);
+  }
+
+  changeProductOrdering(order: string) {
+    this.router.navigate([], {
+      queryParams: { sort: order },
+      queryParamsHandling: 'merge',
+    });
+    this.loadQueryParams();
   }
 
   LoadProductsImage() {
