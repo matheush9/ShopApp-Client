@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject, catchError, tap, of } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ConfirmationDialogComponent } from 'src/app/modules/shared/components/confirmation-dialog/confirmation-dialog.component';
 
@@ -18,6 +18,8 @@ import { ConfirmationDialogComponent } from 'src/app/modules/shared/components/c
   styleUrls: ['./product-add.component.scss'],
 })
 export class ProductAddComponent {
+  @ViewChild('owlCar', { static: false }) owlCar?: any;
+
   newProduct: boolean = false;
   product$?: Observable<Product>;
   product?: Product;
@@ -71,11 +73,7 @@ export class ProductAddComponent {
     exitAnimationDuration: string,
     dialogMessage: string
   ): void {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-
-    this.dialog.open(ConfirmationDialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '300px',
       enterAnimationDuration,
       exitAnimationDuration,
@@ -83,6 +81,14 @@ export class ProductAddComponent {
       data: {
         message: dialogMessage,
       },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteImageById(
+          this.images.at(this.owlCar.carouselService._current)!.id
+        );
+      }
     });
   }
 
@@ -93,7 +99,7 @@ export class ProductAddComponent {
         this.error$.next(true);
         return of();
       }),
-      tap((data) => (this.product = data))
+      tap((product) => (this.product = product))
     );
   }
 
@@ -103,7 +109,25 @@ export class ProductAddComponent {
         console.error(error);
         this.error$.next(true);
         return of();
+      }),
+      tap((images) => {
+        this.images = images;
       })
     );
+  }
+
+  deleteImageById(imageId: number) {
+    this.imageService
+      .deleteImageById(imageId)
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          this.error$.next(true);
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.getImagesByProduct(this.product!.id);
+      });
   }
 }

@@ -40,4 +40,9 @@ export class ImageService {
       params: params,
     });
   }
+
+  deleteImageById(id: number): Observable<Image[]> {
+    console.log(id)
+    return this.httpClient.delete<Image[]>(this.apiUrl + '/Image/' + id);   
+  }
 }
