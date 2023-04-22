@@ -27,6 +27,7 @@ export class ProductAddComponent {
   images$?: Observable<Image[]>;
   error$ = new Subject<boolean>();
   imagesProviderUrl: string;
+  imageFileName: string = '';
 
   constructor(
     public dialog: MatDialog,
@@ -129,5 +130,25 @@ export class ProductAddComponent {
       .subscribe(() => {
         this.getImagesByProduct(this.product!.id);
       });
+  }
+
+  uploadImage(event: any) {
+    const imageFile: File = event.target.files[0];
+    if (imageFile) {
+      this.imageFileName = imageFile.name;
+
+      const formData = new FormData();
+      var imageModel = {
+        name: this.imageFileName,
+        productId: this.product!.id,
+      } as Image;
+
+      formData.append('imageFile', imageFile);
+      formData.append('json', JSON.stringify(imageModel));
+
+      this.imageService.uploadImageFile(formData).subscribe(() => {
+        this.getImagesByProduct(this.product!.id);
+      });
+    }
   }
 }

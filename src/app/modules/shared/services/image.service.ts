@@ -42,7 +42,10 @@ export class ImageService {
   }
 
   deleteImageById(id: number): Observable<Image[]> {
-    console.log(id)
     return this.httpClient.delete<Image[]>(this.apiUrl + '/Image/' + id);   
+  }
+
+  uploadImageFile(imageFile: FormData) {
+    return this.httpClient.post(this.apiUrl + '/Image', imageFile);
   }
 }

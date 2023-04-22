@@ -84,7 +84,7 @@
         </div>
 
         <div class="relative flex w-full flex-col sm:w-2/5 lg:order-2 lg:w-2/6">
-          <div class="relative w-full " *ngIf="images$ | async as images">
+          <div class="relative w-full" *ngIf="images$ | async as images">
             <h2 class="mb-6 text-center text-xl font-bold">Product images</h2>
             <owl-carousel-o [options]="customOptions" #owlCar>
               <ng-template carouselSlide *ngFor="let image of images">
@@ -121,11 +121,31 @@
                 )
               "
             >
-              Remove this image
+              Remove image
+              <i
+                class="material-icons-round ml-1 cursor-pointer select-none align-middle"
+                >delete</i
+              >
             </button>
 
-            <button class="flex-grow basis-0" mat-flat-button color="primary">
+            <input
+              class="hidden"
+              type="file"
+              accept="image/*"
+              (change)="uploadImage($event)"
+              #imageUpload
+            />
+            <button
+              class="flex-grow basis-0"
+              mat-flat-button
+              color="primary"
+              (click)="imageUpload.click()"
+            >
               Add new image
+              <i
+                class="material-icons-round ml-1 cursor-pointer select-none align-middle"
+                >file_upload</i
+              >
             </button>
           </div>
         </div>
