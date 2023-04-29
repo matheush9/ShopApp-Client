@@ -3,4 +3,5 @@ export interface Store {
   name: string;
   country: string;
   description: string;
+  userId: string;
 }

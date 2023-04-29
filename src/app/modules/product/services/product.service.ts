@@ -21,25 +21,19 @@ export class ProductService {
 
   getProduct(id: number): Observable<Product> {
     return this.httpClient.get<Product>(this.apiUrl + '/Product/' + id, {
-      headers: this.getAuthHeader(),
+      headers: this.jwtTokenService.getAuthHeader(),
     });
   }
 
   searchProduct(query: string): Observable<Product[]> {
     return this.httpClient.get<Product[]>(
-      this.apiUrl + '/Product/search/' + query, {headers: this.getAuthHeader()}
+      this.apiUrl + '/Product/search/' + query, {headers: this.jwtTokenService.getAuthHeader()}
     );
   }
 
   filterProductsByParams(params: HttpParams): Observable<Product[]> {
     return this.httpClient.get<Product[]>(this.apiUrl + '/Product/filter/', {
-      params: params, headers: this.getAuthHeader(),
-    });
-  }
-  
-  getAuthHeader() {
-    return new HttpHeaders({
-      Authorization: 'Bearer ' + this.jwtTokenService.getToken(),
+      params: params, headers: this.jwtTokenService.getAuthHeader(),
     });
   }
 }
