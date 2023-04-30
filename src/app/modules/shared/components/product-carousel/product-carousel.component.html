@@ -8,7 +8,7 @@
         >View more...</span
       >
       <owl-carousel-o [options]="customOptions" #owlCar>
-        <ng-template carouselSlide *ngFor="let product of products; let i = index">
+        <ng-template carouselSlide *ngFor="let product of products.data; let i = index">
           <div class="mr-4" *ngIf="images[i]">
             <app-product-card
               [productImageUrl]="imagesProviderUrl + images[i].largeImagePath"

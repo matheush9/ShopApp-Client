@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Product } from '../interfaces/product-interface';
 import { JwtTokenService } from './../../shared/services/jwt-token.service';
+import { PagedResponse } from '../../shared/interfaces/wrappers/paged-response-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -31,8 +32,8 @@ export class ProductService {
     );
   }
 
-  filterProductsByParams(params: HttpParams): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(this.apiUrl + '/Product/filter/', {
+  filterProductsByParams(params: HttpParams): Observable<PagedResponse<Product[]>> {
+    return this.httpClient.get<PagedResponse<Product[]>>(this.apiUrl + '/Product/filter/', {
       params: params, headers: this.jwtTokenService.getAuthHeader(),
     });
   }

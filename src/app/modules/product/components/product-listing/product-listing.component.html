@@ -60,6 +60,23 @@
           </select>
         </div>
 
+        <div class="flex items-center gap-2">
+          <span class="hidden items-center gap-2 lg:flex">
+            <span class="font-medium">Display:</span>
+          </span>
+
+          <select
+            class="w-full rounded-lg border p-2.5 outline-none lg:w-40"
+            #productPageSize
+            (change)="changeProductPageSize(productPageSize.value)"
+          >
+            <option value="1">1 per page</option>
+            <option value="5" selected>5 per page</option>
+            <option value="10">10 per page</option>
+            <option value="20">20 per page</option>  
+          </select>
+        </div>
+
         <span><span class="font-bold">0</span> items found</span>
       </div>
     </div>
@@ -76,7 +93,7 @@
     <div
       class="grid h-full w-full gap-4 min-[430px]:grid-cols-2 sm:grid-cols-3 xl:grid-cols-4"
     >
-      <ng-container *ngFor="let product of products; let i = index">
+      <ng-container *ngFor="let product of products.data; let i = index">
         <app-product-card
           *ngIf="images[i]"
           [productImageUrl]="imagesProviderUrl + images[i].largeImagePath"

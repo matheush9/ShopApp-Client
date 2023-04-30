@@ -16,6 +16,7 @@ import { Image } from '../../interfaces/image-interface';
 import { ProductService } from 'src/app/modules/product/services/product.service';
 import { ImageService } from '../../services/image.service';
 import { HttpParams } from '@angular/common/http';
+import { PagedResponse } from '../../interfaces/wrappers/paged-response-interface';
 
 @Component({
   selector: 'app-product-carousel',
@@ -49,7 +50,7 @@ export class ProductCarouselComponent implements OnInit {
   };
 
   products?: Product[];
-  products$?: Observable<Product[]>;
+  products$?: Observable<PagedResponse<Product[]>>;
   images: Image[] = [];
   image$?: Observable<Image>;
   error$ = new Subject<boolean>();
@@ -86,7 +87,7 @@ export class ProductCarouselComponent implements OnInit {
         return of();
       }),
       tap((products) => {
-        this.LoadProductsImage(products);
+        this.LoadProductsImage(products.data);
       })
     );
   }

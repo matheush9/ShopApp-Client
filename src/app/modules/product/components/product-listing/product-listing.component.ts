@@ -8,6 +8,7 @@ import { Image } from 'src/app/modules/shared/interfaces/image-interface';
 import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { ProductOrdinations } from 'src/app/modules/shared/models/product-ordinations-model';
+import { PagedResponse } from 'src/app/modules/shared/interfaces/wrappers/paged-response-interface';
 
 @Component({
   selector: 'app-product-listing',
@@ -16,7 +17,7 @@ import { ProductOrdinations } from 'src/app/modules/shared/models/product-ordina
 })
 export class ProductListingComponent implements OnInit {
   checked: boolean = false;
-  products$?: Observable<Product[]>;
+  products$?: Observable<PagedResponse<Product[]>>;
   products: Product[] = [];
   images: Image[] = [];
   image$?: Observable<Image>;
@@ -64,7 +65,7 @@ export class ProductListingComponent implements OnInit {
         return of();
       }),
       tap((products) => {
-        this.LoadProductsImage(products);
+        this.LoadProductsImage(products.data);
       })
     );
   }
@@ -99,6 +100,13 @@ export class ProductListingComponent implements OnInit {
       queryParamsHandling: 'merge',
     });
     this.loadQueryParams();
-    console.log(order);
+  }
+
+  changeProductPageSize(size: string) {
+    this.router.navigate([], {
+      queryParams: { PageSize: size },
+      queryParamsHandling: 'merge',
+    });
+    this.loadQueryParams(); 
   }
 }
