@@ -53,31 +53,20 @@
             #orderings
             (change)="changeProductOrdering(orderings.value)"
           >
-            <option [value]="productOrdinations.featured" selected>Relevance</option>
+            <option [value]="productOrdinations.featured" selected>
+              Relevance
+            </option>
             <option [value]="productOrdinations.newProducts">New</option>
-            <option [value]="productOrdinations.priceAscending">Price Low to High</option>
-            <option [value]="productOrdinations.priceDescending">Price High to Low</option>
+            <option [value]="productOrdinations.priceAscending">
+              Price Low to High
+            </option>
+            <option [value]="productOrdinations.priceDescending">
+              Price High to Low
+            </option>
           </select>
         </div>
 
-        <div class="flex items-center gap-2">
-          <span class="hidden items-center gap-2 lg:flex">
-            <span class="font-medium">Display:</span>
-          </span>
-
-          <select
-            class="w-full rounded-lg border p-2.5 outline-none lg:w-40"
-            #productPageSize
-            (change)="changeProductPageSize(productPageSize.value)"
-          >
-            <option value="1">1 per page</option>
-            <option value="5" selected>5 per page</option>
-            <option value="10">10 per page</option>
-            <option value="20">20 per page</option>  
-          </select>
-        </div>
-
-        <span><span class="font-bold">0</span> items found</span>
+        <span><span class="font-bold">{{productsTotalFound}}</span> items found</span>
       </div>
     </div>
   </div>
@@ -103,5 +92,18 @@
         ></app-product-card>
       </ng-container>
     </div>
+  </div>
+
+  <div>
+    <mat-paginator
+      #paginator
+      (page)="changeProductPage($event)"
+      class="flex w-full rounded-md bg-light-platinum p-2"
+      [length]="productsTotal"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      aria-label="Select page"
+    >
+    </mat-paginator>
   </div>
 </div>

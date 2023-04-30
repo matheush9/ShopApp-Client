@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -37,6 +38,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     MatIconModule,
     SharedModule,
     CarouselModule,
+    MatPaginatorModule
   ],
 })
 export class ProductModule {}

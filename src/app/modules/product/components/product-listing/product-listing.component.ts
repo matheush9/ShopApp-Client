@@ -9,6 +9,7 @@ import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { ProductOrdinations } from 'src/app/modules/shared/models/product-ordinations-model';
 import { PagedResponse } from 'src/app/modules/shared/interfaces/wrappers/paged-response-interface';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-product-listing',
@@ -24,6 +25,11 @@ export class ProductListingComponent implements OnInit {
   error$ = new Subject<boolean>();
   imagesProviderUrl?: string;
   queryParams: HttpParams = new HttpParams();
+  productsTotal = 1;
+  pageSizeOptions: number[] = [5, 10, 15, 20];
+  pageSize = 10;
+  pageIndex = 1;
+  productsTotalFound: number = 0;
 
   @Input() productCardRoute: string = '/product/detail/';
 
@@ -66,6 +72,9 @@ export class ProductListingComponent implements OnInit {
       }),
       tap((products) => {
         this.LoadProductsImage(products.data);
+        this.productsTotal = products.totalRecords;
+        this.productsTotalFound = products.data.length;
+        this.pageIndex = products.pageNumber - 1;
       })
     );
   }
@@ -102,11 +111,13 @@ export class ProductListingComponent implements OnInit {
     this.loadQueryParams();
   }
 
-  changeProductPageSize(size: string) {
+  changeProductPage(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    console.log(event.pageIndex)
     this.router.navigate([], {
-      queryParams: { PageSize: size },
+      queryParams: { pageSize: event.pageSize, pageNumber: this.pageIndex + 1},
       queryParamsHandling: 'merge',
     });
-    this.loadQueryParams(); 
+    this.loadQueryParams();
   }
 }
