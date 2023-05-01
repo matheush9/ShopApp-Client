@@ -1,6 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +10,19 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   checked: boolean = false;
+  cartItemsCount: number = 0;
+  constructor(
+    private renderer: Renderer2,
+    private router: Router,
+    private cartService: CartService
+  ) {}
 
-  constructor(private renderer: Renderer2, private router: Router) {}
+  ngOnInit(): void {
+    this.cartItemsCount = this.cartService.getCart().length;
+    this.cartService.cartUpdates().subscribe((cart) => {
+      this.cartItemsCount = cart.length;
+    });
+  }
 
   onMenuClick() {
     this.checked = !this.checked;
@@ -20,6 +32,8 @@ export class NavbarComponent {
   }
 
   searchProduct(value: string) {
-    this.router.navigate(['/product/listing'], {queryParams: {query: value}});
+    this.router.navigate(['/product/listing'], {
+      queryParams: { query: value },
+    });
   }
 }

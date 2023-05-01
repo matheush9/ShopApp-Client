@@ -55,11 +55,19 @@
       </app-input>
     </div>
 
-    <div class="order-3 flex lg:gap-3 lg:order-none">
+    <div class="order-3 flex lg:order-none lg:gap-3">
       <app-icon-box class="order-2 cursor-pointer" routerLink="/cart">
         <i class="material-icons-round select-none text-primary-color"
           >shopping_cart</i
         >
+        <div *ngIf="cartItemsCount > 0" class="absolute">
+          <i
+            class="material-icons-round mb-8 ml-8 select-none text-red-500"
+            >circle</i
+          >
+          <span class="absolute mt-1 -ml-4 text-xs font-semibold text-white">
+            {{cartItemsCount}}</span>
+        </div>
       </app-icon-box>
 
       <app-icon-box
@@ -90,8 +98,12 @@
       </app-icon-box>
 
       <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/product/inventory">Your inventory</button>
-        <button mat-menu-item routerLink="/product/add">Create a product</button>
+        <button mat-menu-item routerLink="/product/inventory">
+          Your inventory
+        </button>
+        <button mat-menu-item routerLink="/product/add">
+          Create a product
+        </button>
       </mat-menu>
     </div>
   </div>
