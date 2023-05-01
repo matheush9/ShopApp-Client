@@ -26,9 +26,14 @@ export class CartService {
 
   addProduct(cartProduct: CartProduct) {
     let newCart: CartProduct[];
-
     newCart = this.getCart();
-    newCart.push(cartProduct);
+
+    const productIndex = newCart.findIndex((p) => p.id == cartProduct.id);
+    if (productIndex !== -1) {
+      newCart[productIndex].amount++;
+    } else {
+      newCart.push(cartProduct);
+    }
     localStorage.setItem(this.cartKey, JSON.stringify(newCart));
     this.cartUpdateSubject.next(newCart);
   }

@@ -17,6 +17,7 @@
         >
           <img
             class="w-36"
+            *ngIf="images[i]"
             [src]="imagesProviderUrl + images[i].smallImagePath"
             alt="logo"
           />
