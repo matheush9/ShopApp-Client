@@ -4,4 +4,5 @@ export interface Image {
   smallImagePath: string;
   largeImagePath: string;
   productId: number;
+  userId: number;
 }

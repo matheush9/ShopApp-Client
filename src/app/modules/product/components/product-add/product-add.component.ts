@@ -135,7 +135,7 @@ export class ProductAddComponent {
   uploadImage(event: any) {
     const imageFile: File = event.target.files[0];
     if (imageFile) {
-      this.imageFileName = imageFile.name;
+      this.imageFileName = '-product'+ imageFile.name;
 
       const formData = new FormData();
       var imageModel = {
@@ -143,7 +143,7 @@ export class ProductAddComponent {
         productId: this.product!.id,
       } as Image;
 
-      formData.append('imageFile', imageFile);
+      formData.append('imageFile', imageFile, this.imageFileName);
       formData.append('json', JSON.stringify(imageModel));
 
       this.imageService.uploadImageFile(formData).subscribe(() => {
