@@ -37,4 +37,11 @@ export class ProductService {
       params: params, headers: this.jwtTokenService.getAuthHeader(),
     });
   }
+
+  filterProductsByIdList(params: HttpParams): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(this.apiUrl + '/Product/idList', {
+      params: params
+    });
+  }
+
 }

@@ -4,19 +4,31 @@
       class="flex h-fit w-full flex-grow flex-col gap-2 rounded-lg bg-light-blue p-2"
     >
       <h2 class="text-2xl font-bold">
-        Items: <span class="text-lg font-medium">0</span>
+        Items: <span class="text-lg font-medium">{{cartItemsCount}}</span>
       </h2>
-      
-      <div class="flex w-full flex-col rounded-lg bg-white">
-        <div class="flex items-center gap-6 rounded-2xl p-4 lg:gap-10">
-          <img class="w-16 pb-10" src="/assets/conversor.jpg" alt="logo" />
+
+      <div
+        class="flex w-full flex-col rounded-lg bg-white"
+        *ngIf="products$ | async as products"
+      >
+        <div
+          class="flex items-center gap-6 rounded-2xl p-4 lg:gap-10"
+          *ngFor="let product of products; let i = index"
+        >
+          <img
+            class="w-36"
+            [src]="imagesProviderUrl + images[i].smallImagePath"
+            alt="logo"
+          />
 
           <div class="flex w-full flex-col gap-10">
             <div
               class="flex flex-col justify-between gap-4 lg:flex-row lg:gap-0"
             >
-              <p class="text-lg font-bold">product name bla bla bla bla</p>
-              <span class="text-xl font-bold text-primary-color">$00.00</span>
+              <p class="text-lg font-bold">{{ product.name }}</p>
+              <span class="text-xl font-bold text-primary-color"
+                >${{ product.price }}</span
+              >
             </div>
 
             <div
@@ -24,8 +36,13 @@
             >
               <app-quantity-selector
                 class="[&_.icon-box]:h-6 [&_.icon-box]:w-6"
+                [productId]="product.id"
+                (productAmountChange)="calculateTotalPrice()"
               ></app-quantity-selector>
-              <span class="flex items-center gap-1">
+              <span
+                class="flex items-center gap-1"
+                (click)="deleteProduct(product.id)"
+              >
                 <i
                   class="material-icons-round cursor-pointer select-none text-primary-color"
                   >delete</i
@@ -45,14 +62,14 @@
 
       <div class="flex flex-col gap-2">
         <span class="flex justify-between"
-          >Price: <span class="font-bold">$00.00</span>
+          >Price: <span class="font-bold">${{basePrice| number: '1.2-2'}}</span>
         </span>
 
-        <span class="flex justify-between">Discount: <span>$00.00</span></span>
+        <span class="flex justify-between">Discount: <span>{{discount| number: '1.2-2'}}</span></span>
 
         <span class="flex justify-between text-xl font-bold text-primary-color"
           >Total price:
-          <span>$00.00</span>
+          <span>{{totalPrice| number: '1.2-2'}}</span>
         </span>
 
         <div class="flex flex-col gap-4">

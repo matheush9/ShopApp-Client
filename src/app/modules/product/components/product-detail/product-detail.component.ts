@@ -7,6 +7,8 @@ import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { Product } from '../../interfaces/product-interface';
 import { Image } from 'src/app/modules/shared/interfaces/image-interface';
+import { CartProduct } from 'src/app/modules/core/interfaces/cart-product-interface';
+import { CartService } from 'src/app/modules/core/services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -40,7 +42,8 @@ export class ProductDetailComponent {
   constructor(
     private productService: ProductService,
     private imageService: ImageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -73,5 +76,14 @@ export class ProductDetailComponent {
         return of();
       })
     );
+  }
+
+  addProductToCart(productId: number) {
+    const product: CartProduct = {
+      id: productId,
+      amount: 1,
+    };
+
+    this.cartService.addProduct(product);
   }
 }

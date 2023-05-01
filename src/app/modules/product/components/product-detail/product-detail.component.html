@@ -32,26 +32,12 @@
         <span class="text-3xl font-bold text-primary-color">{{
           product.price
         }}</span>
-        <div class="flex items-center gap-4">
-          <app-icon-box>
-            <i
-              class="material-icons-round cursor-pointer select-none text-primary-color"
-              >remove</i
-            >
-          </app-icon-box>
-          <span class="font-bold">1</span>
-          <app-icon-box>
-            <i
-              class="material-icons-round cursor-pointer select-none text-primary-color"
-              >add</i
-            >
-          </app-icon-box>
-        </div>
 
         <button
           mat-flat-button
           color="primary"
           class="flex items-center justify-center gap-1 bg-primary-color font-medium text-white"
+          (click)="addProductToCart(product.id)"
         >
           <mat-icon>shopping_cart</mat-icon>
           Add to cart
