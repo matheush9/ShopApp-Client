@@ -23,6 +23,10 @@ export class StoreService {
     return this.httpClient.get<Store>(this.apiUrl + '/Store/' + id);
   }
 
+  getStoreByUser(userId: number): Observable<Store> {
+    return this.httpClient.get<Store>(this.apiUrl + '/Store/user/' + userId);
+  }
+
   addStore(store: Store): Observable<Store> {
     return this.httpClient.post<Store>(this.apiUrl + '/Store', store, {
       headers: this.jwtTokenService.getAuthHeader(),
