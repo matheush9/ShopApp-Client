@@ -9,7 +9,7 @@
   <div
     class="lg:w-full mb-8 flex h-screen w-full flex-col gap-6 rounded-lg bg-light-platinum p-3 sm:w-4/5"
   >
-    <app-product-price-filter></app-product-price-filter>
+    <app-product-price-filter (priceRangeChange)="storePriceRange($event)"></app-product-price-filter>
     <hr />
     <app-product-check-filter></app-product-check-filter>
 

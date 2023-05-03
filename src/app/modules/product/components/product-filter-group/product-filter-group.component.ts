@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-filter-group.component.scss']
 })
 export class ProductFilterGroupComponent {
+  priceRange: string = '';
 
+  storePriceRange(event: any) {
+    this.priceRange = event;
+  }
 }
