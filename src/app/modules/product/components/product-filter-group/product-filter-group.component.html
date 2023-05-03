@@ -11,8 +11,8 @@
   >
     <app-product-price-filter (priceRangeChange)="storePriceRange($event)"></app-product-price-filter>
     <hr />
-    <app-product-check-filter></app-product-check-filter>
+    <app-product-check-filter (checkBoxChange)="storeCategories($event)"></app-product-check-filter>
 
-    <button class="mt-12" mat-flat-button color="primary">Apply filters</button>
+    <button class="mt-12" mat-flat-button color="primary" (click)="applyFilters()">Apply filters</button>
   </div>
 </div>
