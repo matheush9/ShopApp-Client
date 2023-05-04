@@ -2,6 +2,7 @@ import { Component, Renderer2 } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
+import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +12,12 @@ import { CartService } from '../../services/cart.service';
 export class NavbarComponent {
   checked: boolean = false;
   cartItemsCount: number = 0;
+
   constructor(
     private renderer: Renderer2,
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private jwtService: JwtTokenService,
   ) {}
 
   ngOnInit(): void {
@@ -35,5 +38,13 @@ export class NavbarComponent {
     this.router.navigate(['/product/listing'], {
       queryParams: { query: value },
     });
+  }
+
+  userLogOut() {
+    this.jwtService.removeToken(); 
+  }
+  
+  userIsLogged(): boolean {
+    return !!this.jwtService.getToken();
   }
 }

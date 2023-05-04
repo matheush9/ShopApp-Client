@@ -5,6 +5,7 @@ import { Subject, catchError, of } from 'rxjs';
 import { LoginService } from '../../services/login.service';
 import { JwtTokenService } from './../../../shared/services/jwt-token.service';
 import { User } from '../../interfaces/user-interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent {
 
   constructor(
     private loginService: LoginService,
-    private jwtTokenService: JwtTokenService
+    private jwtTokenService: JwtTokenService,
+    private router: Router
   ) {}
 
   login() {
@@ -37,6 +39,7 @@ export class LoginComponent {
       )
       .subscribe((tokenObj) => {
         this.storeToken(tokenObj.token);
+        this.router.navigate(['/']);
       });
   }
 
