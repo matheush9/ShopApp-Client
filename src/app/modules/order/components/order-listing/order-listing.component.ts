@@ -1,25 +1,32 @@
 import { Component } from '@angular/core';
-import { OrderListing } from '../../interfaces/order-listing-interface';
 
-
-//mock data
-
-const order_data: OrderListing[] = [
-  {id: 1, date: "01/01/2000", status: 'none', total: 2242.324},
-  {id: 1, date: "01/01/2000", status: 'none', total: 2242.324},
-  {id: 1, date: "01/01/2000", status: 'none', total: 2242.324},
-  {id: 1, date: "01/01/2000", status: 'none', total: 2242.324},
-  {id: 1, date: "01/01/2000", status: 'none', total: 2242.324},
-];
-
+import { OrderService } from '../../services/order.service';
+import { Observable } from 'rxjs';
+import { Order } from '../../interfaces/order-interface';
+import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
+import { CustomerService } from 'src/app/modules/customer/services/customer.service';
 
 @Component({
   selector: 'app-order-listing',
   templateUrl: './order-listing.component.html',
-  styleUrls: ['./order-listing.component.scss']
+  styleUrls: ['./order-listing.component.scss'],
 })
-
 export class OrderListingComponent {
-  displayedColumns: string[] = ['id', 'date', 'status', 'total', 'order'];
-  dataSource = order_data;
+  displayedColumns: string[] = ['id', 'date', 'status', 'order'];
+  Orders$?: Observable<Order[]>;
+
+  constructor(
+    private OrderService: OrderService,
+    private jwtTokenService: JwtTokenService,
+    private customerService: CustomerService
+  ) {}
+
+  ngOnInit() {
+    const authUserId = this.jwtTokenService.getAuthenticatedUserId();
+    this.customerService
+      .getCustomerByUserId(authUserId)
+      .subscribe((customer) => {
+        this.Orders$ = this.OrderService.getOrdersByCustomerId(customer.id);
+      });
+  }
 }
