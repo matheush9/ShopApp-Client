@@ -24,9 +24,12 @@ export class CustomerService {
   }
 
   addCustomer(customer: Customer): Observable<Customer> {
-    console.log('se2')
     return this.httpClient.post<Customer>(this.apiUrl + '/Customer', customer, {
       headers: this.jwtTokenService.getAuthHeader(),
     });
+  }
+  
+  getCustomerByUserId(userId: number): Observable<Customer> {
+    return this.httpClient.get<Customer>(this.apiUrl + '/Customer/user/' + userId);
   }
 }
