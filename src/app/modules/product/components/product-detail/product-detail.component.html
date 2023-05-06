@@ -1,15 +1,18 @@
 <div class="mx-auto lg:max-w-screen-lg xl:max-w-screen-xl">
-  <div class="flex flex-col p-4 lg:p-0" *ngIf="product$ | async as product">
+  <div class="flex flex-col p-4 lg:p-0 mb-10" *ngIf="product$ | async as product">
     <h1 class="my-5 text-2xl font-bold">
       {{ product.name }}
     </h1>
-    <div class="flex flex-col items-center sm:flex-row sm:justify-around" *ngIf="images$ | async as images">
+    <div
+      class="flex flex-col items-center sm:flex-row sm:justify-around"
+      *ngIf="images$ | async as images"
+    >
       <div class="relative w-full sm:w-2/4 lg:w-2/5">
         <owl-carousel-o [options]="customOptions" #owlCar>
-          <ng-template carouselSlide *ngFor="let image of images" >
+          <ng-template carouselSlide *ngFor="let image of images">
             <div>
               <img [src]="[imagesProviderUrl + image.largeImagePath]" />
-            </div> 
+            </div>
           </ng-template>
         </owl-carousel-o>
 
@@ -53,24 +56,13 @@
     </div>
 
     <div
-      class="mt-10 flex h-32 flex-row gap-4 rounded-lg bg-light-platinum sm:h-20 sm:gap-8"
+      class="mt-10 flex flex-row gap-4 rounded-lg bg-light-platinum sm:gap-8"
     >
-      <div
-        class="flex cursor-pointer flex-col items-center gap-4 rounded-lg border p-4 shadow sm:flex-row"
+      <app-store-card
         routerLink="/store"
-      >
-        <img
-          src="/assets/calc.jpg"
-          class="h-14 rounded-full border shadow sm:h-20"
-        />
-        <span class="text-lg font-medium sm:mb-6">Store name</span>
-      </div>
-      <div class="flex flex-col justify-center gap-4">
-        <span>Products: <span class="text-primary-color">0</span></span>
-        <span
-          >Joined: <span class="text-primary-color">0 Months ago</span></span
-        >
-      </div>
+        [queryParams]="{ storeId: product.storeId }"
+        [storeId]="product.storeId"
+      ></app-store-card>
     </div>
 
     <div class="mt-10 flex flex-col gap-4 rounded-lg bg-light-platinum p-4">
