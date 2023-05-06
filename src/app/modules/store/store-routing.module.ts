@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { StorePageComponent } from './components/store-detail/store-page.component';
+import { StorePageComponent } from './components/store-page/store-page.component';
 
 const routes: Routes = [{ path: '', component: StorePageComponent }];
 

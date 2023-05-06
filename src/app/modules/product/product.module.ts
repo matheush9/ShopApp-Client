@@ -40,5 +40,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     CarouselModule,
     MatPaginatorModule
   ],
+  exports: [
+    ProductListingComponent
+  ]
 })
 export class ProductModule {}

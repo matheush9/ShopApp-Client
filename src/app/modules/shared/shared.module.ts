@@ -10,6 +10,7 @@ import { ProductCheckFilterComponent } from './components/product-filter/compone
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { QuantitySelectorComponent } from './components/quantity-selector/quantity-selector.component';
 import { ProductCarouselComponent } from './components/product-carousel/product-carousel.component';
+import { StoreCardComponent } from './components/store-card/store-card.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
@@ -29,6 +30,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ConfirmationDialogComponent,
     QuantitySelectorComponent,
     ProductCarouselComponent,
+    StoreCardComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     MatExpansionModule,
     MatCheckboxModule,
     MatButtonModule,
-    CarouselModule,
+    CarouselModule
   ],
   exports: [
     InputComponent,
@@ -48,6 +50,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ProductPriceFilterComponent,
     QuantitySelectorComponent,
     ProductCarouselComponent,
+    StoreCardComponent
   ],
 })
 export class SharedModule {}
