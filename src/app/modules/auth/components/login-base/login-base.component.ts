@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login-base',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class LoginBaseComponent {
 
+  constructor(private location: Location) {}
+
+  navigateBack() {
+    this.location.back();
+  }
 }
