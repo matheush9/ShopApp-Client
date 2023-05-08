@@ -20,11 +20,14 @@
     <div
       class="fixed top-0 -left-full z-20 flex h-full w-full list-none flex-col items-center justify-center bg-light-platinum leading-10 transition-all duration-700 ease-in-out lg:hidden"
     >
-      <li>Home</li>
-      <li>Products</li>
-      <li>Services</li>
-      <li>About</li>
-      <li>Contact</li>
+    <ol (click)="onMenuClick()" class="text-center">
+      <li routerLink="/">Home</li>
+      <li routerLink="auth/account-info">Account</li>      
+      <li routerLink="order/listing">Orders</li>
+      <li *ngIf="userHasStore()" routerLink="product/inventory">Inventory</li>
+      <li *ngIf="userHasStore()" routerLink="product/add">Create a product</li>
+      <li (click)="userLogOut()">Log out</li>
+    </ol>
 
       <span class="close-menu absolute top-6 left-5">
         <i

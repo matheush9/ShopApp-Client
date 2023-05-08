@@ -3,6 +3,7 @@ import { Component, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
+import { StoreService } from 'src/app/modules/store/services/store.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,6 +19,7 @@ export class NavbarComponent {
     private router: Router,
     private cartService: CartService,
     private jwtService: JwtTokenService,
+    private storeService: StoreService,
   ) {}
 
   ngOnInit(): void {
@@ -46,5 +48,10 @@ export class NavbarComponent {
   
   userIsLogged(): boolean {
     return !!this.jwtService.getToken();
+  }
+
+  userHasStore(): boolean {
+    const userId = this.jwtService.getToken();
+    return !!this.storeService.getStoreByUser(Number(userId));
   }
 }
