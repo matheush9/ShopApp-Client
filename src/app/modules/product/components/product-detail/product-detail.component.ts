@@ -1,6 +1,7 @@
+import { ItemService } from 'src/app/modules/order/services/item.service';
 import { Component } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Observable, Subject, catchError, of } from 'rxjs';
+import { Observable, Subject, catchError, of, switchMap, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 import { ProductService } from '../../services/product.service';
@@ -9,6 +10,11 @@ import { Product } from '../../interfaces/product-interface';
 import { Image } from 'src/app/modules/shared/interfaces/image-interface';
 import { CartProduct } from 'src/app/modules/core/interfaces/cart-product-interface';
 import { CartService } from 'src/app/modules/core/services/cart.service';
+import { Order } from 'src/app/modules/order/interfaces/order-interface';
+import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
+import { CustomerService } from 'src/app/modules/customer/services/customer.service';
+import { OrderService } from 'src/app/modules/order/services/order.service';
+import { Item } from 'src/app/modules/order/interfaces/item-interface';
 
 @Component({
   selector: 'app-product-detail',
@@ -43,7 +49,11 @@ export class ProductDetailComponent {
     private productService: ProductService,
     private imageService: ImageService,
     private route: ActivatedRoute,
-    private cartService: CartService
+    private cartService: CartService,
+    private jwtTokenService: JwtTokenService,
+    private customerService: CustomerService,
+    private orderService: OrderService,
+    private itemService: ItemService
   ) {}
 
   ngOnInit() {
@@ -64,6 +74,9 @@ export class ProductDetailComponent {
         console.error(error);
         this.error$.next(true);
         return of();
+      }),
+      tap((product) => {
+        this.product = product;
       })
     );
   }
@@ -82,8 +95,44 @@ export class ProductDetailComponent {
     const product: CartProduct = {
       id: productId,
       amount: 1,
+      totalPrice: 0,
     };
 
     this.cartService.addProduct(product);
+  }
+
+  addOrder(): Observable<Order> {
+    const userId = this.jwtTokenService.getAuthenticatedUserId();
+
+    return this.customerService.getCustomerByUserId(userId).pipe(
+      switchMap((customer) => {
+        const newOrder = {
+          customerId: customer.id,
+        } as Order;
+
+        return this.orderService.addOrder(newOrder);
+      })
+    );
+  }
+
+  addOrderItem(item: Item) {
+    this.itemService.addItem(item).subscribe();
+  }
+
+  addItemToOrder(orderId: number) {
+    var item = {
+      orderId: orderId,
+      productId: this.product?.id,
+      priceTotal: this.product?.price,
+      quantity: 1,
+    } as Item;
+
+    this.addOrderItem(item);
+  }
+
+  buySingleProduct() {
+    this.addOrder().subscribe((order) => {
+      this.addItemToOrder(order.id);
+    });
   }
 }

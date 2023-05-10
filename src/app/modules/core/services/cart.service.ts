@@ -43,11 +43,11 @@ export class CartService {
     return this.getCart().at(productIndex);
   }
 
-  editProduct(productId: number, amount: number): CartProduct[] {
+  editProduct(cartProduct: CartProduct): CartProduct[] {
     let newCart = this.getCart();
-    const productIndex = this.getCart().findIndex((p) => p.id === productId);
-    newCart[productIndex].amount = amount;
-    console.log(newCart[productIndex].amount);
+    const productIndex = this.getCart().findIndex((p) => p.id === cartProduct.id);
+    newCart[productIndex].amount = cartProduct.amount;
+    newCart[productIndex].totalPrice = cartProduct.totalPrice;
     localStorage.setItem(this.cartKey, JSON.stringify(newCart));
 
     return newCart;

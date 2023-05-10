@@ -28,8 +28,14 @@ export class QuantitySelectorComponent {
   handleProductAmount(value: number) {
     const newAmount = this.productAmount + value;
 
+    var cartProduct = {
+      id: this.productId,
+      amount: newAmount,
+      totalPrice: 0,
+    } as CartProduct;
+
     if (newAmount >= 1) {
-      this.cartService.editProduct(this.productId, newAmount);
+      this.cartService.editProduct(cartProduct);
       this.productAmountChange.emit(newAmount);
     }
   }
