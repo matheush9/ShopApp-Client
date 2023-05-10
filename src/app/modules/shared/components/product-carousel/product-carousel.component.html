@@ -11,9 +11,8 @@
         <ng-template carouselSlide *ngFor="let product of products.data; let i = index">
           <div class="mr-4" *ngIf="images[i]">
             <app-product-card
+              [product]="product"
               [productImageUrl]="imagesProviderUrl + images[i].largeImagePath"
-              [productName]="product.name"
-              [productId]="product.id"
               [productRoute]="productCardRoute"
             ></app-product-card>
           </div>

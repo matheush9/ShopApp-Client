@@ -86,8 +86,7 @@
         <app-product-card
           *ngIf="images[i]"
           [productImageUrl]="imagesProviderUrl + images[i].largeImagePath"
-          [productName]="product.name"
-          [productId]="product.id"
+          [product]="product"
           [productRoute]="productCardRoute"
         ></app-product-card>
       </ng-container>

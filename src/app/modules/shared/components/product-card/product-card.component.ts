@@ -1,3 +1,4 @@
+import { Product } from './../../../product/interfaces/product-interface';
 import { Component, Input } from '@angular/core';
 import { CartProduct } from 'src/app/modules/core/interfaces/cart-product-interface';
 
@@ -9,10 +10,11 @@ import { CartService } from 'src/app/modules/core/services/cart.service';
   styleUrls: ['./product-card.component.scss'],
 })
 export class ProductCardComponent {
-  @Input() productName: string = '';
+  @Input() product?: Product;
   @Input() productImageUrl: string = '';
-  @Input() productId: number = 0;
   @Input() productRoute: string = '';
+
+  imageLoadFailed: boolean = false;
 
   constructor(private cartService: CartService) {}
 
@@ -24,9 +26,15 @@ export class ProductCardComponent {
     const product: CartProduct = {
       id: productId,
       amount: 1,
+      totalPrice: 0,
     };
 
     this.cartService.addProduct(product);
+  }
+
+  handleImageError(event: string) {
+    console.log(event)
+    this.imageLoadFailed = true;
   }
 }
   
