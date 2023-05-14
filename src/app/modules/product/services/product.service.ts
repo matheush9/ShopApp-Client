@@ -44,4 +44,15 @@ export class ProductService {
     });
   }
 
+  addProduct(newProduct: Product): Observable<Product> {
+    return this.httpClient.post<Product>(this.apiUrl + '/Product', newProduct, {
+      headers: this.jwtTokenService.getAuthHeader(),
+    })
+  }
+
+  updateProduct(newProduct: Product, id: number): Observable<Product> {
+    return this.httpClient.put<Product>(this.apiUrl + '/Product/' + id, newProduct, {
+      headers: this.jwtTokenService.getAuthHeader(),
+    })
+  }
 }
