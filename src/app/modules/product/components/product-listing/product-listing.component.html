@@ -84,8 +84,7 @@
     >
       <ng-container *ngFor="let product of products.data; let i = index">
         <app-product-card
-          *ngIf="images[i]"
-          [productImageUrl]="imagesProviderUrl + images[i].largeImagePath"
+          [productImageUrl]="images[i] ? imagesProviderUrl + images[i].largeImagePath : '/assets/empty.jpg'"
           [product]="product"
           [productRoute]="productCardRoute"
         ></app-product-card>
