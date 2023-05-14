@@ -30,6 +30,7 @@ export class ProductListingComponent implements OnInit {
   pageSize = 10;
   pageIndex = 1;
   productsTotalFound: number = 0;
+  query: string = '';
 
   @Input() productCardRoute: string = '/product/detail/';
 
@@ -59,6 +60,7 @@ export class ProductListingComponent implements OnInit {
   loadQueryParams() {
     this.route.queryParams.pipe().subscribe((params) => {
       this.queryParams = new HttpParams({ fromObject: params });
+      this.query = this.queryParams.get("query") ?? '';
       this.filterProducts(this.queryParams);
     });
   }
