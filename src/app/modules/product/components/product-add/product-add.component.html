@@ -24,29 +24,34 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Product name</mat-label>
-            <input matInput [value]="product?.name" />
+            <input matInput [(ngModel)]="product.name" name="name" />
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="h-40">
             <mat-label>Product description</mat-label>
             <textarea
               class="resize-none"
-              matInput
-              [value]="product?.description"
+              [(ngModel)]="product.description" name="description"
+              matInput              
             ></textarea>
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
-            <mat-label>Select category</mat-label>
-            <mat-select>
-              <mat-option value="one">Category 1</mat-option>
-              <mat-option value="two">Category 2</mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div *ngIf="productCategories$ | async as productCategories">
+            <mat-form-field appearance="fill">
+              <mat-label>Select category</mat-label>
+              <mat-select [(ngModel)]="product.productCategoryId" name="category">
+                <mat-option
+                  *ngFor="let category of productCategories"
+                  [value]="category.id"                  
+                  >{{category.categoryName}}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
 
           <mat-form-field appearance="fill">
             <mat-label>Price</mat-label>
-            <input matInput [value]="product?.price" />
+            <input matInput [(ngModel)]="product.price" name="price" />
           </mat-form-field>
 
           <div
@@ -57,7 +62,7 @@
               mat-flat-button
               color="warn"
               (click)="
-                openDialog(
+                CancelChangesDialog(
                   '250ms',
                   '150ms',
                   'Are you sure you want to cancel your changes?'
@@ -71,7 +76,7 @@
               mat-flat-button
               color="primary"
               (click)="
-                openDialog(
+                SaveChangesDialog(
                   '250ms',
                   '150ms',
                   'Are you sure you want to save all?'
@@ -114,7 +119,7 @@
               mat-flat-button
               color="warn"
               (click)="
-                openDialog(
+                RemoveImageDialog(
                   '250ms',
                   '150ms',
                   'Are you sure you want to remove this image?'

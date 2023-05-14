@@ -6,4 +6,5 @@ export interface Product {
   smallImageUrl: string;
   largeImageUrl: string;
   storeId: number;
+  productCategoryId: number;
 }

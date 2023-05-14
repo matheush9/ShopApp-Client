@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { ProductRoutingModule } from './product-routing.module';
 
@@ -30,6 +31,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ProductRoutingModule,
     MatFormFieldModule,
     MatInputModule,
@@ -38,7 +40,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     MatIconModule,
     SharedModule,
     CarouselModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   exports: [
     ProductListingComponent
