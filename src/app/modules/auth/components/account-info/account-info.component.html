@@ -3,14 +3,14 @@
   <div class="mt-10 flex flex-col justify-center pb-14 lg:flex-row" >
     <div class="flex flex-col justify-between sm:flex-row lg:gap-20">
       <div
-        class="flex flex-shrink flex-grow basis-0 flex-col items-center justify-center" *ngIf="image$ | async as image"
+        class="flex flex-shrink flex-grow basis-0 flex-col items-center justify-center"
       >
         <img
           class="w-1/2 rounded-md border-2 shadow-sm"
+          *ngIf="image$ | async as image"
           [src]="imagesProviderUrl + image.largeImagePath"
           alt="logo"
         />
-        <span class="mt-3 text-lg font-medium"> User Name</span>
 
         <input
           class="hidden"
