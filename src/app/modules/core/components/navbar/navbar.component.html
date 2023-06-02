@@ -24,8 +24,8 @@
       <li routerLink="/">Home</li>
       <li routerLink="auth/account-info">Account</li>      
       <li routerLink="order/listing">Orders</li>
-      <li *ngIf="userHasStore()" routerLink="product/inventory">Inventory</li>
-      <li *ngIf="userHasStore()" routerLink="product/add">Create a product</li>
+      <li *ngIf="userHasStore" routerLink="product/inventory">Inventory</li>
+      <li *ngIf="userHasStore" routerLink="product/add">Create a product</li>
       <li (click)="userLogOut()">Log out</li>
     </ol>
 
@@ -113,6 +113,7 @@
       </app-icon-box>
 
       <app-icon-box
+        *ngIf="userHasStore"
         class="order-4 hidden cursor-pointer lg:block"
         [matMenuTriggerFor]="storeMenu"
       >

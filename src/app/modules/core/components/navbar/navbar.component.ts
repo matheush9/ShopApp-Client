@@ -13,13 +13,14 @@ import { StoreService } from 'src/app/modules/store/services/store.service';
 export class NavbarComponent {
   checked: boolean = false;
   cartItemsCount: number = 0;
+  userHasStore: boolean = false;
 
   constructor(
     private renderer: Renderer2,
     private router: Router,
     private cartService: CartService,
     private jwtService: JwtTokenService,
-    private storeService: StoreService,
+    private storeService: StoreService
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +28,8 @@ export class NavbarComponent {
     this.cartService.cartUpdates().subscribe((cart) => {
       this.cartItemsCount = cart.length;
     });
+
+    this.fUserHasStore();
   }
 
   onMenuClick() {
@@ -43,15 +46,19 @@ export class NavbarComponent {
   }
 
   userLogOut() {
-    this.jwtService.removeToken(); 
+    this.jwtService.removeToken();
+    window.location.reload();
+    window.location.href = 'auth/login';
   }
-  
-  userIsLogged(): boolean {
+
+  userIsLogged(): boolean {  
     return !!this.jwtService.getToken();
   }
 
-  userHasStore(): boolean {
-    const userId = this.jwtService.getToken();
-    return !!this.storeService.getStoreByUser(Number(userId));
+  fUserHasStore() {
+    const userId = this.jwtService.getAuthenticatedUserId();
+    this.storeService.getStoreByUser(Number(userId)).subscribe((result) => {
+      this.userHasStore = !!result;
+    });
   }
 }

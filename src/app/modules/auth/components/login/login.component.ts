@@ -39,7 +39,8 @@ export class LoginComponent {
       )
       .subscribe((tokenObj) => {
         this.storeToken(tokenObj.token);
-        this.router.navigate(['/']);
+        window.location.reload();
+        window.location.href = '/';
       });
   }
 
