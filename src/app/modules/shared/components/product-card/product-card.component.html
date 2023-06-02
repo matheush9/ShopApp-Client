@@ -1,10 +1,10 @@
 <div class="sm:w-full">
   <div
-    class="flex h-[26rem] w-full flex-col gap-4 rounded-lg border border-solid shadow-md"
+    class="flex h-[30rem] w-full flex-col gap-4 rounded-lg border border-solid shadow-md"
   >
     <div
       [routerLink]="productRoute + product?.id"
-      class="h-full cursor-pointer border-b border-solid"
+      class="h-3/5 cursor-pointer border-b border-solid"
     >
       <img [src]="[productImageUrl]" (error)="handleImageError(productImageUrl)" alt="product image" class="h-full" />
 
