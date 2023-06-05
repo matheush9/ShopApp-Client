@@ -234,6 +234,9 @@ export class ProductAddComponent {
         this.product,
         this.product.id
       );
+
+    window.location.reload();
+    window.location.href = 'product/inventory';
   }
 
   getUserStore() {
