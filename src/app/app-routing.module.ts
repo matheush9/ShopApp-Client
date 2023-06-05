@@ -37,6 +37,10 @@ const routes: Routes = [
       import('./modules/store/store.module').then((m) => m.StoreModule),
     data: { preload: true, delay: 12000 },
   },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({
