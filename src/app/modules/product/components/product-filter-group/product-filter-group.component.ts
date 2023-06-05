@@ -23,11 +23,15 @@ export class ProductFilterGroupComponent {
   }
 
   applyFilters() {
-    this.route.queryParams.pipe().subscribe((params) => {
-      console.log(params);
-
+    this.route.queryParams.pipe().subscribe((params) => {  
+      const queryParams: any = { priceRange: this.priceRange };
+  
+      if (this.productCategories !== '') {
+        queryParams.CategoriesId = this.productCategories;
+      }
+  
       this.router.navigate([], {
-        queryParams: { priceRange: this.priceRange, CategoriesId: this.productCategories },
+        queryParams,
         queryParamsHandling: 'merge',
       });
     });
