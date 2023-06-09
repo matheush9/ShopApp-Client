@@ -13,12 +13,11 @@
       >
         <div
           class="flex items-center gap-6 rounded-2xl p-4 lg:gap-10"
-          *ngFor="let product of products; let i = index"
+          *ngFor="let product of products"
         >
           <img
             class="w-36"
-            *ngIf="images[i]"
-            [src]="imagesProviderUrl + images[i].smallImagePath"
+            [src]="imagesProviderUrl + product.images[0].smallImagePath"
             alt="logo"
           />
 

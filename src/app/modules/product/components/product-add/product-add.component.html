@@ -31,19 +31,23 @@
             <mat-label>Product description</mat-label>
             <textarea
               class="resize-none"
-              [(ngModel)]="product.description" name="description"
-              matInput              
+              [(ngModel)]="product.description"
+              name="description"
+              matInput
             ></textarea>
           </mat-form-field>
 
           <div *ngIf="productCategories$ | async as productCategories">
             <mat-form-field appearance="fill">
               <mat-label>Select category</mat-label>
-              <mat-select [(ngModel)]="product.productCategoryId" name="category">
+              <mat-select
+                [(ngModel)]="product.productCategoryId"
+                name="category"
+              >
                 <mat-option
                   *ngFor="let category of productCategories"
-                  [value]="category.id"                  
-                  >{{category.categoryName}}</mat-option
+                  [value]="category.id"
+                  >{{ category.categoryName }}</mat-option
                 >
               </mat-select>
             </mat-form-field>
@@ -89,12 +93,12 @@
         </div>
 
         <div class="relative flex w-full flex-col sm:w-2/5 lg:order-2 lg:w-2/6">
-          <div class="relative w-full" *ngIf="images$ | async as images">
-            <h2 class="mb-6 text-center text-xl font-bold">Product images</h2>
+          <h2 class="mb-6 text-center text-xl font-bold">Product images</h2>
+          <div class="relative w-full" *ngIf="product.images[0]; else noImage">
             <owl-carousel-o [options]="customOptions" #owlCar>
-              <ng-template carouselSlide *ngFor="let image of images">
+              <ng-template carouselSlide *ngFor="let image of product.images">
                 <div>
-                  <img [src]="[imagesProviderUrl + image.largeImagePath]" />
+                  <img [src]="imagesProviderUrl + image.largeImagePath" />
                 </div>
               </ng-template>
             </owl-carousel-o>
@@ -112,6 +116,10 @@
               >
             </div>
           </div>
+
+          <ng-template #noImage>
+            <img [src]="'/assets/empty.jpg'" />
+          </ng-template>
 
           <div class="mt-10 flex gap-10 lg:mt-6">
             <button

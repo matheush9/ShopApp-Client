@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { Product } from '../../interfaces/product-interface';
-import { Image } from 'src/app/modules/shared/interfaces/image-interface';
 import { CartProduct } from 'src/app/modules/core/interfaces/cart-product-interface';
 import { CartService } from 'src/app/modules/core/services/cart.service';
 import { Order } from 'src/app/modules/order/interfaces/order-interface';
@@ -40,8 +39,6 @@ export class ProductDetailComponent {
 
   product?: Product;
   product$?: Observable<Product>;
-  images?: Image[];
-  images$?: Observable<Image[]>;
   error$ = new Subject<boolean>();
   imagesProviderUrl?: string;
 
@@ -63,7 +60,6 @@ export class ProductDetailComponent {
       next: (params) => {
         const id = params.get('id');
         this.getProduct(Number(id));
-        this.getImagesByProduct(Number(id));
       },
     });
   }
@@ -77,16 +73,6 @@ export class ProductDetailComponent {
       }),
       tap((product) => {
         this.product = product;
-      })
-    );
-  }
-
-  getImagesByProduct(productId: number) {
-    this.images$ = this.imageService.getImagesbyProduct(productId).pipe(
-      catchError((error) => {
-        console.error(error);
-        this.error$.next(true);
-        return of();
       })
     );
   }

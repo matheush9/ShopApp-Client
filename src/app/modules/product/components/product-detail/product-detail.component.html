@@ -1,18 +1,24 @@
 <div class="mx-auto lg:max-w-screen-lg xl:max-w-screen-xl">
-  <div class="flex flex-col p-4 lg:p-0 mb-10" *ngIf="product$ | async as product">
+  <div
+    class="mb-10 flex flex-col p-4 lg:p-0"
+    *ngIf="product$ | async as product"
+  >
     <h1 class="my-5 text-2xl font-bold">
       {{ product.name }}
     </h1>
-    <div
-      class="flex flex-col items-center sm:flex-row sm:justify-around"
-    >
-      <div class="relative w-full sm:w-2/4 lg:w-2/5" *ngIf="images$ | async as images; else noImage">
+    <div class="flex flex-col items-center sm:flex-row sm:justify-around">
+      <div
+        class="relative w-full sm:w-2/4 lg:w-2/5"
+        *ngIf="product.images[0]; else noImage"
+      >
         <owl-carousel-o [options]="customOptions" #owlCar>
-          <ng-template carouselSlide *ngFor="let image of images">
-            <div>
-              <img [src]="[imagesProviderUrl + image.largeImagePath]" />
-            </div>
-          </ng-template>
+          <ng-container>
+            <ng-template carouselSlide *ngFor="let image of product.images">
+              <div>
+                <img [src]="imagesProviderUrl + image.largeImagePath" />
+              </div>
+            </ng-template>
+          </ng-container>
         </owl-carousel-o>
 
         <div class="absolute left-0 top-[46%] hidden w-full sm:block">
@@ -30,7 +36,7 @@
       </div>
 
       <ng-template #noImage>
-        <img src="/assets/empty.jpg" class="sm:w-2/4 lg:w-2/5">
+        <img [src]="'/assets/empty.jpg'"/>
       </ng-template>
 
       <div

@@ -12,7 +12,6 @@ import {
 } from 'rxjs';
 
 import { Product } from 'src/app/modules/product/interfaces/product-interface';
-import { Image } from '../../interfaces/image-interface';
 import { ProductService } from 'src/app/modules/product/services/product.service';
 import { ImageService } from '../../services/image.service';
 import { HttpParams } from '@angular/common/http';
@@ -51,8 +50,6 @@ export class ProductCarouselComponent implements OnInit {
 
   products?: Product[];
   products$?: Observable<PagedResponse<Product[]>>;
-  images: Image[] = [];
-  image$?: Observable<Image>;
   error$ = new Subject<boolean>();
   imagesProviderUrl?: string;
   queryParams: HttpParams = new HttpParams();
@@ -86,33 +83,6 @@ export class ProductCarouselComponent implements OnInit {
         this.error$.next(true);
         return of();
       }),
-      tap((products) => {
-        this.LoadProductsImage(products.data);
-      })
     );
-  }
-
-  LoadProductsImage(products: Product[]) {
-    this.products = products;
-    this.queryParams = new HttpParams();
-    this.products.forEach((element) => {
-      this.queryParams = this.queryParams.append('proId', element.id);
-    });
-    this.getImagesByParams(this.queryParams);
-  }
-
-  getImagesByParams(params: HttpParams) {
-    this.imageService
-      .getImagesByProductParams(params)
-      .pipe(
-        catchError((error) => {
-          console.error(error);
-          this.error$.next(true);
-          return of();
-        })
-      )
-      .subscribe((images) => {
-        this.images = images;
-      });
   }
 }

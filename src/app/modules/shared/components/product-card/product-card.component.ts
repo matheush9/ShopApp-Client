@@ -33,6 +33,7 @@ export class ProductCardComponent {
   }
 
   handleImageError(event: string) {
+    console.log(event)
     this.imageLoadFailed = true;
   }
 }

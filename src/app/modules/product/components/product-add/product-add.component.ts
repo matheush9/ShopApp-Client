@@ -30,11 +30,10 @@ export class ProductAddComponent {
     id: 0,
     name: '',
     description: '',
-    largeImageUrl: '',
-    smallImageUrl: '',
     price: 0,
     storeId: 0,
     productCategoryId: 0,
+    images: [],
   };
   images: Image[] = [];
   images$?: Observable<Image[]>;
@@ -80,7 +79,6 @@ export class ProductAddComponent {
           const id = params.get('id');
           if (id) {
             this.getProduct(Number(id));
-            this.getImagesByProduct(Number(id));
           } else this.newProduct = true;
         })
       )
@@ -173,19 +171,6 @@ export class ProductAddComponent {
     );
   }
 
-  getImagesByProduct(productId: number) {
-    this.images$ = this.imageService.getImagesbyProduct(productId).pipe(
-      catchError((error) => {
-        console.error(error);
-        this.error$.next(true);
-        return of();
-      }),
-      tap((images) => {
-        this.images = images;
-      })
-    );
-  }
-
   deleteImageById(imageId: number) {
     this.imageService
       .deleteImageById(imageId)
@@ -197,7 +182,7 @@ export class ProductAddComponent {
         })
       )
       .subscribe(() => {
-        this.getImagesByProduct(this.product!.id);
+        this.getProduct(this.product!.id);
       });
   }
 
@@ -216,7 +201,7 @@ export class ProductAddComponent {
       formData.append('json', JSON.stringify(imageModel));
 
       this.imageService.uploadImageFile(formData).subscribe(() => {
-        this.getImagesByProduct(this.product!.id);
+        this.getProduct(this.product!.id);
       });
     }
   }

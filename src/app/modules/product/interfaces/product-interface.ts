@@ -1,10 +1,11 @@
+import { Image } from "../../shared/interfaces/image-interface";
+
 export interface Product {
   id: number;
   name: string;
   description: string;
   price: number;
-  smallImageUrl: string;
-  largeImageUrl: string;
   storeId: number;
   productCategoryId: number;
+  images: Image[];
 }

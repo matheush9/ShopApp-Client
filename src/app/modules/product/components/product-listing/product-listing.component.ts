@@ -4,7 +4,6 @@ import { HttpParams } from '@angular/common/http';
 import { Observable, Subject, catchError, of, tap } from 'rxjs';
 
 import { Product } from '../../interfaces/product-interface';
-import { Image } from 'src/app/modules/shared/interfaces/image-interface';
 import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { ProductOrdinations } from 'src/app/modules/shared/models/product-ordinations-model';
@@ -20,8 +19,6 @@ export class ProductListingComponent implements OnInit {
   checked: boolean = false;
   products$?: Observable<PagedResponse<Product[]>>;
   products: Product[] = [];
-  images: Image[] = [];
-  image$?: Observable<Image>;
   error$ = new Subject<boolean>();
   imagesProviderUrl?: string;
   queryParams: HttpParams = new HttpParams();
@@ -73,36 +70,11 @@ export class ProductListingComponent implements OnInit {
         return of();
       }),
       tap((products) => {
-        this.LoadProductsImage(products.data);
         this.productsTotal = products.totalRecords;
         this.productsTotalFound = products.data.length;
         this.pageIndex = products.pageNumber - 1;
       })
     );
-  }
-
-  LoadProductsImage(products: Product[]) {
-    this.products = products;
-    this.queryParams = new HttpParams();
-    this.products.forEach((element) => {
-      this.queryParams = this.queryParams.append('proId', element.id);
-    });
-    this.getImagesByParams(this.queryParams);
-  }
-
-  getImagesByParams(params: HttpParams) {
-    this.imageService
-      .getImagesByProductParams(params)
-      .pipe(
-        catchError((error) => {
-          console.error(error);
-          this.error$.next(true);
-          return of();
-        })
-      )
-      .subscribe((images) => {
-        this.images = images;
-      });
   }
 
   changeProductOrdering(order: string) {

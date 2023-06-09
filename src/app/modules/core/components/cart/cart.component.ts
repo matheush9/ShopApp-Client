@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { Observable, switchMap, tap } from 'rxjs';
 
 import { Product } from 'src/app/modules/product/interfaces/product-interface';
-import { Image } from 'src/app/modules/shared/interfaces/image-interface';
 import { ProductService } from 'src/app/modules/product/services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { CartService } from '../../services/cart.service';
@@ -23,8 +22,6 @@ import { ItemService } from 'src/app/modules/order/services/item.service';
 export class CartComponent {
   products$?: Observable<Product[]>;
   products: Product[] = [];
-  images: Image[] = [];
-  image$?: Observable<Image>;
   imagesProviderUrl?: string;
   queryParams: HttpParams = new HttpParams();
   basePrice: number = 0;
@@ -62,17 +59,10 @@ export class CartComponent {
   filterProducts(params: HttpParams) {
     this.products$ = this.productService.filterProductsByIdList(params).pipe(
       tap((products) => {
-        this.getImagesByParams(params);
         this.products = products;
         this.calculateTotalPrice();
       })
     );
-  }
-
-  getImagesByParams(params: HttpParams) {
-    this.imageService.getImagesByProductParams(params).subscribe((images) => {
-      this.images = images;
-    });
   }
 
   deleteProduct(productId: number) {
