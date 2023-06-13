@@ -123,7 +123,7 @@
       </app-icon-box>
 
       <mat-menu #storeMenu="matMenu">
-        <button mat-menu-item routerLink="/product/inventory">
+        <button mat-menu-item [routerLink]="['/product/inventory']" [queryParamsHandling]="'preserve'">
           Your inventory
         </button>
         <button mat-menu-item routerLink="/product/add">
