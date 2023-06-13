@@ -9,8 +9,20 @@
       [displayWith]="formatLabel"
       discrete
     >
-      <input #sliderStart matSliderStartThumb  (valueChange)="onStartValueChange($event)" />
-      <input #sliderEnd matSliderEndThumb (valueChange)="onEndValueChange($event)"  />
+      <input
+        #sliderStart
+        matSliderStartThumb
+        (valueChange)="onStartValueChange($event)"
+        [(ngModel)]="startValueRange"
+        name="start"
+      />
+      <input
+        #sliderEnd
+        matSliderEndThumb
+        (valueChange)="onEndValueChange($event)"
+        [(ngModel)]="endValueRange"
+        name="end"
+      />
     </mat-slider>
   </div>
 </fieldset>

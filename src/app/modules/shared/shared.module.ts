@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { InputComponent } from './components/input/input.component';
 import { IconBoxComponent } from './components/icon-box/icon-box.component';
@@ -35,6 +36,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     MatIconModule,
     MatSliderModule,
     MatExpansionModule,
