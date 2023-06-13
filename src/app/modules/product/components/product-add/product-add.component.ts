@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subject, catchError, tap, map, of } from 'rxjs';
+import { Observable, Subject, catchError, tap, map, of, finalize } from 'rxjs';
 
 import { Product } from '../../interfaces/product-interface';
 import { Image } from 'src/app/modules/shared/interfaces/image-interface';
@@ -145,14 +145,14 @@ export class ProductAddComponent {
   SaveChangesDialog(
     enterAnimationDuration: string,
     exitAnimationDuration: string,
-    dialogMessage: string   
+    dialogMessage: string
   ): void {
     const dialogRef = this.openDialog(
       enterAnimationDuration,
       exitAnimationDuration,
       dialogMessage
     );
-    
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.saveProductInfo();
@@ -213,21 +213,22 @@ export class ProductAddComponent {
 
   saveProductInfo() {
     if (this.newProduct)
-      this.product$ = this.productService.addProduct(this.product);
+      this.product$ = this.productService.addProduct(this.product).pipe(
+        finalize(() => {
+          window.location.href = 'product/inventory';
+        })
+      );
     else
       this.product$ = this.productService.updateProduct(
         this.product,
         this.product.id
       );
-
-    window.location.reload();
-    window.location.href = 'product/inventory';
   }
 
   getUserStore() {
     const userId = this.jwtTokenService.getAuthenticatedUserId();
     this.storeService.getStoreByUser(userId).subscribe((store) => {
       this.product.storeId = store.id;
-    })
+    });
   }
 }
