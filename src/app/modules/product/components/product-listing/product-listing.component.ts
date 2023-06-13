@@ -87,7 +87,8 @@ export class ProductListingComponent implements OnInit {
 
   changeProductPage(event: PageEvent) {
     this.pageSize = event.pageSize;
-    this.router.navigate([], {
+    this.pageIndex = event.pageIndex;
+    this.router.navigate([], {      
       queryParams: { pageSize: event.pageSize, pageNumber: this.pageIndex + 1},
       queryParamsHandling: 'merge',
     });
