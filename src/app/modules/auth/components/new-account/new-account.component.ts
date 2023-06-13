@@ -67,6 +67,7 @@ export class NewAccountComponent {
         this.createCustomer();
         this.createStore();
       }
+      window.location.href = '';
     });
   }
 
