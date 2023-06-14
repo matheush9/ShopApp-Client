@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { ProductCategory } from './../../../../../product/interfaces/product-category-interface';
 import { ProductCategoryService } from 'src/app/modules/product/services/product-category.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-check-filter',
@@ -17,10 +18,14 @@ export class ProductCheckFilterComponent {
   productCategories$?: Observable<ProductCategory[]>;
   productCategoriesChecked: number[] = [];
 
-  constructor(private productCategoryService: ProductCategoryService) {}
+  constructor(
+    private productCategoryService: ProductCategoryService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.getAllProductCategories();
+    this.loadCheckboxCategoriesByParams();
   }
 
   getAllProductCategories() {
@@ -44,5 +49,22 @@ export class ProductCheckFilterComponent {
 
   emitCategories() {
     this.checkBoxChange.emit(String(this.productCategoriesChecked));
+  }
+
+  loadCheckboxCategoriesByParams() {
+    this.route.queryParamMap.subscribe((params) => {
+      const categoriesId = params.get('CategoriesId')?.split(',');
+      if (categoriesId)
+        this.productCategoriesChecked = categoriesId.map((str) => Number(str));
+    });
+  }
+
+  getCheckboxStatus(categoryId: number): boolean {
+    for (const category of this.productCategoriesChecked) {
+      if (category === categoryId) {
+        return true;
+      }
+    }
+    return false;
   }
 }

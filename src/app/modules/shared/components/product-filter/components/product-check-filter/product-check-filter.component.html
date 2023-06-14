@@ -5,10 +5,11 @@
         <mat-panel-title class="font-medium">Categories</mat-panel-title>
       </mat-expansion-panel-header>
       <div *ngIf="productCategories$ | async as productCategories">
-        <div *ngFor="let category of productCategories">
+        <div *ngFor="let category of productCategories; let i = index">
           <mat-checkbox
             (change)="onCheckBoxChange($event, category.id)"
             color="primary"
+            [checked]="getCheckboxStatus(category.id)"
           ></mat-checkbox>
           <span>{{ category.categoryName }}</span>
         </div>
