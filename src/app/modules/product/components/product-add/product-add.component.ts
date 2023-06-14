@@ -118,7 +118,7 @@ export class ProductAddComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.deleteImageById(
-          this.images.at(this.owlCar.carouselService._current)!.id
+          this.product.images.at(this.owlCar.carouselService._current)!.id
         );
       }
     });
