@@ -15,7 +15,7 @@
           <ng-container>
             <ng-template carouselSlide *ngFor="let image of product.images">
               <div>
-                <img [src]="imagesProviderUrl + image.largeImagePath" />
+                <img class="h-96 w-32" [src]="imagesProviderUrl + image.largeImagePath" />
               </div>
             </ng-template>
           </ng-container>

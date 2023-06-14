@@ -98,7 +98,7 @@
             <owl-carousel-o [options]="customOptions" #owlCar>
               <ng-template carouselSlide *ngFor="let image of product.images">
                 <div>
-                  <img [src]="imagesProviderUrl + image.largeImagePath" />
+                  <img class="h-72 w-20" [src]="imagesProviderUrl + image.largeImagePath" />
                 </div>
               </ng-template>
             </owl-carousel-o>
