@@ -58,6 +58,7 @@ export class ProductListingComponent implements OnInit {
     this.route.queryParams.pipe().subscribe((params) => {
       this.queryParams = new HttpParams({ fromObject: params });
       this.query = this.queryParams.get("query") ?? '';
+      this.pageSize = Number(this.queryParams.get("pageSize")) || 10;
       this.filterProducts(this.queryParams);
     });
   }
