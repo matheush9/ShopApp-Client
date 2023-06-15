@@ -24,12 +24,16 @@ export class ProductFilterGroupComponent {
 
   applyFilters() {
     this.route.queryParams.pipe().subscribe((params) => {  
+
       const queryParams: any = { priceRange: this.priceRange };
   
-      if (this.productCategories !== '') {
+      if (this.productCategories === '') {
+        queryParams.CategoriesId = null;
+      }
+      else {
         queryParams.CategoriesId = this.productCategories;
       }
-  
+
       this.router.navigate([], {
         queryParams,
         queryParamsHandling: 'merge',
