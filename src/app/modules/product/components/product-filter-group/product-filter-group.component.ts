@@ -10,7 +10,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 export class ProductFilterGroupComponent {
   queryParams: HttpParams = new HttpParams();
   priceRange: string = '';
-  productCategories: string = '';
+  productCategory: number = 0;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -18,21 +18,18 @@ export class ProductFilterGroupComponent {
     this.priceRange = event;
   }
 
-  storeCategories(event: any) {
-    this.productCategories = event;
+  storeCategory(event: any) {
+    this.productCategory = event;
   }
 
   applyFilters() {
-    this.route.queryParams.pipe().subscribe((params) => {  
-
+    this.route.queryParams.pipe().subscribe(() => {  
       const queryParams: any = { priceRange: this.priceRange };
-  
-      if (this.productCategories === '') {
-        queryParams.CategoriesId = null;
-      }
-      else {
-        queryParams.CategoriesId = this.productCategories;
-      }
+
+      if (this.productCategory == 0) 
+        queryParams.categoryId = null;
+      else 
+        queryParams.categoryId = this.productCategory;
 
       this.router.navigate([], {
         queryParams,

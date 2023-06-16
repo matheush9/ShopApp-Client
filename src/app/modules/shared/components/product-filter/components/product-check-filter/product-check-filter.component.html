@@ -9,7 +9,7 @@
           <mat-checkbox
             (change)="onCheckBoxChange($event, category.id)"
             color="primary"
-            [checked]="getCheckboxStatus(category.id)"
+            [checked]="productCategoryChecked === category.id"
           ></mat-checkbox>
           <span>{{ category.categoryName }}</span>
         </div>

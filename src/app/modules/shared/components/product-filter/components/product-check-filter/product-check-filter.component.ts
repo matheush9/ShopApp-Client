@@ -16,7 +16,7 @@ export class ProductCheckFilterComponent {
   @Output() checkBoxChange = new EventEmitter<string>();
 
   productCategories$?: Observable<ProductCategory[]>;
-  productCategoriesChecked: number[] = [];
+  productCategoryChecked: number = 0;
 
   constructor(
     private productCategoryService: ProductCategoryService,
@@ -25,7 +25,7 @@ export class ProductCheckFilterComponent {
 
   ngOnInit() {
     this.getAllProductCategories();
-    this.loadCheckboxCategoriesByParams();
+    this.getCategoryByParams();
   }
 
   getAllProductCategories() {
@@ -34,37 +34,22 @@ export class ProductCheckFilterComponent {
   }
 
   onCheckBoxChange(event: any, categoryId: number) {
-    const categoryIndex = this.productCategoriesChecked.findIndex(
-      (c) => c === categoryId
-    );
+    if (event.checked)
+      this.productCategoryChecked = categoryId;
+    else 
+      this.productCategoryChecked = 0;
 
-    if (event.checked) {
-      this.productCategoriesChecked.push(categoryId);
-    } else {
-      this.productCategoriesChecked.splice(categoryIndex, 1);
-    }
-
-    this.emitCategories();
+    this.emitCheckedCategory();
   }
 
-  emitCategories() {
-    this.checkBoxChange.emit(String(this.productCategoriesChecked));
+  emitCheckedCategory() {
+    this.checkBoxChange.emit(String(this.productCategoryChecked));
   }
 
-  loadCheckboxCategoriesByParams() {
+  getCategoryByParams() {
     this.route.queryParamMap.subscribe((params) => {
-      const categoriesId = params.get('CategoriesId')?.split(',');
-      if (categoriesId)
-        this.productCategoriesChecked = categoriesId.map((str) => Number(str));
+      const categoryId = params.get('categoryId');
+      if (categoryId) this.productCategoryChecked = Number(categoryId);
     });
-  }
-
-  getCheckboxStatus(categoryId: number): boolean {
-    for (const category of this.productCategoriesChecked) {
-      if (category === categoryId) {
-        return true;
-      }
-    }
-    return false;
   }
 }
