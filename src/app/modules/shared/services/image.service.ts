@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Image } from '../interfaces/image-interface';
+import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,10 @@ export class ImageService {
   private apiUrl?: string;
   private imagesProviderUrl: string;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private jwtTokenService: JwtTokenService
+  ) {
     this.apiUrl = environment.apiUrl;
     this.imagesProviderUrl = environment.imagesProviderUrl;
   }
@@ -34,7 +38,9 @@ export class ImageService {
   }
 
   deleteImageById(id: number): Observable<Image[]> {
-    return this.httpClient.delete<Image[]>(this.apiUrl + '/Image/' + id);   
+    return this.httpClient.delete<Image[]>(this.apiUrl + '/Image/' + id, {
+      headers: this.jwtTokenService.getAuthHeader(),
+    });
   }
 
   uploadImageFile(imageFile: FormData) {
