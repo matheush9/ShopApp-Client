@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, forkJoin } from 'rxjs';
 
 import { User } from '../../interfaces/user-interface';
 import { Store } from 'src/app/modules/store/interfaces/store-interface';
@@ -23,7 +24,7 @@ export class NewAccountComponent {
   };
 
   accountType: string = 'customer';
-  storeDescription: string = ''; 
+  storeDescription: string = '';
 
   constructor(
     private loginService: LoginService,
@@ -38,36 +39,38 @@ export class NewAccountComponent {
     });
   }
 
-  createStore() {
+  createStore(): Observable<Store> {
     var store = {
       name: this.user.name,
       userId: this.jwtTokenService.getAuthenticatedUserId(),
       description: this.storeDescription,
     } as Store;
 
-    this.storeService.addStore(store).subscribe();
+    return this.storeService.addStore(store);
   }
 
-  createCustomer() {
-
+  createCustomer(): Observable<Customer> {
     var customer = {
       name: this.user.name,
       userId: this.jwtTokenService.getAuthenticatedUserId(),
     } as Customer;
 
-    this.customerService.addCustomer(customer).subscribe();
+    return this.customerService.addCustomer(customer);
   }
 
   login() {
     this.loginService.authenticateUser(this.user).subscribe((tokenObj) => {
       this.storeToken(tokenObj.token);
 
-      if (this.accountType == 'customer') this.createCustomer();
-      else {
-        this.createCustomer();
-        this.createStore();
+      if (this.accountType === 'customer') {
+        this.createCustomer().subscribe(() => {
+          window.location.href = '';
+        });
+      } else {
+        forkJoin([this.createCustomer(), this.createStore()]).subscribe(() => {
+          window.location.href = '';
+        });
       }
-      window.location.href = '';
     });
   }
 
