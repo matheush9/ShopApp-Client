@@ -47,7 +47,6 @@ export class NavbarComponent {
 
   userLogOut() {
     this.jwtService.removeToken();
-    window.location.reload();
     window.location.href = 'auth/login';
   }
 

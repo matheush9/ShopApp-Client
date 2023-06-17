@@ -14,6 +14,10 @@ export class ProductFilterGroupComponent {
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
+  ngOnInit() {
+    this.loadQueryParams();
+  }
+
   storePriceRange(event: any) {
     this.priceRange = event;
   }
@@ -22,14 +26,19 @@ export class ProductFilterGroupComponent {
     this.productCategory = event;
   }
 
+  loadQueryParams() {
+    this.route.queryParamMap.subscribe((params) => {
+      this.priceRange = params.get('priceRange') ?? '';
+      this.productCategory = Number(params.get('categoryId'));
+    });
+  }
+
   applyFilters() {
-    this.route.queryParams.pipe().subscribe(() => {  
+    this.route.queryParams.pipe().subscribe(() => {
       const queryParams: any = { priceRange: this.priceRange };
 
-      if (this.productCategory == 0) 
-        queryParams.categoryId = null;
-      else 
-        queryParams.categoryId = this.productCategory;
+      if (this.productCategory == 0) queryParams.categoryId = null;
+      else queryParams.categoryId = this.productCategory;
 
       this.router.navigate([], {
         queryParams,
