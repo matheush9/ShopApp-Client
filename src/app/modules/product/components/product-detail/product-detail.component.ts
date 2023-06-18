@@ -96,7 +96,11 @@ export class ProductDetailComponent {
           customerId: customer.id,
         } as Order;
 
-        return this.orderService.addOrder(newOrder);
+        return this.orderService.addOrder(newOrder).pipe(
+          tap(() => {
+            window.location.href = 'order/listing';
+          })
+        );
       })
     );
   }
