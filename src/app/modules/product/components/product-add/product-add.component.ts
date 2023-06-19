@@ -11,10 +11,12 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { ConfirmationDialogComponent } from 'src/app/modules/shared/components/confirmation-dialog/confirmation-dialog.component';
+
 import { ProductCategory } from '../../interfaces/product-category-interface';
 import { ProductCategoryService } from '../../services/product-category.service';
 import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
 import { StoreService } from 'src/app/modules/store/services/store.service';
+import { SnackbarService } from 'src/app/modules/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-product-add',
@@ -49,7 +51,8 @@ export class ProductAddComponent {
     private route: ActivatedRoute,
     private productCategoryService: ProductCategoryService,
     private jwtTokenService: JwtTokenService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private snackbarService: SnackbarService
   ) {
     this.imagesProviderUrl = this.imageService.getImagesProviderUrl();
   }
@@ -109,6 +112,11 @@ export class ProductAddComponent {
     exitAnimationDuration: string,
     dialogMessage: string
   ): void {
+    if (this.newProduct) {
+      this.snackbarService.openSnackbar('Add your product first!');
+      return;
+    }
+
     const dialogRef = this.openDialog(
       enterAnimationDuration,
       exitAnimationDuration,
@@ -187,6 +195,11 @@ export class ProductAddComponent {
   }
 
   uploadImage(event: any) {
+    if (this.newProduct) {
+      this.snackbarService.openSnackbar('Add your product first!');
+      return;
+    }
+
     const imageFile: File = event.target.files[0];
     if (imageFile) {
       this.imageFileName = '-product' + imageFile.name;
