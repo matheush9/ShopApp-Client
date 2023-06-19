@@ -17,7 +17,7 @@
         >
           <img
             class="w-36"
-            [src]="imagesProviderUrl + product.images[0].smallImagePath"
+            [src]="product.images[0] ? imagesProviderUrl + product.images[0].largeImagePath : '/assets/empty.jpg'"
             alt="logo"
           />
 
