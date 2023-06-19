@@ -96,18 +96,17 @@ export class CartComponent {
           customerId: customer.id,
         } as Order;
 
-        return this.orderService.addOrder(newOrder).pipe(
-          tap(() => {
-            window.location.href = 'order/listing';
-          })
-        );
+        return this.orderService.addOrder(newOrder);
       })
     );
   }
 
   addOrderItem(item: Item) {
-    this.itemService.addItem(item).subscribe();
+    this.itemService.addItem(item).subscribe(() => {
+      window.location.href = 'order/listing';
+    });
   }
+
 
   addCartItemsToOrder(orderId: number) {
     const cart = this.cartService.getCart();
