@@ -18,6 +18,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
@@ -31,7 +32,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ConfirmationDialogComponent,
     QuantitySelectorComponent,
     ProductCarouselComponent,
-    StoreCardComponent
+    StoreCardComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +43,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     MatExpansionModule,
     MatCheckboxModule,
     MatButtonModule,
-    CarouselModule
+    CarouselModule,
+    MatSnackBarModule
   ],
   exports: [
     InputComponent,
@@ -52,7 +54,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ProductPriceFilterComponent,
     QuantitySelectorComponent,
     ProductCarouselComponent,
-    StoreCardComponent
+    StoreCardComponent,
   ],
 })
 export class SharedModule {}
