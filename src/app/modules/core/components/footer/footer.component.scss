@@ -1,9 +1,18 @@
-@import 'src/styles/colors.scss';
+@import "src/styles/colors.scss";
 
 :host ::ng-deep .mat-expansion-indicator::after {
-    border-color: $rich-black;
+  border-color: $rich-black;
 }
 
 .bluePanelTitle {
+  color: $primary-color;
+}
+
+li {
+  margin-top: 0.75rem;
+  cursor: pointer;
+
+  &:hover {
     color: $primary-color;
+  }
 }

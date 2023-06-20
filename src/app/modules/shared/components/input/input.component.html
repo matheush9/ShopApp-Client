@@ -3,7 +3,7 @@
   [type]="inputType"
   [placeholder]="placeholder"
   [ngClass]="{ pl: hasIconLeft }"
-  class="rounded-lg border border-solid border-platinum p-2.5 text-spanish-gray outline-primary-color"
+  class="rounded-lg border border-solid border-platinum p-2.5 text-spanish-gray outline-none focus:border-primary-color"
   #input
   (keyup.enter)="emitInputValue(input.value)"
 />

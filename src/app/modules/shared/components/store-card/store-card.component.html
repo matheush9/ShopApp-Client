@@ -3,7 +3,7 @@
   *ngIf="store$ | async as store"
 >
   <div
-    class="flex flex-col items-center gap-4 rounded-lg border p-4 shadow sm:flex-row"
+    class="flex flex-col items-center gap-4 rounded-lg border p-4 shadow sm:flex-row cursor-pointer"
   >
     <img
       *ngIf="image$ | async as image; else noImage"
