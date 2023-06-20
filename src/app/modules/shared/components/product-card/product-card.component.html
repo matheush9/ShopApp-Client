@@ -6,14 +6,19 @@
       [routerLink]="productRoute + product?.id"
       class="h-3/5 cursor-pointer border-b border-solid"
     >
-      <img [src]="[productImageUrl]" alt="product image" class="h-full" />
+      <img
+        [src]="[productImageUrl]"
+        alt="product image"
+        class="h-full w-full"
+      />
     </div>
-
     <div class="flex flex-col gap-6 p-3">
       <span class="multine-ellipsis overflow-hidden text-ellipsis font-medium"
         >{{ product?.name }}
       </span>
-      <span class="text-xl font-bold text-primary-color">${{product?.price | number: '1.2-2'}}</span>
+      <span class="text-xl font-bold text-primary-color"
+        >${{ product?.price | number : "1.2-2" }}</span
+      >
 
       <button
         mat-flat-button

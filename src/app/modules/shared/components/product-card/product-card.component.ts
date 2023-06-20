@@ -14,8 +14,6 @@ export class ProductCardComponent {
   @Input() productImageUrl: string = '';
   @Input() productRoute: string = '';
 
-  imageLoadFailed: boolean = false;
-
   constructor(private cartService: CartService) {}
 
   toStr(value: number): string {
@@ -30,11 +28,6 @@ export class ProductCardComponent {
     };
 
     this.cartService.addProduct(product);
-  }
-
-  handleImageError(event: string) {
-    console.log(event)
-    this.imageLoadFailed = true;
   }
 }
   
