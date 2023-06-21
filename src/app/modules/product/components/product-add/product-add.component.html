@@ -66,9 +66,7 @@
               mat-flat-button
               color="warn"
               (click)="
-                CancelChangesDialog(
-                  '250ms',
-                  '150ms',
+                cancelChangesDialog(
                   'Are you sure you want to cancel your changes?'
                 )
               "
@@ -80,9 +78,7 @@
               mat-flat-button
               color="primary"
               (click)="
-                SaveChangesDialog(
-                  '250ms',
-                  '150ms',
+                saveChangesDialog(
                   'Are you sure you want to save all?'
                 )
               "
@@ -130,9 +126,7 @@
               mat-flat-button
               color="warn"
               (click)="
-                RemoveImageDialog(
-                  '250ms',
-                  '150ms',
+                removeImageDialog(
                   'Are you sure you want to remove this image?'
                 )
               "

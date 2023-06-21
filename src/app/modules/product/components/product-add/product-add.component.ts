@@ -93,9 +93,9 @@ export class ProductAddComponent {
   }
 
   openDialog(
-    enterAnimationDuration: string,
-    exitAnimationDuration: string,
-    dialogMessage: string
+    dialogMessage: string,
+    enterAnimationDuration: string = '250ms',
+    exitAnimationDuration: string = '150ms'
   ): MatDialogRef<ConfirmationDialogComponent, any> {
     return this.dialog.open(ConfirmationDialogComponent, {
       width: '300px',
@@ -108,66 +108,40 @@ export class ProductAddComponent {
     });
   }
 
-  RemoveImageDialog(
-    enterAnimationDuration: string,
-    exitAnimationDuration: string,
-    dialogMessage: string
-  ): void {
+  removeImageDialog(dialogMessage: string): void {
     if (this.newProduct) {
       this.snackbarService.openSnackbar('Add your product first!');
       return;
     }
 
-    const dialogRef = this.openDialog(
-      enterAnimationDuration,
-      exitAnimationDuration,
-      dialogMessage
-    );
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.deleteImageById(
-          this.product.images.at(this.owlCar.carouselService._current)!.id
-        );
-      }
-    });
+    this.openDialog(dialogMessage)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result)
+          this.deleteImageById(
+            this.product.images.at(this.owlCar.carouselService._current)!.id
+          );
+      });
   }
 
-  CancelChangesDialog(
-    enterAnimationDuration: string,
-    exitAnimationDuration: string,
-    dialogMessage: string
-  ): void {
-    const dialogRef = this.openDialog(
-      enterAnimationDuration,
-      exitAnimationDuration,
-      dialogMessage
-    );
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // do something (later)
-      }
-    });
+  cancelChangesDialog(dialogMessage: string): void {
+    this.openDialog(dialogMessage)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          // do something (later)
+        }
+      });
   }
 
-  SaveChangesDialog(
-    enterAnimationDuration: string,
-    exitAnimationDuration: string,
-    dialogMessage: string
-  ): void {
-    const dialogRef = this.openDialog(
-      enterAnimationDuration,
-      exitAnimationDuration,
-      dialogMessage
-    );
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.saveProductInfo();
-      }
-    });
+  saveChangesDialog(dialogMessage: string): void {
+    this.openDialog(dialogMessage)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.saveProductInfo();
+      });
   }
+
 
   getProduct(productId: number) {
     this.product$ = this.productService.getProduct(productId).pipe(
