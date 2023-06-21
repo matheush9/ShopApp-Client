@@ -7,9 +7,15 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
 import { OrderListingComponent } from './components/order-listing/order-listing.component';
 
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [OrderDetailComponent, OrderListingComponent],
-  imports: [CommonModule, OrderRoutingModule, MatTableModule],
+  imports: [
+    CommonModule,
+    OrderRoutingModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+  ],
 })
 export class OrderModule {}

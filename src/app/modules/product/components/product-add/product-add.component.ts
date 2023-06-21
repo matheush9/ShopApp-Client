@@ -43,6 +43,7 @@ export class ProductAddComponent {
   imagesProviderUrl: string;
   imageFileName: string = '';
   productCategories$?: Observable<ProductCategory[]>;
+  isImageUploading: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -200,6 +201,7 @@ export class ProductAddComponent {
       return;
     }
 
+    this.isImageUploading = true;
     const imageFile: File = event.target.files[0];
     if (imageFile) {
       this.imageFileName = '-product' + imageFile.name;
@@ -215,6 +217,7 @@ export class ProductAddComponent {
 
       this.imageService.uploadImageFile(formData).subscribe(() => {
         this.getProduct(this.product!.id);
+        this.isImageUploading = false;
       });
     }
   }

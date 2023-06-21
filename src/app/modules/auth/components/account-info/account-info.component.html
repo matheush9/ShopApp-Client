@@ -12,6 +12,9 @@
           alt="logo"
         />
 
+        <mat-progress-spinner class="self-center mt-4" color="primary" mode="indeterminate" *ngIf="isImageUploading">      
+        </mat-progress-spinner>
+
         <input
           class="hidden"
           type="file"
@@ -19,13 +22,14 @@
           (change)="changeImage($event)"
           #imageChange
         />
+
         <button
           class="mt-10 lg:mt-6"
           mat-flat-button
           color="primary"
           (click)="imageChange.click()"
         >
-          Change image
+          Add or change a image
           <i
             class="material-icons-round ml-1 cursor-pointer select-none align-middle"
             >file_upload</i

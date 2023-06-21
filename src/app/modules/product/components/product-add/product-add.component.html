@@ -117,6 +117,9 @@
             </div>
           </div>
 
+          <mat-progress-spinner class="self-center mt-4" color="primary" mode="indeterminate" *ngIf="isImageUploading">      
+          </mat-progress-spinner>
+
           <ng-template #noImage>
             <img [src]="'/assets/empty.jpg'" />
           </ng-template>

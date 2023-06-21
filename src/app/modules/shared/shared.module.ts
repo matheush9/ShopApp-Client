@@ -18,7 +18,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
@@ -44,7 +45,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     MatCheckboxModule,
     MatButtonModule,
     CarouselModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     InputComponent,

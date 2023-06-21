@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -41,6 +42,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     SharedModule,
     CarouselModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     ProductListingComponent

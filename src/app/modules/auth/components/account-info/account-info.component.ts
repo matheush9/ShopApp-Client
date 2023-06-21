@@ -20,6 +20,7 @@ export class AccountInfoComponent {
   image?: Image;
   imagesProviderUrl: string;
   imageFileName: string = '';
+  isImageUploading: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -91,6 +92,7 @@ export class AccountInfoComponent {
   }
 
   changeImage(event: any) {
+    this.isImageUploading = true;
     let imageFile: File = event.target.files[0];
     if (imageFile) {
       this.imageFileName = '-user.' + imageFile.name;
@@ -107,6 +109,7 @@ export class AccountInfoComponent {
       this.deleteImage();
       this.imageService.uploadImageFile(formData).subscribe(() => {
         this.getImage();
+        this.isImageUploading = false;
       });
     }
   }

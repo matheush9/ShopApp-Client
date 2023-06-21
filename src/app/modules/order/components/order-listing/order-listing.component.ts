@@ -13,7 +13,7 @@ import { CustomerService } from 'src/app/modules/customer/services/customer.serv
 })
 export class OrderListingComponent {
   displayedColumns: string[] = ['id', 'date', 'status', 'order'];
-  Orders$?: Observable<Order[]>;
+  orders$?: Observable<Order[]>;
 
   constructor(
     private OrderService: OrderService,
@@ -26,7 +26,7 @@ export class OrderListingComponent {
     this.customerService
       .getCustomerByUserId(authUserId)
       .subscribe((customer) => {
-        this.Orders$ = this.OrderService.getOrdersByCustomerId(customer.id);
+        this.orders$ = this.OrderService.getOrdersByCustomerId(customer.id);
       });
   }
 }
