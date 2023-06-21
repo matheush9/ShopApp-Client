@@ -55,4 +55,10 @@ export class ProductService {
       headers: this.jwtTokenService.getAuthHeader(),
     })
   }
+
+  deleteProduct(productId: number): Observable<Product> {
+    return this.httpClient.delete<Product>(this.apiUrl + '/Product/' + productId, {
+      headers: this.jwtTokenService.getAuthHeader(),
+    })
+  }
 }

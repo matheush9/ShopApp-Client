@@ -142,6 +142,13 @@ export class ProductAddComponent {
       });
   }
 
+  deleteProductDialog(dialogMessage: string): void {
+    this.openDialog(dialogMessage)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.deleteProduct();
+      });
+  }
 
   getProduct(productId: number) {
     this.product$ = this.productService.getProduct(productId).pipe(
@@ -220,5 +227,13 @@ export class ProductAddComponent {
     this.storeService.getStoreByUser(userId).subscribe((store) => {
       this.product.storeId = store.id;
     });
+  }
+
+  deleteProduct() {
+    this.product$ = this.productService.deleteProduct(this.product.id).pipe(
+      finalize(() => {
+        window.location.href = 'product/inventory';
+      })
+    );
   }
 }
