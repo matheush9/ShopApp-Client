@@ -8,6 +8,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { SharedModule } from '../shared/shared.module';
+import { ProductModule } from '../product/product.module';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -23,7 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
     NavbarComponent,
     FooterComponent,
     CartComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +36,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatCheckboxModule,
     MatRadioModule,
     SharedModule,
+    ProductModule,
     MatDialogModule,
     MatMenuModule
   ],

@@ -9,6 +9,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ProductFilterGroupComponent } from './components/product-filter-group/product-filter-group.component';
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
 import { ProductInventoryListingComponent } from './components/product-inventory-listing/product-inventory-listing.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductCarouselComponent } from './components/product-carousel/product-carousel.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -29,6 +31,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ProductFilterGroupComponent,
     ProductListingComponent,
     ProductInventoryListingComponent,
+    ProductCardComponent,
+    ProductCarouselComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +49,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     MatProgressSpinnerModule
   ],
   exports: [
-    ProductListingComponent
+    ProductListingComponent, ProductCarouselComponent
   ]
 })
 export class ProductModule {}

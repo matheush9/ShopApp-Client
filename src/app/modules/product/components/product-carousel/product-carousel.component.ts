@@ -5,17 +5,14 @@ import {
   Subject,
   catchError,
   of,
-  switchMap,
-  combineLatest,
-  map,
-  tap,
+
 } from 'rxjs';
 
 import { Product } from 'src/app/modules/product/interfaces/product-interface';
 import { ProductService } from 'src/app/modules/product/services/product.service';
-import { ImageService } from '../../services/image.service';
+import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { HttpParams } from '@angular/common/http';
-import { PagedResponse } from '../../interfaces/wrappers/paged-response-interface';
+import { PagedResponse } from 'src/app/modules/shared/interfaces/wrappers/paged-response-interface';
 
 @Component({
   selector: 'app-product-carousel',

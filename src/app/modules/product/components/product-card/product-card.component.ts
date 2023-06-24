@@ -1,4 +1,4 @@
-import { Product } from './../../../product/interfaces/product-interface';
+import { Product } from '../../interfaces/product-interface';
 import { Component, Input } from '@angular/core';
 import { CartProduct } from 'src/app/modules/core/interfaces/cart-product-interface';
 

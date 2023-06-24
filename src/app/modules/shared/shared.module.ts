@@ -5,12 +5,10 @@ import { FormsModule } from '@angular/forms';
 
 import { InputComponent } from './components/input/input.component';
 import { IconBoxComponent } from './components/icon-box/icon-box.component';
-import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductPriceFilterComponent } from './components/product-filter/components/product-price-filter/product-price-filter.component';
 import { ProductCheckFilterComponent } from './components/product-filter/components/product-check-filter/product-check-filter.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { QuantitySelectorComponent } from './components/quantity-selector/quantity-selector.component';
-import { ProductCarouselComponent } from './components/product-carousel/product-carousel.component';
 import { StoreCardComponent } from './components/store-card/store-card.component';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -27,12 +25,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   declarations: [
     InputComponent,
     IconBoxComponent,
-    ProductCardComponent,
     ProductPriceFilterComponent,
     ProductCheckFilterComponent,
     ConfirmationDialogComponent,
     QuantitySelectorComponent,
-    ProductCarouselComponent,
     StoreCardComponent,
   ],
   imports: [
@@ -51,11 +47,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   exports: [
     InputComponent,
     IconBoxComponent,
-    ProductCardComponent,
     ProductCheckFilterComponent,
     ProductPriceFilterComponent,
     QuantitySelectorComponent,
-    ProductCarouselComponent,
     StoreCardComponent,
   ],
 })
