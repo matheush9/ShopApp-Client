@@ -112,7 +112,7 @@ export class CartComponent {
     const cart = this.cartService.getCart();
 
     cart.forEach((cartProduct) => {
-      var item = {
+      const item = {
         orderId: orderId,
         productId: cartProduct.id,
         priceTotal: cartProduct.totalPrice,

@@ -50,13 +50,11 @@ export class ImageService {
     const imageName = (userId ? '-user.' : '-product.') + image.name;
 
     const formData = new FormData();
-    var imageModel = {
+    const imageModel = {
       name: imageName,
       userId: userId,
       productId: productId,
     } as Image;
-
-    console.log(imageModel)
 
     formData.append('imageFile', image, imageName);
     formData.append('json', JSON.stringify(imageModel));

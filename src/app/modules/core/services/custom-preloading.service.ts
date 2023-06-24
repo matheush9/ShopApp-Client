@@ -8,7 +8,7 @@ import { PreloadingStrategy, Route } from '@angular/router';
 export class CustomPreloading implements PreloadingStrategy {
   preload(route: Route, loadMe: () => Observable<any>): Observable<any> {
     if (route.data && route.data['preload']) {
-      var delay: number = route.data['delay'];
+      const delay: number = route.data['delay'];
       console.log(
         'preload called on ' + route.path + ' with a delay of ' + delay
       );

@@ -41,7 +41,7 @@ export class NewAccountComponent {
   }
 
   createStore(): Observable<Store> {
-    var store = {
+    const store = {
       name: this.user.name,
       userId: this.jwtTokenService.getAuthenticatedUserId(),
       description: this.storeDescription,
@@ -51,7 +51,7 @@ export class NewAccountComponent {
   }
 
   createCustomer(): Observable<Customer> {
-    var customer = {
+    const customer = {
       name: this.user.name,
       userId: this.jwtTokenService.getAuthenticatedUserId(),
     } as Customer;

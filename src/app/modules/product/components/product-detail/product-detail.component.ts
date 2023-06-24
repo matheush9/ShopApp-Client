@@ -108,7 +108,7 @@ export class ProductDetailComponent {
   }
 
   addItemToOrder(orderId: number) {
-    var item = {
+    const item = {
       orderId: orderId,
       productId: this.product?.id,
       priceTotal: this.product?.price,

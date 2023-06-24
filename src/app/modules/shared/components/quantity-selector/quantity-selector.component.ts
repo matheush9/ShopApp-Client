@@ -28,7 +28,7 @@ export class QuantitySelectorComponent {
   handleProductAmount(value: number) {
     const newAmount = this.productAmount + value;
 
-    var cartProduct = {
+    const cartProduct = {
       id: this.productId,
       amount: newAmount,
       totalPrice: 0,
