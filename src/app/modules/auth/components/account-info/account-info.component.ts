@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, tap } from 'rxjs';
+import { EMPTY, Observable, tap } from 'rxjs';
 import { ConfirmationDialogComponent } from 'src/app/modules/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { User } from '../../interfaces/user-interface';
 import { Image } from 'src/app/modules/shared/interfaces/image-interface';
@@ -15,7 +15,13 @@ import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.servi
 })
 export class AccountInfoComponent {
   user$?: Observable<User>;
-  user?: User;
+  user: User = {
+    id: 0,
+    name: '',
+    email: '',
+    password: '',
+    images: [],
+  };
   imagesProviderUrl: string;
   imageFileName: string = '';
   isImageUploading: boolean = false;
@@ -50,7 +56,7 @@ export class AccountInfoComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.deleteImage()
+        this.deleteImage();
         this.deleteUser();
       }
     });
@@ -66,39 +72,30 @@ export class AccountInfoComponent {
   }
 
   deleteUser() {
-    if (this.user) this.user$ = this.userService.deleteUser(this.user.id);
+    this.user$ = this.userService.deleteUser(this.user.id);
   }
 
-  deleteImage() {
-    if (this.user?.images[0])
-      this.imageService.deleteImageById(this.user.images[0].id).subscribe();
+  deleteImage(): Observable<Image[]> {
+    if (this.user.images[0])
+      return this.imageService.deleteImageById(this.user.images[0].id);
+    return EMPTY;
   }
 
-  changeUserInfo() {
-    if (this.user)
-      this.user$ = this.userService.editUser(this.user.id, this.user);
+  editUserInfo() {
+    this.user$ = this.userService.editUser(this.user.id, this.user);
   }
 
   changeImage(event: any) {
     this.isImageUploading = true;
-    let imageFile: File = event.target.files[0];
-    if (imageFile) {
-      this.imageFileName = '-user.' + imageFile.name;
+    const imageFile: File = event.target.files[0];
 
-      const formData = new FormData();
-      var imageModel = {
-        name: this.imageFileName,
-        userId: this.user!.id,
-      } as Image;
-
-      formData.append('imageFile', imageFile, this.imageFileName);
-      formData.append('json', JSON.stringify(imageModel));
-
-      this.deleteImage();
-      this.imageService.uploadImageFile(formData).subscribe(() => {
-        this.getUser();
-        this.isImageUploading = false;
+    this.imageService.uploadImage(imageFile, this.user.id)?.subscribe(() => {
+      this.deleteImage().subscribe({
+        complete: () => {
+          this.getUser();
+          this.isImageUploading = false;
+        },
       });
-    }
+    });
   }
 }

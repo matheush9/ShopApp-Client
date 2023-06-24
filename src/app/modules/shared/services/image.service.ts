@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Image } from '../interfaces/image-interface';
@@ -39,7 +39,28 @@ export class ImageService {
     });
   }
 
-  uploadImageFile(imageFile: FormData) {
+  addImage(imageFile: FormData) {
     return this.httpClient.post(this.apiUrl + '/Image', imageFile);
+  }
+
+  uploadImage(image: File, userId?: number, productId?: number): Observable<Object> {
+    if (!image) 
+      return throwError(() => new Error('The file is not valid!'));
+
+    const imageName = (userId ? '-user.' : '-product.') + image.name;
+
+    const formData = new FormData();
+    var imageModel = {
+      name: imageName,
+      userId: userId,
+      productId: productId,
+    } as Image;
+
+    console.log(imageModel)
+
+    formData.append('imageFile', image, imageName);
+    formData.append('json', JSON.stringify(imageModel));
+
+    return this.addImage(formData);
   }
 }

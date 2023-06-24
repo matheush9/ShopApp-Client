@@ -175,30 +175,16 @@ export class ProductAddComponent {
   }
 
   uploadImage(event: any) {
-    if (this.newProduct) {
-      this.snackbarService.openSnackbar('Add your product first!');
-      return;
-    }
+    if (this.newProduct)
+      return this.snackbarService.openSnackbar('Add your product first!');
 
     this.isImageUploading = true;
-    const imageFile: File = event.target.files[0];
-    if (imageFile) {
-      this.imageFileName = '-product' + imageFile.name;
-
-      const formData = new FormData();
-      var imageModel = {
-        name: this.imageFileName,
-        productId: this.product!.id,
-      } as Image;
-
-      formData.append('imageFile', imageFile, this.imageFileName);
-      formData.append('json', JSON.stringify(imageModel));
-
-      this.imageService.uploadImageFile(formData).subscribe(() => {
-        this.getProduct(this.product!.id);
-        this.isImageUploading = false;
-      });
-    }
+    const imageFile = event.target.files[0];
+    
+    this.imageService.uploadImage(imageFile, undefined, this.product.id).subscribe(() => {
+      this.getProduct(this.product.id);
+      this.isImageUploading = false;
+    });
   }
 
   getAllProductCategories() {
