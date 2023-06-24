@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable, tap } from 'rxjs';
 import { ConfirmationDialogComponent } from 'src/app/modules/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { User } from '../../interfaces/user-interface';
@@ -16,8 +16,6 @@ import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.servi
 export class AccountInfoComponent {
   user$?: Observable<User>;
   user?: User;
-  image$?: Observable<Image>;
-  image?: Image;
   imagesProviderUrl: string;
   imageFileName: string = '';
   isImageUploading: boolean = false;
@@ -63,18 +61,8 @@ export class AccountInfoComponent {
     this.user$ = this.userService.getUser(userId).pipe(
       tap((user) => {
         this.user = user;
-        this.getImage();
       })
     );
-  }
-
-  getImage() {
-    if (this.user)
-      this.image$ = this.imageService.getImageByUser(this.user.id).pipe(
-        tap((image) => {
-          this.image = image;
-        })
-      );
   }
 
   deleteUser() {
@@ -82,8 +70,8 @@ export class AccountInfoComponent {
   }
 
   deleteImage() {
-    if (this.image)
-      this.imageService.deleteImageById(this.image.id).subscribe();
+    if (this.user?.images[0])
+      this.imageService.deleteImageById(this.user.images[0].id).subscribe();
   }
 
   changeUserInfo() {
@@ -108,7 +96,7 @@ export class AccountInfoComponent {
 
       this.deleteImage();
       this.imageService.uploadImageFile(formData).subscribe(() => {
-        this.getImage();
+        this.getUser();
         this.isImageUploading = false;
       });
     }

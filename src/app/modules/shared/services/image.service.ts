@@ -29,10 +29,6 @@ export class ImageService {
     return this.httpClient.get<Image>(this.apiUrl + '/Image/' + id);
   }
 
-  getImageByProduct(id: number): Observable<Image> {
-    return this.httpClient.get<Image>(this.apiUrl + '/Image/product/' + id);
-  }
-
   getImageByUser(userId: number): Observable<Image> {
     return this.httpClient.get<Image>(this.apiUrl + '/Image/user/' + userId);
   }

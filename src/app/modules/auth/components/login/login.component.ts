@@ -19,6 +19,7 @@ export class LoginComponent {
     name: '',
     email: '',
     password: '',
+    images: [],
   };
 
   constructor(

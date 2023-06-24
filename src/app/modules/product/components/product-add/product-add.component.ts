@@ -37,8 +37,6 @@ export class ProductAddComponent {
     productCategoryId: 0,
     images: [],
   };
-  images: Image[] = [];
-  images$?: Observable<Image[]>;
   error$ = new Subject<boolean>();
   imagesProviderUrl: string;
   imageFileName: string = '';

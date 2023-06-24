@@ -21,6 +21,7 @@ export class NewAccountComponent {
     name: '',
     email: '',
     password: '',
+    images: [],
   };
 
   accountType: string = 'customer';
