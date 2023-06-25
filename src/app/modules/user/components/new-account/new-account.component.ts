@@ -5,7 +5,7 @@ import { User } from '../../interfaces/user-interface';
 import { Store } from 'src/app/modules/store/interfaces/store-interface';
 import { Customer } from 'src/app/modules/customer/interfaces/customer-interface';
 
-import { LoginService } from '../../services/login.service';
+import { UserService } from '../../services/user.service';
 import { StoreService } from 'src/app/modules/store/services/store.service';
 import { CustomerService } from 'src/app/modules/customer/services/customer.service';
 import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
@@ -28,14 +28,14 @@ export class NewAccountComponent {
   storeDescription: string = '';
 
   constructor(
-    private loginService: LoginService,
+    private userService: UserService,
     private storeService: StoreService,
     private customerService: CustomerService,
     private jwtTokenService: JwtTokenService
   ) {}
 
   register() {
-    this.loginService.addUser(this.user).subscribe(() => {
+    this.userService.addUser(this.user).subscribe(() => {
       this.login();
     });
   }
@@ -60,7 +60,7 @@ export class NewAccountComponent {
   }
 
   login() {
-    this.loginService.authenticateUser(this.user).subscribe((tokenObj) => {
+    this.userService.authenticateUser(this.user).subscribe((tokenObj) => {
       this.storeToken(tokenObj.token);
 
       if (this.accountType === 'customer') {

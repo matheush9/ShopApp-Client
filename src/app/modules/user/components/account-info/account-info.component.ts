@@ -4,7 +4,7 @@ import { EMPTY, Observable, tap } from 'rxjs';
 import { ConfirmationDialogComponent } from 'src/app/modules/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { User } from '../../interfaces/user-interface';
 import { Image } from 'src/app/modules/shared/interfaces/image-interface';
-import { LoginService } from '../../services/login.service';
+import { UserService } from '../../services/user.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
 
@@ -28,7 +28,7 @@ export class AccountInfoComponent {
 
   constructor(
     public dialog: MatDialog,
-    private userService: LoginService,
+    private userService: UserService,
     private imageService: ImageService,
     private jwtTokenService: JwtTokenService
   ) {

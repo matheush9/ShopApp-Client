@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { User } from '../interfaces/user-interface';
-import { JwtToken } from './../../shared/interfaces/jwt-token-interface';
+import { JwtToken } from '../../shared/interfaces/jwt-token-interface';
 import { JwtTokenService } from '../../shared/services/jwt-token.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class UserService {
   private apiUrl?: string;
 
   constructor(

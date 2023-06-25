@@ -11,9 +11,9 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
 
   {
-    path: 'auth',
+    path: 'user',
     loadChildren: () =>
-      import('./modules/auth/auth.module').then((m) => m.AuthModule),
+      import('./modules/user/user.module').then((m) => m.AuthModule),
     data: { preload: true, delay: 2000 },
   },
 

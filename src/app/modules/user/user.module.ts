@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AuthRoutingModule } from './auth-routing.module';
+import { UserRoutingModule } from './user-routing.module';
 
 import { LoginBaseComponent } from './components/login-base/login-base.component';
 import { LoginComponent } from './components/login/login.component';
@@ -27,7 +27,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [
     CommonModule,
     FormsModule,
-    AuthRoutingModule,
+    UserRoutingModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,

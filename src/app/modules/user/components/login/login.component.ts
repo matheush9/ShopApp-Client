@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { Subject, catchError, of } from 'rxjs';
 
-import { LoginService } from '../../services/login.service';
+import { UserService } from '../../services/user.service';
 import { JwtTokenService } from './../../../shared/services/jwt-token.service';
 import { User } from '../../interfaces/user-interface';
 import { Router } from '@angular/router';
@@ -23,13 +23,13 @@ export class LoginComponent {
   };
 
   constructor(
-    private loginService: LoginService,
+    private userService: UserService,
     private jwtTokenService: JwtTokenService,
     private router: Router
   ) {}
 
   login() {
-    this.loginService
+    this.userService
       .authenticateUser(this.user)
       .pipe(
         catchError((error) => {
