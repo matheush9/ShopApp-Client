@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 
-import { Subject, catchError, of } from 'rxjs';
-
-import { UserService } from '../../services/user.service';
-import { JwtTokenService } from './../../../shared/services/jwt-token.service';
 import { User } from '../../interfaces/user-interface';
-import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  error$ = new Subject<boolean>();
   user: User = {
     id: 0,
     name: '',
@@ -22,30 +17,9 @@ export class LoginComponent {
     images: [],
   };
 
-  constructor(
-    private userService: UserService,
-    private jwtTokenService: JwtTokenService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService) {}
 
   login() {
-    this.userService
-      .authenticateUser(this.user)
-      .pipe(
-        catchError((error) => {
-          console.error(error);
-          this.error$.next(true);
-          return of();
-        })
-      )
-      .subscribe((tokenObj) => {
-        this.storeToken(tokenObj.token);
-        window.location.reload();
-        window.location.href = '/';
-      });
-  }
-
-  storeToken(token: string) {
-    this.jwtTokenService.setToken(token);
+    this.authService.login(this.user).subscribe();
   }
 }

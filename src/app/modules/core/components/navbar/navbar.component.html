@@ -22,7 +22,7 @@
     >
     <ol (click)="onMenuClick()" class="text-center">
       <li routerLink="/">Home</li>
-      <li routerLink="auth/account-info">Account</li>      
+      <li routerLink="user/account-info">Account</li>      
       <li routerLink="order/listing">Orders</li>
       <li *ngIf="userHasStore" routerLink="product/inventory">Inventory</li>
       <li *ngIf="userHasStore" routerLink="product/add">Create a product</li>
@@ -88,7 +88,7 @@
       <ng-template #userLoggedOutOption>
         <app-icon-box
           class="order-3 hidden cursor-pointer lg:block"
-          routerLink="/auth/login"
+          routerLink="/user/login"
         >
           <i class="material-icons-round select-none text-primary-color"
             >person</i
@@ -97,7 +97,7 @@
       </ng-template>
 
       <mat-menu #userMenu="matMenu">
-        <button mat-menu-item routerLink="/auth/account-info">
+        <button mat-menu-item routerLink="/user/account-info">
           Your account
         </button>
         <button (click)="userLogOut()" mat-menu-item>Log out</button>

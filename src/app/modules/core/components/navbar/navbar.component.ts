@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
 import { StoreService } from 'src/app/modules/store/services/store.service';
+import { AuthService } from './../../../user/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +21,8 @@ export class NavbarComponent {
     private router: Router,
     private cartService: CartService,
     private jwtService: JwtTokenService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -46,12 +48,11 @@ export class NavbarComponent {
   }
 
   userLogOut() {
-    this.jwtService.removeToken();
-    window.location.href = 'auth/login';
+    this.authService.logOut();
   }
 
-  userIsLogged(): boolean {  
-    return !!this.jwtService.getToken();
+  userIsLogged(): boolean {
+    return this.authService.userIsLogged();
   }
 
   fUserHasStore() {

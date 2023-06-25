@@ -1,14 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, forkJoin } from 'rxjs';
+import { Component } from '@angular/core';
 
 import { User } from '../../interfaces/user-interface';
-import { Store } from 'src/app/modules/store/interfaces/store-interface';
-import { Customer } from 'src/app/modules/customer/interfaces/customer-interface';
 
-import { UserService } from '../../services/user.service';
-import { StoreService } from 'src/app/modules/store/services/store.service';
-import { CustomerService } from 'src/app/modules/customer/services/customer.service';
-import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-new-account',
@@ -27,55 +21,9 @@ export class NewAccountComponent {
   accountType: string = 'customer';
   storeDescription: string = '';
 
-  constructor(
-    private userService: UserService,
-    private storeService: StoreService,
-    private customerService: CustomerService,
-    private jwtTokenService: JwtTokenService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   register() {
-    this.userService.addUser(this.user).subscribe(() => {
-      this.login();
-    });
-  }
-
-  createStore(): Observable<Store> {
-    const store = {
-      name: this.user.name,
-      userId: this.jwtTokenService.getAuthenticatedUserId(),
-      description: this.storeDescription,
-    } as Store;
-
-    return this.storeService.addStore(store);
-  }
-
-  createCustomer(): Observable<Customer> {
-    const customer = {
-      name: this.user.name,
-      userId: this.jwtTokenService.getAuthenticatedUserId(),
-    } as Customer;
-
-    return this.customerService.addCustomer(customer);
-  }
-
-  login() {
-    this.userService.authenticateUser(this.user).subscribe((tokenObj) => {
-      this.storeToken(tokenObj.token);
-
-      if (this.accountType === 'customer') {
-        this.createCustomer().subscribe(() => {
-          window.location.href = '';
-        });
-      } else {
-        forkJoin([this.createCustomer(), this.createStore()]).subscribe(() => {
-          window.location.href = '';
-        });
-      }
-    });
-  }
-
-  storeToken(token: string) {
-    this.jwtTokenService.setToken(token);
+    this.authService.register(this.user, this.storeDescription);
   }
 }
