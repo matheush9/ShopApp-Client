@@ -36,8 +36,8 @@
             >
               <app-quantity-selector
                 class="[&_.icon-box]:h-6 [&_.icon-box]:w-6"
-                [productId]="product.id"
-                (productAmountChange)="calculateTotalPrice()"
+                [quantity]="getProductQuantity(product.id)"
+                (quantityChange)="onProductQuantityChange($event, product.id)"
               ></app-quantity-selector>
               <span
                 class="flex items-center gap-1"

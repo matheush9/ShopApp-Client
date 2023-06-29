@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject, throwError } from 'rxjs';
+
 import { CartProduct } from '../interfaces/cart-product-interface';
-import { Observable, Subject } from 'rxjs';
+import { Item } from '../../order/interfaces/item-interface';
+
+import { ItemService } from '../../order/services/item.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +12,8 @@ import { Observable, Subject } from 'rxjs';
 export class CartService {
   private cartKey = 'cart';
   private cartUpdateSubject = new Subject<CartProduct[]>();
-  constructor() {}
+
+  constructor(private itemService: ItemService) {}
 
   getCart(): CartProduct[] {
     let cart: CartProduct[] = [];
@@ -24,13 +29,18 @@ export class CartService {
     return [];
   }
 
-  addProduct(cartProduct: CartProduct) {
-    let newCart: CartProduct[];
-    newCart = this.getCart();
+  addProduct(productId: number, quantity: number = 1) {
+    let newCart = this.getCart();
+
+    const cartProduct: CartProduct = {
+      id: productId,
+      quantity: quantity,
+      totalPrice: 0,
+    };
 
     const productIndex = newCart.findIndex((p) => p.id == cartProduct.id);
     if (productIndex !== -1) {
-      newCart[productIndex].amount++;
+      newCart[productIndex].quantity++;
     } else {
       newCart.push(cartProduct);
     }
@@ -45,8 +55,8 @@ export class CartService {
 
   editProduct(cartProduct: CartProduct): CartProduct[] {
     let newCart = this.getCart();
-    const productIndex = this.getCart().findIndex((p) => p.id === cartProduct.id);
-    newCart[productIndex].amount = cartProduct.amount;
+    const productIndex = newCart.findIndex((p) => p.id === cartProduct.id);
+    newCart[productIndex].quantity = cartProduct.quantity;
     newCart[productIndex].totalPrice = cartProduct.totalPrice;
     localStorage.setItem(this.cartKey, JSON.stringify(newCart));
 
@@ -55,9 +65,8 @@ export class CartService {
 
   deleteProduct(productId: number): CartProduct[] {
     let newCart = this.getCart();
-    const productIndex = this.getCart().findIndex((p) => p.id === productId);
+    const productIndex = newCart.findIndex((p) => p.id === productId);
     newCart.splice(productIndex, 1);
-    console.log();
     localStorage.setItem(this.cartKey, JSON.stringify(newCart));
 
     this.cartUpdateSubject.next(newCart);
@@ -67,5 +76,19 @@ export class CartService {
 
   cartUpdates(): Observable<CartProduct[]> {
     return this.cartUpdateSubject.asObservable();
+  }
+
+  addCartItemsToOrder(orderId: number): Observable<Item[]> {
+    const cart = this.getCart();
+    const itemList: Partial<Item>[] = cart.map((cartProduct) => ({
+      orderId: orderId,
+      productId: cartProduct.id,
+      priceTotal: cartProduct.totalPrice,
+      quantity: cartProduct.quantity,
+    }));
+
+    if (itemList.length > 0)
+      return this.itemService.addItemsList(itemList as Item[]);
+    else return throwError(() => new Error('Empty cart!'));
   }
 }

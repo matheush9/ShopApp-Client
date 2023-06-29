@@ -40,6 +40,6 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDialogModule,
     MatMenuModule
   ],
-  exports: [NavbarComponent, FooterComponent, CartComponent],
+  exports: [NavbarComponent, FooterComponent],
 })
 export class CoreModule {}

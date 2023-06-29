@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
 
 import { Observable, switchMap, tap } from 'rxjs';
 
 import { Product } from 'src/app/modules/product/interfaces/product-interface';
+import { Order } from 'src/app/modules/order/interfaces/order-interface';
+import { Item } from 'src/app/modules/order/interfaces/item-interface';
+import { ItemService } from 'src/app/modules/order/services/item.service';
+import { CartProduct } from '../../interfaces/cart-product-interface';
+
 import { ProductService } from 'src/app/modules/product/services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { CartService } from '../../services/cart.service';
-import { HttpParams } from '@angular/common/http';
 import { OrderService } from 'src/app/modules/order/services/order.service';
-import { Order } from 'src/app/modules/order/interfaces/order-interface';
 import { CustomerService } from 'src/app/modules/customer/services/customer.service';
 import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
-import { Item } from 'src/app/modules/order/interfaces/item-interface';
-import { ItemService } from 'src/app/modules/order/services/item.service';
 
 @Component({
   selector: 'app-cart',
@@ -70,6 +72,11 @@ export class CartComponent {
     this.loadQueryParams();
   }
 
+  onProductQuantityChange(newQuantity: number, productId: number) {
+    this.saveProductQuantityChange(productId, newQuantity);
+    this.calculateTotalPrice();
+  }
+
   calculateTotalPrice() {
     const cart = this.cartService.getCart();
     this.basePrice = 0;
@@ -78,54 +85,39 @@ export class CartComponent {
       const productIndex = this.products.findIndex(
         (p) => p.id === cartProduct.id
       );
-      cartProduct.totalPrice = this.products[productIndex].price * cartProduct.amount;
+      cartProduct.totalPrice =
+        this.products[productIndex].price * cartProduct.quantity;
       this.cartService.editProduct(cartProduct);
-      
+
       this.basePrice += cartProduct.totalPrice;
     });
 
     this.totalPrice = this.basePrice - this.discount;
   }
 
-  addOrder(): Observable<Order> {
-    const userId = this.jwtTokenService.getAuthenticatedUserId();
+  saveProductQuantityChange(productId: number, newQuantity: number) {
+    const cartProduct = {
+      id: productId,
+      quantity: newQuantity,
+      totalPrice: 0,
+    } as CartProduct;
 
-    return this.customerService.getCustomerByUserId(userId).pipe(
-      switchMap((customer) => {
-        const newOrder = {
-          customerId: customer.id,
-        } as Order;
-
-        return this.orderService.addOrder(newOrder);
-      })
-    );
-  }
-
-  addOrderItem(item: Item) {
-    this.itemService.addItem(item).subscribe(() => {
-      window.location.href = 'order/listing';
-    });
-  }
-
-
-  addCartItemsToOrder(orderId: number) {
-    const cart = this.cartService.getCart();
-
-    cart.forEach((cartProduct) => {
-      const item = {
-        orderId: orderId,
-        productId: cartProduct.id,
-        priceTotal: cartProduct.totalPrice,
-        quantity: cartProduct.amount,
-      } as Item;
-
-      this.addOrderItem(item);
-    });
+    this.cartService.editProduct(cartProduct);
   }
 
   checkout() {
-    this.addOrder().subscribe((order) => {
-      this.addCartItemsToOrder(order.id);
-    });
+    if (this.customerService.currentCustomer) {
+      this.orderService.addBlankOrder(this.customerService.currentCustomer.id)
+        .pipe(
+          switchMap((order) => this.cartService.addCartItemsToOrder(order.id))
+        )
+        .subscribe(() => {
+          window.location.href = 'order/listing';
+        });
+    }
+  }
+
+  getProductQuantity(productId: number): number {
+    return this.cartService.findProduct(productId)?.quantity ?? 1;
   }
 }

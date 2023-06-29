@@ -32,4 +32,12 @@ export class OrderService {
       headers: this.jwtTokenService.getAuthHeader(),
     });
   }
+
+  addBlankOrder(customerId: number): Observable<Order> {
+    const newOrder = {      
+      customerId: customerId,
+    } as Order;
+
+    return this.addOrder(newOrder);
+  }
 }
