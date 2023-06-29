@@ -1,5 +1,5 @@
-import { Observable, forkJoin, switchMap, tap } from 'rxjs';
-import { Injectable, ViewChild } from '@angular/core';
+import { Observable, forkJoin, mergeMap, switchMap, tap } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 import { JwtTokenService } from '../../shared/services/jwt-token.service';
 import { CustomerService } from '../../customer/services/customer.service';
@@ -19,24 +19,21 @@ export class AuthService {
     private userService: UserService,
     private customerService: CustomerService,
     private storeService: StoreService
-  ) {}
-
-  register(user: User, storeDesc?: string) {
-    this.userService.addUser(user).pipe(
-      switchMap(() => this.login(user)),
-      switchMap(() => this.registerUserAndStore(user, storeDesc))
-    ).subscribe();
+  ) {
+    if (this.jwtTokenService.getAuthenticatedUserId()) {
+      this.setCurrentAccountInfo();
+    }
   }
-  
-  private registerUserAndStore(user: User, storeDesc?: string): Observable<any> {
-    const observables: Observable<any>[] = [];
-  
-    observables.push(this.createCustomer(user));
-  
-    if (storeDesc) 
-      observables.push(this.createStore(user, storeDesc));
-  
-    return forkJoin(observables);
+
+  register(user: User, storeDesc?: string): Observable<User> {
+    return this.userService.addUser(user).pipe(
+      switchMap(() => this.login(user)),
+      tap(() => {
+        if (storeDesc) 
+          this.createStore(user, storeDesc).subscribe();
+        this.createCustomer(user).subscribe();
+        this.setCurrentAccountInfo();
+      }));
   }
 
   private createStore(user: User, storeDesc: string): Observable<Store> {
@@ -62,14 +59,14 @@ export class AuthService {
     return this.userService.authenticateUser(user).pipe(
       tap((tokenObj) => {
         this.storeToken(tokenObj.token);
-        window.location.href = '';
+        this.setCurrentAccountInfo();
       })
     );
   }
 
   logOut() {
     this.jwtTokenService.removeToken();
-    window.location.href = 'user/login';
+    this.removeCurrentAccountInfo();
   }
 
   private storeToken(token: string) {
@@ -80,5 +77,16 @@ export class AuthService {
     return !!this.jwtTokenService.getToken();
   }
 
+  setCurrentAccountInfo() {
+    this.userService.setCurrentUser().subscribe((user) => {
+      this.customerService.setCurrentCustomer(user);
+      this.storeService.setCurrentStore(user);
+    });
+  }
 
+  removeCurrentAccountInfo() {
+    this.userService.removeCurrentUser();
+    this.customerService.removeCurrentCustomer();
+    this.storeService.removeCurrentStore();
+  }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { User } from '../interfaces/user-interface';
@@ -11,6 +11,7 @@ import { JwtTokenService } from '../../shared/services/jwt-token.service';
   providedIn: 'root',
 })
 export class UserService {
+  currentUser?: User;
   private apiUrl?: string;
 
   constructor(
@@ -24,8 +25,8 @@ export class UserService {
     return this.httpClient.get<User>(this.apiUrl + '/User/' + id);
   }
 
-  addUser(newUser: User): Observable<JwtToken> {
-    return this.httpClient.post<JwtToken>(this.apiUrl + '/User', newUser);
+  addUser(newUser: User): Observable<User> {
+    return this.httpClient.post<User>(this.apiUrl + '/User', newUser);
   }
 
   authenticateUser(user: User): Observable<JwtToken> {
@@ -42,5 +43,20 @@ export class UserService {
     return this.httpClient.delete<User>(this.apiUrl + '/User/' + id, {
       headers: this.jwtTokenService.getAuthHeader(),
     });
+  }
+
+  setCurrentUser(): Observable<User> {
+    if (this.currentUser) return of(this.currentUser);
+
+    const userId = this.jwtTokenService.getAuthenticatedUserId();
+    return this.getUser(userId).pipe(
+      tap((user) => {
+        this.currentUser = user;
+      })
+    );
+  }
+
+  removeCurrentUser() {
+    delete this.currentUser;
   }
 }

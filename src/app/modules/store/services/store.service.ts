@@ -5,12 +5,14 @@ import { Observable } from 'rxjs';
 import { Store } from '../interfaces/store-interface';
 import { environment } from 'src/environments/environment';
 import { JwtTokenService } from '../../shared/services/jwt-token.service';
+import { User } from '../../user/interfaces/user-interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StoreService {
   private apiUrl?: string;
+  currentStore?: Store;
 
   constructor(
     private httpClient: HttpClient,
@@ -31,5 +33,13 @@ export class StoreService {
     return this.httpClient.post<Store>(this.apiUrl + '/Store', store, {
       headers: this.jwtTokenService.getAuthHeader(),
     });
+  }
+
+  setCurrentStore(user: User) {
+    if (user.store) this.currentStore = user.store;
+  }
+
+  removeCurrentStore() {
+    delete this.currentStore;
   }
 }
