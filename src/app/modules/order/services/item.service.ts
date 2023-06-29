@@ -28,4 +28,10 @@ export class ItemService {
       headers: this.jwtTokenService.getAuthHeader(),
     });
   }
+
+  addItemsList(itemsList: Item[]): Observable<Item[]> {
+    return this.httpClient.post<Item[]>(this.apiUrl + '/Item/list', itemsList, {
+      headers: this.jwtTokenService.getAuthHeader(),
+    });
+  }
 }
