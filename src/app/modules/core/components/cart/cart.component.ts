@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { Observable, switchMap, tap } from 'rxjs';
 
 import { Product } from 'src/app/modules/product/interfaces/product-interface';
-import { Order } from 'src/app/modules/order/interfaces/order-interface';
-import { Item } from 'src/app/modules/order/interfaces/item-interface';
-import { ItemService } from 'src/app/modules/order/services/item.service';
 import { CartProduct } from '../../interfaces/cart-product-interface';
 
 import { ProductService } from 'src/app/modules/product/services/product.service';
@@ -14,7 +12,7 @@ import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { CartService } from '../../services/cart.service';
 import { OrderService } from 'src/app/modules/order/services/order.service';
 import { CustomerService } from 'src/app/modules/customer/services/customer.service';
-import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
+
 
 @Component({
   selector: 'app-cart',
@@ -36,9 +34,8 @@ export class CartComponent {
     private imageService: ImageService,
     private cartService: CartService,
     private orderService: OrderService,
-    private jwtTokenService: JwtTokenService,
     private customerService: CustomerService,
-    private itemService: ItemService
+    private router: Router,
   ) {
     this.imagesProviderUrl = this.imageService.getImagesProviderUrl();
   }
@@ -112,7 +109,7 @@ export class CartComponent {
           switchMap((order) => this.cartService.addCartItemsToOrder(order.id))
         )
         .subscribe(() => {
-          window.location.href = 'order/listing';
+          this.router.navigate(['order/listing']);
         });
     }
   }

@@ -2,7 +2,7 @@ import { ItemService } from 'src/app/modules/order/services/item.service';
 import { Component } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Observable, Subject, forkJoin, tap } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
@@ -45,6 +45,7 @@ export class ProductDetailComponent {
     private productService: ProductService,
     private imageService: ImageService,
     private route: ActivatedRoute,
+    private router: Router,
     private cartService: CartService,
     private customerService: CustomerService,
     private orderService: OrderService,
@@ -93,7 +94,7 @@ export class ProductDetailComponent {
       );
 
       forkJoin([addItemToOrder$, addBlankOrder$]).subscribe(() => {
-        window.location.href = 'order/listing';
+        this.router.navigate(['order/listing']);
       });
     }
   }

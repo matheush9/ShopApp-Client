@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject, catchError, tap, map, of, finalize } from 'rxjs';
 
 import { Product } from '../../interfaces/product-interface';
@@ -48,6 +48,7 @@ export class ProductAddComponent {
     private productService: ProductService,
     private imageService: ImageService,
     private route: ActivatedRoute,
+    private router: Router,
     private productCategoryService: ProductCategoryService,
     private jwtTokenService: JwtTokenService,
     private storeService: StoreService,
@@ -196,7 +197,7 @@ export class ProductAddComponent {
     if (this.newProduct)
       this.product$ = this.productService.addProduct(this.product).pipe(
         finalize(() => {
-          window.location.href = 'product/inventory';
+          this.router.navigate(['product/inventory']);
         })
       );
     else
@@ -216,7 +217,7 @@ export class ProductAddComponent {
   deleteProduct() {
     this.product$ = this.productService.deleteProduct(this.product.id).pipe(
       finalize(() => {
-        window.location.href = 'product/inventory';
+        this.router.navigate(['product/inventory']);
       })
     );
   }

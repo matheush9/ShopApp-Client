@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { User } from '../../interfaces/user-interface';
 
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-account',
@@ -21,9 +22,11 @@ export class NewAccountComponent {
   accountType: string = 'customer';
   storeDescription: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   register() {
-    this.authService.register(this.user, this.storeDescription);
+    this.authService.register(this.user, this.storeDescription).subscribe(() => {
+      this.router.navigate(['']);
+    });
   }
 }

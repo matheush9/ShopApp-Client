@@ -49,16 +49,10 @@ export class NavbarComponent {
 
   userLogOut() {
     this.authService.logOut();
+    this.router.navigate(['user/login']);
   }
 
   userIsLogged(): boolean {
     return this.authService.userIsLogged();
-  }
-
-  fUserHasStore() {
-    const userId = this.jwtService.getAuthenticatedUserId();
-    this.storeService.getStoreByUser(Number(userId)).subscribe((result) => {
-      this.userHasStore = !!result;
-    });
   }
 }
