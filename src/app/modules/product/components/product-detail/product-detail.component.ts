@@ -1,18 +1,17 @@
 import { ItemService } from 'src/app/modules/order/services/item.service';
 import { Component } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Observable, Subject, catchError, of, switchMap, tap } from 'rxjs';
+import { Observable, Subject, forkJoin, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
-import { Product } from '../../interfaces/product-interface';
-import { CartProduct } from 'src/app/modules/core/interfaces/cart-product-interface';
 import { CartService } from 'src/app/modules/core/services/cart.service';
-import { Order } from 'src/app/modules/order/interfaces/order-interface';
 import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
 import { CustomerService } from 'src/app/modules/customer/services/customer.service';
 import { OrderService } from 'src/app/modules/order/services/order.service';
+
+import { Product } from '../../interfaces/product-interface';
 import { Item } from 'src/app/modules/order/interfaces/item-interface';
 
 @Component({
@@ -47,30 +46,22 @@ export class ProductDetailComponent {
     private imageService: ImageService,
     private route: ActivatedRoute,
     private cartService: CartService,
-    private jwtTokenService: JwtTokenService,
     private customerService: CustomerService,
     private orderService: OrderService,
     private itemService: ItemService
-  ) {}
+  ) {
+    this.imagesProviderUrl = this.imageService.getImagesProviderUrl();
+  }
 
   ngOnInit() {
-    this.imagesProviderUrl = this.imageService.getImagesProviderUrl();
-
-    this.route.paramMap.subscribe({
-      next: (params) => {
-        const id = params.get('id');
-        this.getProduct(Number(id));
-      },
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      this.getProduct(Number(id));
     });
   }
 
   getProduct(productId: number) {
     this.product$ = this.productService.getProduct(productId).pipe(
-      catchError((error) => {
-        console.error(error);
-        this.error$.next(true);
-        return of();
-      }),
       tap((product) => {
         this.product = product;
       })
@@ -78,33 +69,7 @@ export class ProductDetailComponent {
   }
 
   addProductToCart(productId: number) {
-    const product: CartProduct = {
-      id: productId,
-      amount: 1,
-      totalPrice: 0,
-    };
-
-    this.cartService.addProduct(product);
-  }
-
-  addOrder(): Observable<Order> {
-    const userId = this.jwtTokenService.getAuthenticatedUserId();
-
-    return this.customerService.getCustomerByUserId(userId).pipe(
-      switchMap((customer) => {
-        const newOrder = {
-          customerId: customer.id,
-        } as Order;
-
-        return this.orderService.addOrder(newOrder);
-      })
-    );
-  }
-
-  addOrderItem(item: Item) {
-    this.itemService.addItem(item).subscribe(() => {
-      window.location.href = 'order/listing';
-    });
+    this.cartService.addProduct(productId);
   }
 
   addItemToOrder(orderId: number) {
@@ -115,12 +80,21 @@ export class ProductDetailComponent {
       quantity: 1,
     } as Item;
 
-    this.addOrderItem(item);
+    return this.itemService.addItem(item);
   }
 
   buySingleProduct() {
-    this.addOrder().subscribe((order) => {
-      this.addItemToOrder(order.id);
-    });
+    if (this.customerService.currentCustomer) {
+      const addBlankOrder$ = this.orderService.addBlankOrder(
+        this.customerService.currentCustomer.id
+      );
+      const addItemToOrder$ = addBlankOrder$.pipe(
+        tap((order) => this.addItemToOrder(order.id))
+      );
+
+      forkJoin([addItemToOrder$, addBlankOrder$]).subscribe(() => {
+        window.location.href = 'order/listing';
+      });
+    }
   }
 }

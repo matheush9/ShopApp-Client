@@ -21,13 +21,7 @@ export class ProductCardComponent {
   }
 
   addProductToCart(productId: number) {
-    const product: CartProduct = {
-      id: productId,
-      amount: 1,
-      totalPrice: 0,
-    };
-
-    this.cartService.addProduct(product);
+    this.cartService.addProduct(productId);
   }
 }
   
