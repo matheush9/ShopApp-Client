@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { Store } from '../interfaces/store-interface';
 import { environment } from 'src/environments/environment';
@@ -12,6 +12,7 @@ import { User } from '../../user/interfaces/user-interface';
 })
 export class StoreService {
   private apiUrl?: string;
+  private storeUpdateSubject = new Subject<Store | undefined>();
   currentStore?: Store;
 
   constructor(
@@ -36,10 +37,18 @@ export class StoreService {
   }
 
   setCurrentStore(user: User) {
-    if (user.store) this.currentStore = user.store;
+    if (user.store) {
+      this.currentStore = user.store;
+      this.storeUpdateSubject.next(this.currentStore);
+    }
   }
 
   removeCurrentStore() {
     delete this.currentStore;
+    this.storeUpdateSubject.next(this.currentStore);
+  }
+
+  storeUpdates(): Observable<Store | undefined> {
+    return this.storeUpdateSubject.asObservable();     
   }
 }

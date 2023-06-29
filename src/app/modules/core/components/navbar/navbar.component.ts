@@ -2,7 +2,6 @@ import { Component, Renderer2 } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
-import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
 import { StoreService } from 'src/app/modules/store/services/store.service';
 import { AuthService } from './../../../user/services/auth.service';
 
@@ -20,18 +19,21 @@ export class NavbarComponent {
     private renderer: Renderer2,
     private router: Router,
     private cartService: CartService,
-    private jwtService: JwtTokenService,
     private storeService: StoreService,
     private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.cartItemsCount = this.cartService.getCart().length;
+
     this.cartService.cartUpdates().subscribe((cart) => {
       this.cartItemsCount = cart.length;
     });
 
-    this.fUserHasStore();
+    this.storeService.storeUpdates().subscribe((store) => {
+      this.userHasStore = !!store;
+      console.log(this.userHasStore, store)
+    })
   }
 
   onMenuClick() {
