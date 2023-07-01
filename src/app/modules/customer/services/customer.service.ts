@@ -39,6 +39,7 @@ export class CustomerService {
 
   setCurrentCustomer(user: User) {
     if (user.customer) this.currentCustomer = user.customer;
+    else this.getCustomerByUserId(user.id).subscribe((customer) => this.currentCustomer = customer);
   }
 
   removeCurrentCustomer() {

@@ -37,10 +37,13 @@ export class StoreService {
   }
 
   setCurrentStore(user: User) {
-    if (user.store) {
-      this.currentStore = user.store;
+    const updateStore = (store: Store) => {
+      this.currentStore = store;
       this.storeUpdateSubject.next(this.currentStore);
-    }
+    };
+  
+    if (user.store) updateStore(user.store);
+    else this.getStoreByUser(user.id).subscribe((store) => {updateStore(store)});
   }
 
   removeCurrentStore() {
@@ -49,6 +52,6 @@ export class StoreService {
   }
 
   storeUpdates(): Observable<Store | undefined> {
-    return this.storeUpdateSubject.asObservable();     
+    return this.storeUpdateSubject.asObservable();
   }
 }

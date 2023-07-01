@@ -32,8 +32,7 @@ export class NavbarComponent {
 
     this.storeService.storeUpdates().subscribe((store) => {
       this.userHasStore = !!store;
-      console.log(this.userHasStore, store)
-    })
+    });
   }
 
   onMenuClick() {
