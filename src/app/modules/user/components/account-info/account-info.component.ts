@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EMPTY, Observable, tap } from 'rxjs';
+
 import { ConfirmationDialogComponent } from 'src/app/modules/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { User } from '../../interfaces/user-interface';
 import { Image } from 'src/app/modules/shared/interfaces/image-interface';
+
 import { UserService } from '../../services/user.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
-import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
 
 @Component({
   selector: 'app-account-info',
@@ -29,17 +30,16 @@ export class AccountInfoComponent {
   constructor(
     public dialog: MatDialog,
     private userService: UserService,
-    private imageService: ImageService,
-    private jwtTokenService: JwtTokenService
+    private imageService: ImageService
   ) {
     this.imagesProviderUrl = this.imageService.getImagesProviderUrl();
   }
 
   ngOnInit() {
-    this.getUser();
+    this.getUser(); 
   }
 
-  openDialog(
+  deleteAccountDialog(
     enterAnimationDuration: string,
     exitAnimationDuration: string,
     dialogMessage: string
@@ -56,23 +56,26 @@ export class AccountInfoComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.deleteImage();
-        this.deleteUser();
+        this.deleteImage().subscribe(() => {
+          this.deleteUser();
+        })
       }
     });
   }
 
   getUser() {
-    const userId = this.jwtTokenService.getAuthenticatedUserId();
-    this.user$ = this.userService.getUser(userId).pipe(
-      tap((user) => {
-        this.user = user;
-      })
-    );
+    this.user$ = this.userService.setCurrentUser(true).pipe(tap((user) => {
+      this.user = user;
+    }));
   }
 
   deleteUser() {
-    this.user$ = this.userService.deleteUser(this.user.id);
+    this.user$ = this.userService.deleteUser(this.user.id).pipe(
+      tap(() => {
+        this.userService.removeCurrentUser();    
+        this.getUser();
+      })
+    );
   }
 
   deleteImage(): Observable<Image[]> {
@@ -82,7 +85,11 @@ export class AccountInfoComponent {
   }
 
   editUserInfo() {
-    this.user$ = this.userService.editUser(this.user.id, this.user);
+    this.user$ = this.userService.editUser(this.user.id, this.user).pipe(
+      tap(() => {
+        this.getUser();
+      })
+    );
   }
 
   changeImage(event: any) {
