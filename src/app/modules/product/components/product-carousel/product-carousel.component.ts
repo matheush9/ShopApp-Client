@@ -1,18 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
+
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import {
-  Observable,
-  Subject,
-  catchError,
-  of,
+import { Observable, Subject, catchError, of } from 'rxjs';
 
-} from 'rxjs';
-
+import { PagedResponse } from 'src/app/modules/shared/interfaces/wrappers/paged-response-interface';
 import { Product } from 'src/app/modules/product/interfaces/product-interface';
 import { ProductService } from 'src/app/modules/product/services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
-import { HttpParams } from '@angular/common/http';
-import { PagedResponse } from 'src/app/modules/shared/interfaces/wrappers/paged-response-interface';
 
 @Component({
   selector: 'app-product-carousel',
@@ -79,7 +74,7 @@ export class ProductCarouselComponent implements OnInit {
         console.error(error);
         this.error$.next(true);
         return of();
-      }),
+      })
     );
   }
 }

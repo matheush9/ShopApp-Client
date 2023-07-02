@@ -1,14 +1,15 @@
 import { Component, OnInit, Renderer2, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
+import { PageEvent } from '@angular/material/paginator';
 import { Observable, Subject, catchError, of, tap } from 'rxjs';
 
 import { Product } from '../../interfaces/product-interface';
-import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { ProductOrdinations } from 'src/app/modules/shared/models/product-ordinations-model';
 import { PagedResponse } from 'src/app/modules/shared/interfaces/wrappers/paged-response-interface';
-import { PageEvent } from '@angular/material/paginator';
+
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-product-listing',

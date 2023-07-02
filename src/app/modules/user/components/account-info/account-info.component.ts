@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { EMPTY, Observable, tap } from 'rxjs';
 
-import { ConfirmationDialogComponent } from 'src/app/modules/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { User } from '../../interfaces/user-interface';
 import { Image } from 'src/app/modules/shared/interfaces/image-interface';
 
 import { UserService } from '../../services/user.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
+import { ConfirmationDialogService } from './../../../shared/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-account-info',
@@ -28,7 +27,7 @@ export class AccountInfoComponent {
   isImageUploading: boolean = false;
 
   constructor(
-    public dialog: MatDialog,
+    public dialogService: ConfirmationDialogService,
     private userService: UserService,
     private imageService: ImageService
   ) {
@@ -36,43 +35,34 @@ export class AccountInfoComponent {
   }
 
   ngOnInit() {
-    this.getUser(); 
+    this.getUser();
   }
 
-  deleteAccountDialog(
-    enterAnimationDuration: string,
-    exitAnimationDuration: string,
-    dialogMessage: string
-  ): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: '300px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-      disableClose: true,
-      data: {
-        message: dialogMessage,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.deleteImage().subscribe(() => {
-          this.deleteUser();
-        })
-      }
-    });
+  deleteAccountDialog(dialogMessage: string): void {
+    this.dialogService
+      .openDialog(dialogMessage)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.deleteImage().subscribe(() => {
+            this.deleteUser();
+          });
+        }
+      });
   }
 
   getUser() {
-    this.user$ = this.userService.setCurrentUser(true).pipe(tap((user) => {
-      this.user = user;
-    }));
+    this.user$ = this.userService.setCurrentUser(true).pipe(
+      tap((user) => {
+        this.user = user;
+      })
+    );
   }
 
   deleteUser() {
     this.user$ = this.userService.deleteUser(this.user.id).pipe(
       tap(() => {
-        this.userService.removeCurrentUser();    
+        this.userService.removeCurrentUser();
         this.getUser();
       })
     );

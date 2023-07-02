@@ -1,11 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subject, catchError, tap, of, finalize } from 'rxjs';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
-import { ConfirmationDialogComponent } from 'src/app/modules/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ProductCategory } from '../../interfaces/product-category-interface';
 import { Product } from '../../interfaces/product-interface';
 
@@ -14,6 +12,7 @@ import { SnackbarService } from 'src/app/modules/shared/services/snackbar.servic
 import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { ProductCategoryService } from '../../services/product-category.service';
+import { ConfirmationDialogService } from './../../../shared/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-product-add',
@@ -41,18 +40,17 @@ export class ProductAddComponent {
   isImageUploading: boolean = false;
 
   constructor(
-    public dialog: MatDialog,
     private productService: ProductService,
     private imageService: ImageService,
     private route: ActivatedRoute,
     private router: Router,
     private productCategoryService: ProductCategoryService,
     private storeService: StoreService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private dialogService: ConfirmationDialogService
   ) {
     this.imagesProviderUrl = this.imageService.getImagesProviderUrl();
   }
-
   customOptions: OwlOptions = {
     loop: false,
     mouseDrag: true,
@@ -87,29 +85,14 @@ export class ProductAddComponent {
     this.product.storeId = this.storeService.currentStore?.id ?? 0;
   }
 
-  openDialog(
-    dialogMessage: string,
-    enterAnimationDuration: string = '250ms',
-    exitAnimationDuration: string = '150ms'
-  ): MatDialogRef<ConfirmationDialogComponent, any> {
-    return this.dialog.open(ConfirmationDialogComponent, {
-      width: '300px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-      disableClose: true,
-      data: {
-        message: dialogMessage,
-      },
-    });
-  }
-
   removeImageDialog(dialogMessage: string): void {
     if (this.newProduct) {
       this.snackbarService.openSnackbar('Add your product first!');
       return;
     }
 
-    this.openDialog(dialogMessage)
+    this.dialogService
+      .openDialog(dialogMessage)
       .afterClosed()
       .subscribe((result) => {
         if (result)
@@ -120,7 +103,8 @@ export class ProductAddComponent {
   }
 
   cancelChangesDialog(dialogMessage: string): void {
-    this.openDialog(dialogMessage)
+    this.dialogService
+      .openDialog(dialogMessage)
       .afterClosed()
       .subscribe((result) => {
         if (result) {
@@ -130,7 +114,8 @@ export class ProductAddComponent {
   }
 
   saveChangesDialog(dialogMessage: string): void {
-    this.openDialog(dialogMessage)
+    this.dialogService
+      .openDialog(dialogMessage)
       .afterClosed()
       .subscribe((result) => {
         if (result) this.saveProductInfo();
@@ -138,7 +123,8 @@ export class ProductAddComponent {
   }
 
   deleteProductDialog(dialogMessage: string): void {
-    this.openDialog(dialogMessage)
+    this.dialogService
+      .openDialog(dialogMessage)
       .afterClosed()
       .subscribe((result) => {
         if (result) this.deleteProduct();
@@ -177,11 +163,13 @@ export class ProductAddComponent {
 
     this.isImageUploading = true;
     const imageFile = event.target.files[0];
-    
-    this.imageService.uploadImage(imageFile, undefined, this.product.id).subscribe(() => {
-      this.getProduct(this.product.id);
-      this.isImageUploading = false;
-    });
+
+    this.imageService
+      .uploadImage(imageFile, undefined, this.product.id)
+      .subscribe(() => {
+        this.getProduct(this.product.id);
+        this.isImageUploading = false;
+      });
   }
 
   getAllProductCategories() {
