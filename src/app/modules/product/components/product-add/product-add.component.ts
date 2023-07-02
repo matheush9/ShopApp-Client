@@ -24,6 +24,7 @@ export class ProductAddComponent {
 
   newProduct: boolean = false;
   product$?: Observable<Product>;
+  initialProduct?: Product;
   product: Product = {
     id: 0,
     name: '',
@@ -83,6 +84,7 @@ export class ProductAddComponent {
 
     this.getAllProductCategories();
     this.product.storeId = this.storeService.currentStore?.id ?? 0;
+    this.initialProduct = {... this.product};
   }
 
   removeImageDialog(dialogMessage: string): void {
@@ -107,9 +109,7 @@ export class ProductAddComponent {
       .openDialog(dialogMessage)
       .afterClosed()
       .subscribe((result) => {
-        if (result) {
-          // do something (later)
-        }
+        if (result && this.initialProduct) this.product = this.initialProduct;
       });
   }
 
@@ -138,7 +138,10 @@ export class ProductAddComponent {
         this.error$.next(true);
         return of();
       }),
-      tap((product) => (this.product = product))
+      tap((product) => {
+        this.product = product;
+        this.initialProduct = {... product}
+      })
     );
   }
 
