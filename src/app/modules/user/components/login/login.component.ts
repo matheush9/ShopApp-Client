@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
+import { catchError } from 'rxjs';
 
 import { User } from '../../interfaces/user-interface';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,11 +21,25 @@ export class LoginComponent {
     images: [],
   };
 
+  loginErrorMessage = '';
+
   constructor(private authService: AuthService, private router: Router) {}
 
-  login() {
-    this.authService.login(this.user).subscribe(() => {
-      this.router.navigate(['']);
-    });
+  login(form: NgForm) {
+    if (form.valid) {
+      this.authService
+        .login(this.user)
+        .pipe(
+          catchError((error) => {
+            if (error.status == 401) {
+              this.loginErrorMessage = 'Invalid login/email or password';
+            } else console.error(error);
+            throw error;
+          })
+        )
+        .subscribe(() => {
+          this.router.navigate(['']);
+        });
+    }
   }
 }

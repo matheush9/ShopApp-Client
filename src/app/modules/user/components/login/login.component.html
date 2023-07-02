@@ -2,17 +2,24 @@
   <h1 class="mb-32 text-xl font-bold lg:mb-8">Welcome back! Log in</h1>
 
   <div class="xl flex w-full flex-col px-10 lg:px-20">
-    <form #form="ngForm" class="flex flex-col" (ngSubmit)="login()">
+    <form #form="ngForm" class="flex flex-col" (ngSubmit)="login(form)">
       <mat-form-field appearance="fill">
         <mat-label>Login/e-mail</mat-label>
-        <input [(ngModel)]="user.email" name="email" matInput />
+        <input required [(ngModel)]="user.email" name="email" matInput #emailInput="ngModel"/>
+        <mat-error *ngIf="emailInput.invalid && emailInput.errors?.['required']">
+          Required
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
-        <input [(ngModel)]="user.password" type="password" name="password" matInput />
+        <input required [(ngModel)]="user.password" type="password" name="password" matInput #passInput="ngModel"/>        
+        <mat-error *ngIf="passInput.invalid && passInput.errors?.['required']">
+          Required
+        </mat-error>
       </mat-form-field>
 
+      <mat-error *ngIf="loginErrorMessage">{{ loginErrorMessage }}</mat-error>
       <span class="self-end text-primary-color"
         ><a routerLink="/user/forgot-password">Forgot Password?</a></span
       >
