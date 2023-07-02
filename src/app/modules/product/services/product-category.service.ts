@@ -9,21 +9,17 @@ import { ProductCategory } from '../interfaces/product-category-interface';
   providedIn: 'root',
 })
 export class ProductCategoryService {
-  private apiUrl?: string;
-
-  constructor(private httpClient: HttpClient) {
-    this.apiUrl = environment.apiUrl;
-  }
+  constructor(private httpClient: HttpClient) {}
 
   getProductCategory(id: number): Observable<ProductCategory> {
     return this.httpClient.get<ProductCategory>(
-      this.apiUrl + '/ProductCategory/' + id
+      environment.apiUrl + '/ProductCategory/' + id
     );
   }
 
   getAllProductCategories(): Observable<ProductCategory[]> {
     return this.httpClient.get<ProductCategory[]>(
-      this.apiUrl + '/ProductCategory'
+      environment.apiUrl + '/ProductCategory'
     );
   }
 }

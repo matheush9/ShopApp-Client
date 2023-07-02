@@ -10,25 +10,21 @@ import { JwtTokenService } from '../../shared/services/jwt-token.service';
   providedIn: 'root',
 })
 export class OrderService {
-  private apiUrl?: string;
-
   constructor(
     private httpClient: HttpClient,
     private jwtTokenService: JwtTokenService
-  ) {
-    this.apiUrl = environment.apiUrl;
-  }
+  ) {}
 
   getOrderById(id: number): Observable<Order> {
-    return this.httpClient.get<Order>(this.apiUrl + '/Order/' + id);
+    return this.httpClient.get<Order>(environment.apiUrl + '/Order/' + id);
   }
 
   getOrdersByCustomerId(id: number): Observable<Order[]> {
-    return this.httpClient.get<Order[]>(this.apiUrl + '/Order/customer/' + id);
+    return this.httpClient.get<Order[]>(environment.apiUrl + '/Order/customer/' + id);
   }
 
   addOrder(order: Order): Observable<Order> {
-    return this.httpClient.post<Order>(this.apiUrl + '/Order', order, {
+    return this.httpClient.post<Order>(environment.apiUrl + '/Order', order, {
       headers: this.jwtTokenService.getAuthHeader(),
     });
   }

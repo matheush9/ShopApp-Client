@@ -11,29 +11,26 @@ import { User } from '../../user/interfaces/user-interface';
   providedIn: 'root',
 })
 export class CustomerService {
-  private apiUrl?: string;
   currentCustomer?: Customer;
 
   constructor(
     private httpClient: HttpClient,
     private jwtTokenService: JwtTokenService,
-  ) {
-    this.apiUrl = environment.apiUrl;
-  }
+  ) {}
 
   getCustomer(id: number): Observable<Customer> {
-    return this.httpClient.get<Customer>(this.apiUrl + '/Customer/' + id);
+    return this.httpClient.get<Customer>(environment.apiUrl + '/Customer/' + id);
   }
 
   addCustomer(customer: Customer): Observable<Customer> {
-    return this.httpClient.post<Customer>(this.apiUrl + '/Customer', customer, {
+    return this.httpClient.post<Customer>(environment.apiUrl + '/Customer', customer, {
       headers: this.jwtTokenService.getAuthHeader(),
     });
   }
 
   getCustomerByUserId(userId: number): Observable<Customer> {
     return this.httpClient.get<Customer>(
-      this.apiUrl + '/Customer/user/' + userId
+      environment.apiUrl + '/Customer/user/' + userId
     );
   }
 

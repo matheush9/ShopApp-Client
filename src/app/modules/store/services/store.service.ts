@@ -11,27 +11,24 @@ import { User } from '../../user/interfaces/user-interface';
   providedIn: 'root',
 })
 export class StoreService {
-  private apiUrl?: string;
   private storeUpdateSubject = new Subject<Store | undefined>();
   currentStore?: Store;
 
   constructor(
     private httpClient: HttpClient,
     private jwtTokenService: JwtTokenService
-  ) {
-    this.apiUrl = environment.apiUrl;
-  }
+  ) {}
 
   getStore(id: number): Observable<Store> {
-    return this.httpClient.get<Store>(this.apiUrl + '/Store/' + id);
+    return this.httpClient.get<Store>(environment.apiUrl + '/Store/' + id);
   }
 
   getStoreByUser(userId: number): Observable<Store> {
-    return this.httpClient.get<Store>(this.apiUrl + '/Store/user/' + userId);
+    return this.httpClient.get<Store>(environment.apiUrl + '/Store/user/' + userId);
   }
 
   addStore(store: Store): Observable<Store> {
-    return this.httpClient.post<Store>(this.apiUrl + '/Store', store, {
+    return this.httpClient.post<Store>(environment.apiUrl + '/Store', store, {
       headers: this.jwtTokenService.getAuthHeader(),
     });
   }

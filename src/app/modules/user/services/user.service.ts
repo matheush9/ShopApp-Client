@@ -12,35 +12,32 @@ import { JwtTokenService } from '../../shared/services/jwt-token.service';
 })
 export class UserService {
   currentUser?: User;
-  private apiUrl?: string;
 
   constructor(
     private httpClient: HttpClient,
     private jwtTokenService: JwtTokenService
-  ) {
-    this.apiUrl = environment.apiUrl;
-  }
+  ) {}
 
   getUser(id: number): Observable<User> {
-    return this.httpClient.get<User>(this.apiUrl + '/User/' + id);
+    return this.httpClient.get<User>(environment.apiUrl + '/User/' + id);
   }
 
   addUser(newUser: User): Observable<User> {
-    return this.httpClient.post<User>(this.apiUrl + '/User', newUser);
+    return this.httpClient.post<User>(environment.apiUrl + '/User', newUser);
   }
 
   authenticateUser(user: User): Observable<JwtToken> {
-    return this.httpClient.post<JwtToken>(this.apiUrl + '/User/auth', user);
+    return this.httpClient.post<JwtToken>(environment.apiUrl + '/User/auth', user);
   }
 
   editUser(id: number, newUser: User): Observable<User> {
-    return this.httpClient.put<User>(this.apiUrl + '/User/' + id, newUser, {
+    return this.httpClient.put<User>(environment.apiUrl + '/User/' + id, newUser, {
       headers: this.jwtTokenService.getAuthHeader(),
     });
   }
 
   deleteUser(id: number): Observable<User> {
-    return this.httpClient.delete<User>(this.apiUrl + '/User/' + id, {
+    return this.httpClient.delete<User>(environment.apiUrl + '/User/' + id, {
       headers: this.jwtTokenService.getAuthHeader(),
     });
   }
