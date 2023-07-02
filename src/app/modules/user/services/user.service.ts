@@ -45,8 +45,8 @@ export class UserService {
     });
   }
 
-  setCurrentUser(): Observable<User> {
-    if (this.currentUser) return of(this.currentUser);
+  setCurrentUser(refetch: boolean = false): Observable<User> {
+    if (this.currentUser && !refetch) return of(this.currentUser);
 
     const userId = this.jwtTokenService.getAuthenticatedUserId();
     return this.getUser(userId).pipe(
