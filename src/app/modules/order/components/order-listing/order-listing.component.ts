@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
-import { OrderService } from '../../services/order.service';
 import { Observable } from 'rxjs';
+
 import { Order } from '../../interfaces/order-interface';
-import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
+
+import { OrderService } from '../../services/order.service';
 import { CustomerService } from 'src/app/modules/customer/services/customer.service';
 
 @Component({
@@ -17,16 +18,13 @@ export class OrderListingComponent {
 
   constructor(
     private OrderService: OrderService,
-    private jwtTokenService: JwtTokenService,
     private customerService: CustomerService
   ) {}
 
   ngOnInit() {
-    const authUserId = this.jwtTokenService.getAuthenticatedUserId();
-    this.customerService
-      .getCustomerByUserId(authUserId)
-      .subscribe((customer) => {
-        this.orders$ = this.OrderService.getOrdersByCustomerId(customer.id);
-      });
+    if (this.customerService.currentCustomer?.id)
+      this.orders$ = this.OrderService.getOrdersByCustomerId(
+        this.customerService.currentCustomer?.id
+      );
   }
 }

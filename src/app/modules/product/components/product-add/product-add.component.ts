@@ -1,22 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject, catchError, tap, map, of, finalize } from 'rxjs';
-
-import { Product } from '../../interfaces/product-interface';
-import { Image } from 'src/app/modules/shared/interfaces/image-interface';
-import { ProductService } from '../../services/product.service';
-import { ImageService } from 'src/app/modules/shared/services/image.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Observable, Subject, catchError, tap, of, finalize } from 'rxjs';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { ConfirmationDialogComponent } from 'src/app/modules/shared/components/confirmation-dialog/confirmation-dialog.component';
-
 import { ProductCategory } from '../../interfaces/product-category-interface';
-import { ProductCategoryService } from '../../services/product-category.service';
-import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
+import { Product } from '../../interfaces/product-interface';
+
 import { StoreService } from 'src/app/modules/store/services/store.service';
 import { SnackbarService } from 'src/app/modules/shared/services/snackbar.service';
+import { ProductService } from '../../services/product.service';
+import { ImageService } from 'src/app/modules/shared/services/image.service';
+import { ProductCategoryService } from '../../services/product-category.service';
 
 @Component({
   selector: 'app-product-add',
@@ -50,7 +47,6 @@ export class ProductAddComponent {
     private route: ActivatedRoute,
     private router: Router,
     private productCategoryService: ProductCategoryService,
-    private jwtTokenService: JwtTokenService,
     private storeService: StoreService,
     private snackbarService: SnackbarService
   ) {
@@ -88,7 +84,7 @@ export class ProductAddComponent {
       .subscribe();
 
     this.getAllProductCategories();
-    this.getUserStore();
+    this.product.storeId = this.storeService.currentStore?.id ?? 0;
   }
 
   openDialog(
@@ -205,13 +201,6 @@ export class ProductAddComponent {
         this.product,
         this.product.id
       );
-  }
-
-  getUserStore() {
-    const userId = this.jwtTokenService.getAuthenticatedUserId();
-    this.storeService.getStoreByUser(userId).subscribe((store) => {
-      this.product.storeId = store.id;
-    });
   }
 
   deleteProduct() {

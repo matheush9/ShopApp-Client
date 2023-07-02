@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { ImageService } from 'src/app/modules/shared/services/image.service';
 import { CartService } from 'src/app/modules/core/services/cart.service';
-import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
 import { CustomerService } from 'src/app/modules/customer/services/customer.service';
 import { OrderService } from 'src/app/modules/order/services/order.service';
 
