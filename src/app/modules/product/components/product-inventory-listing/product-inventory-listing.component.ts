@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { JwtTokenService } from 'src/app/modules/shared/services/jwt-token.service';
 
 import { StoreService } from 'src/app/modules/store/services/store.service';
 
@@ -10,11 +11,11 @@ import { StoreService } from 'src/app/modules/store/services/store.service';
   styleUrls: ['./product-inventory-listing.component.scss'],
 })
 export class ProductInventoryListingComponent implements OnInit {
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private jwtTokenService: JwtTokenService
   ) {}
 
   ngOnInit(): void {
@@ -22,16 +23,12 @@ export class ProductInventoryListingComponent implements OnInit {
   }
 
   loadQueryParams() {
-    this.route.paramMap
-      .pipe(
-        tap((params) => {
-          if (params.keys.length == 0) {
-            this.router.navigate([], {
-              queryParams: { storeId: this.storeService.currentStore?.id},
-            });
-          }
-        })
-      )
-      .subscribe();
+    this.storeService
+      .getStoreByUser(this.jwtTokenService.getAuthenticatedUserId())
+      .subscribe(() => {
+        this.router.navigate([], {
+          queryParams: { storeId: this.storeService.currentStore?.id },
+        });
+      });
   }
 }

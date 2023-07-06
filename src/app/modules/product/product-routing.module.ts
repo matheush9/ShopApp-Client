@@ -1,3 +1,4 @@
+import { StoreGuard } from './../core/guards/store.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -7,7 +8,6 @@ import { ProductListingComponent } from './components/product-listing/product-li
 import { ProductInventoryListingComponent } from './components/product-inventory-listing/product-inventory-listing.component';
 
 import { AuthGuard } from '../core/guards/auth.guard';
-import { StoreGuard } from '../core/guards/store.guard';
 
 const routes: Routes = [
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
       { path: 'listing/filter', component: ProductListingComponent },
 
       { path: 'inventory', redirectTo: 'inventory/filter'},
-      { path: 'inventory/filter', component: ProductInventoryListingComponent, canActivate: [StoreGuard]  },
+      { path: 'inventory/filter', component: ProductInventoryListingComponent, canActivate: [AuthGuard, StoreGuard]  },
 
       { path: 'add', component: ProductAddComponent, canActivate: [AuthGuard] },
       { path: 'edit/:id', component: ProductAddComponent, canActivate: [AuthGuard] },
