@@ -91,4 +91,9 @@ export class CartService {
       return this.itemService.addItemsList(itemList as Item[]);
     else return throwError(() => new Error('Empty cart!'));
   }
+
+  clearCart() {
+    localStorage.removeItem(this.cartKey);
+    this.cartUpdateSubject.next(this.getCart());
+  }
 }

@@ -109,6 +109,7 @@ export class CartComponent {
           switchMap((order) => this.cartService.addCartItemsToOrder(order.id))
         )
         .subscribe(() => {
+          this.cartService.clearCart();
           this.router.navigate(['order/listing']);
         });
     }
