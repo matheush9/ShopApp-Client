@@ -1,4 +1,4 @@
-import { Observable, forkJoin, mergeMap, switchMap, tap } from 'rxjs';
+import { Observable, forkJoin, of, switchMap, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import { JwtTokenService } from '../../shared/services/jwt-token.service';
@@ -29,11 +29,14 @@ export class AuthService {
     return this.userService.addUser(user).pipe(
       switchMap(() => this.login(user)),
       tap(() => {
-        if (storeDesc) 
-          this.createStore(user, storeDesc).subscribe();
-        this.createCustomer(user).subscribe();
-        this.setCurrentAccountInfo();
-      }));
+        const createStoreObservable = storeDesc ? this.createStore(user, storeDesc) : of(null);
+        const createCustomerObservable = this.createCustomer(user);
+  
+        forkJoin([createStoreObservable, createCustomerObservable]).subscribe(() => {
+          this.setCurrentAccountInfo();
+        });
+      })
+    );
   }
 
   private createStore(user: User, storeDesc: string): Observable<Store> {
