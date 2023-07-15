@@ -1,7 +1,7 @@
 import { ItemService } from 'src/app/modules/order/services/item.service';
 import { Component } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Observable, Subject, forkJoin, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ProductService } from '../../services/product.service';
@@ -85,14 +85,12 @@ export class ProductDetailComponent {
 
   buySingleProduct() {
     if (this.customerService.currentCustomer) {
-      const addBlankOrder$ = this.orderService.addBlankOrder(
+      const createBlankOrder$ = this.orderService.addBlankOrder(
         this.customerService.currentCustomer.id
       );
-      const addItemToOrder$ = addBlankOrder$.pipe(
-        tap((order) => this.addItemToOrder(order.id))
-      );
 
-      forkJoin([addItemToOrder$, addBlankOrder$]).subscribe(() => {
+      createBlankOrder$.subscribe((order) => {
+        this.addItemToOrder(order.id).subscribe();
         this.router.navigate(['order/listing']);
       });
     }
