@@ -42,6 +42,8 @@
           <mat-label>Password</mat-label>
           <input [(ngModel)]="user.password" type="password" name="password" matInput />
         </mat-form-field>
+
+        <mat-error *ngIf="registerErrorMessage">{{ registerErrorMessage }}</mat-error>
       </form>
 
       <div>
