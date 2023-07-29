@@ -4,8 +4,8 @@
       <span
         [routerLink]="['/product/listing/filter']"
         [queryParams]="{sort: productSorting}"
-        class="cursor-pointer font-medium text-primary-color flex justify-end mb-4"
-        >View more...</span
+        class="font-medium text-primary-color flex justify-end mb-2"
+        ><span class="cursor-pointer">View more...</span></span
       >
       <owl-carousel-o [options]="customOptions" #owlCar>
         <ng-template carouselSlide *ngFor="let product of products.data">

@@ -21,18 +21,20 @@ export class LoginComponent {
     images: [],
   };
 
-  loginErrorMessage = '';
+  submitErrorMessage = '';
+  formSubmitted = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login(form: NgForm) {
+    this.formSubmitted = true;
     if (form.valid) {
       this.authService
         .login(this.user)
         .pipe(
           catchError((error) => {
             if (error.status == 401) {
-              this.loginErrorMessage = 'Invalid login/email or password';
+              this.submitErrorMessage = 'Invalid login/email or password';
             } else console.error(error);
             throw error;
           })

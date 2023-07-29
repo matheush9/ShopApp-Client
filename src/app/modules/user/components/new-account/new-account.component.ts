@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 
 import { User } from '../../interfaces/user-interface';
 
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { catchError } from 'rxjs';
+
 
 @Component({
   selector: 'app-new-account',
@@ -22,17 +24,20 @@ export class NewAccountComponent {
 
   accountType: string = 'customer';
   storeDescription: string = '';
-  registerErrorMessage = '';
+  submitErrorMessage = '';
+  formSubmitted = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  register() {
+  register(form: NgForm) {
+    this.formSubmitted = true;
+    if (form.valid) {
     this.authService
       .register(this.user, this.storeDescription)
       .pipe(
         catchError((error) => {
           if (error.error == 'Email already in use') {
-            this.registerErrorMessage = error.error;
+            this.submitErrorMessage = error.error;
           } else console.error(error);
           throw error;
         })
@@ -40,5 +45,6 @@ export class NewAccountComponent {
       .subscribe(() => {
         this.router.navigate(['']);
       });
+    }
   }
 }

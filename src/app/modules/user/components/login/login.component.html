@@ -6,20 +6,20 @@
       <mat-form-field appearance="fill">
         <mat-label>Login/e-mail</mat-label>
         <input required [(ngModel)]="user.email" name="email" matInput #emailInput="ngModel"/>
-        <mat-error *ngIf="emailInput.invalid && emailInput.errors?.['required']">
-          Required
-        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
         <input required [(ngModel)]="user.password" type="password" name="password" matInput #passInput="ngModel"/>        
-        <mat-error *ngIf="passInput.invalid && passInput.errors?.['required']">
-          Required
-        </mat-error>
       </mat-form-field>
 
-      <mat-error *ngIf="loginErrorMessage">{{ loginErrorMessage }}</mat-error>
+      <div class="text-red-500" *ngIf="formSubmitted && form.invalid">
+        <p *ngIf="form.controls['email'].invalid">Email is required!</p>
+        <p *ngIf="form.controls['password'].invalid">Password is required!</p>
+      </div>
+
+      <mat-error *ngIf="submitErrorMessage">{{ submitErrorMessage }}</mat-error>
+
       <span class="self-end text-primary-color"
         ><a routerLink="/user/forgot-password">Forgot Password?</a></span
       >

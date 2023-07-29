@@ -8,11 +8,11 @@
     <img
       *ngIf="image$ | async as image; else noImage"
       [src]="[imagesProviderUrl + image.smallImagePath]"
-      class="h-32 rounded-full border shadow"
+      class="h-40 w-40 rounded-full border shadow"
     />
     <span class="text-lg font-medium sm:mb-12">{{ store.name }}</span>
     <ng-template #noImage>
-      <img src="/assets/empty.jpg" class="h-32 rounded-full border shadow" />
+      <img src="/assets/empty.jpg" class="h-40 w-40 rounded-full border shadow" />
     </ng-template>
   </div>
 
