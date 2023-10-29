@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
 
 ## Access the website:
-[Link](http://154.41.228.116/)
+[Link](http://191.252.205.94/)
 
 ## Development server
 
