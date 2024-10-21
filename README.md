@@ -21,6 +21,7 @@
 <h2 id="about">❓ About </h2> 
 <p>Este projeto foi desenvolvido com o objetivo de praticar e aprimorar minhas habilidades no desenvolvimento de front-end web, utilizando as tecnologias mencionadas.</p> 
 <p>A aplicação simula uma plataforma fictícia onde é possível cadastrar lojas e compradores, além de realizar buscas, cadastrar e comprar produtos. Os usuários também podem visualizar seus pedidos e gerenciar seus inventários.</p>
+<p>O client consome essa API minha: https://github.com/matheush9/ShopApp.</p>
 
 <h2 id="started">🚀 Getting started</h2>
 
