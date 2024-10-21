@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/52aaebfb-b9e8-45ad-b98c-df0da3716b68)<h1 align="center" style="font-weight: bold;">ShopApp Client 💻🛒 </h1>
+<h1 align="center" style="font-weight: bold;">ShopApp Client 💻🛒 </h1>
 
 <h2 id="about">❓ About </h2> 
 <p>Este projeto foi desenvolvido com o objetivo de praticar e aprimorar minhas habilidades no desenvolvimento de front-end web, utilizando as tecnologias mencionadas.</p> 
