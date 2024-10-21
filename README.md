@@ -1,4 +1,22 @@
+[JavaScript]:https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
+[TypeScript]:https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
+[Angular]:https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white
+[TailwindCSS]:https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white
+[HTML5]:https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
+
 <h1 align="center" style="font-weight: bold;">ShopApp Client 💻🛒 </h1>
+
+![HTML5][HTML5]
+![JavaScript][JavaScript]
+![TypeScript][TypeScript]
+![Angular][Angular]
+![TailwindCSS][TailwindCSS]
+
+<p align="center">
+ <a href="#about">About</a> • 
+ <a href="#started">Getting Started</a> • 
+ <a href="#pictures">Pictures</a> •
+</p>
 
 <h2 id="about">❓ About </h2> 
 <p>Este projeto foi desenvolvido com o objetivo de praticar e aprimorar minhas habilidades no desenvolvimento de front-end web, utilizando as tecnologias mencionadas.</p> 
