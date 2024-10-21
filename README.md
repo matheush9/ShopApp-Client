@@ -1,30 +1,50 @@
-# ShopAppClient
+![image](https://github.com/user-attachments/assets/52aaebfb-b9e8-45ad-b98c-df0da3716b68)<h1 align="center" style="font-weight: bold;">ShopApp Client 💻🛒 </h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
+<h2 id="about">❓ About </h2> 
+<p>Este projeto foi desenvolvido com o objetivo de praticar e aprimorar minhas habilidades no desenvolvimento de front-end web, utilizando as tecnologias mencionadas.</p> 
+<p>A aplicação simula uma plataforma fictícia onde é possível cadastrar lojas e compradores, além de realizar buscas, cadastrar e comprar produtos. Os usuários também podem visualizar seus pedidos e gerenciar seus inventários.</p>
 
-## Access the website:
-[Link](http://191.252.205.94/)
+<h2 id="started">🚀 Getting started</h2>
 
-## Development server
+<h3>Prerequisites</h3>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Angular
+- Node.js
 
-## Code scaffolding
+<h3>Setup</h3>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Execute os comandos a seguir na pasta raiz da aplicação.
 
-## Build
+1. Instale todas as dependências no package.json.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm install
+```
 
-## Running unit tests
+2. Inicie a aplicação.
+```bash
+ng serve
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+<h2 id="pictures"> 🖼️ Images </h2>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+**Home**
 
-## Further help
+![image](https://github.com/user-attachments/assets/41ded46a-7586-4e9b-99c3-950cbc652c72)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+**Product detail**
+
+![image](https://github.com/user-attachments/assets/32f0ed33-44fc-4e44-a290-9bb090d4dc4c)
+
+![image](https://github.com/user-attachments/assets/9cbbd674-9d3f-40bb-a684-3e1376314c4e)
+
+**Store**
+
+![image](https://github.com/user-attachments/assets/cbe72d7b-54b7-4265-8bd9-7acec41c594f)
+
+**Cart**
+
+![image](https://github.com/user-attachments/assets/a0a55d88-df0d-4fc2-b93c-808f08085879)
+
+
